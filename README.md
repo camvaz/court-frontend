@@ -1,3 +1,11 @@
+# Front end para aplicacion Court
+
+Para crear una nueva página o componente, crear una carpeta en su respectivo directorio que contenga los archivos .scss, .jsx y si es posible .test.js.
+
+Tanto en components como en pages se encuentran los archivos colores.scss y responsive.scss para manejar los colores y las media querys.
+
+======
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
