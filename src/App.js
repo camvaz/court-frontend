@@ -20,19 +20,15 @@ function App() {
                             withNavbar
                             withFooter
                             component={Home}
-                        ></EnhancedRoute>
-                        <EnhancedRoute
-                            path="/login"
-                            exact
-                            component={Login}
-                        ></EnhancedRoute>
+                        />
+                        <EnhancedRoute path="/login" exact component={Login} />
                         <EnhancedRoute
                             path="/dashboard/:user"
                             exact
                             withNavbar={true}
                             withFooter={false}
                             component={DashboardSingleton}
-                        ></EnhancedRoute>
+                        />
                     </Switch>
                 </Suspense>
             </ScrollToTop>
