@@ -4,6 +4,9 @@ import ScrollToTop from "react-router-scroll-top";
 import EnhancedRoute from "./components/EnhancedRoute/EnhancedRoute";
 const Home = React.lazy(() => import("./pages/Home/Home"));
 const Login = React.lazy(() => import("./pages/Login/Login"));
+const DashboardSingleton = React.lazy(() =>
+    import("./components/DashboardSingleton/DashboardSingleton")
+);
 
 function App() {
     return (
@@ -13,20 +16,23 @@ function App() {
                     <Switch>
                         <EnhancedRoute
                             path="/"
-                            exact={true}
-                            withNavbar={true}
-                            withFooter={true}
-                        >
-                            <Home />
-                        </EnhancedRoute>
+                            exact
+                            withNavbar
+                            withFooter
+                            component={Home}
+                        ></EnhancedRoute>
                         <EnhancedRoute
                             path="/login"
-                            exact={true}
-                            withNavbar={false}
+                            exact
+                            component={Login}
+                        ></EnhancedRoute>
+                        <EnhancedRoute
+                            path="/dashboard/:user"
+                            exact
+                            withNavbar={true}
                             withFooter={false}
-                        >
-                            <Login />
-                        </EnhancedRoute>
+                            component={DashboardSingleton}
+                        ></EnhancedRoute>
                     </Switch>
                 </Suspense>
             </ScrollToTop>

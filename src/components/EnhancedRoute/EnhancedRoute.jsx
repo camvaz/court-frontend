@@ -5,13 +5,19 @@ import Footer from "../Footer/Footer";
 
 export default class EnhancedRoute extends Component {
     render() {
-        const { path, exact, withNavbar, withFooter, children } = this.props;
+        const { path, exact, withNavbar, withFooter, component } = this.props;
         return (
-            <Route path={path} exact={exact}>
-                {withNavbar && <Navbar />}
-                {children}
-                {withFooter && <Footer />}
-            </Route>
+            <Route
+                path={path}
+                exact={exact}
+                render={props => (
+                    <>
+                        {withNavbar && <Navbar />}
+                        {React.createElement(component, props)}
+                        {withFooter && <Footer />}
+                    </>
+                )}
+            ></Route>
         );
     }
 }
