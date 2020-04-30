@@ -12,7 +12,7 @@ export default class DashboardSingleton extends Component {
         return (
             <Switch>
                 <EnhancedRoute
-                    path={`/dashboard/${ADMIN_TYPE}`}
+                    path={`/dashboard/${ADMIN_TYPE.route}`}
                     exact
                     withNavbar
                     component={Administrador}
