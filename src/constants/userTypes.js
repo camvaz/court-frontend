@@ -34,16 +34,10 @@ const PARTICIPANTE_TYPE = {
     role: "Player"
 };
 
-const INTERNAUTA_TYPE = {
-    route: null,
-    description: "Internauta"
-};
-
 export const userTypes = {
     ADMIN_TYPE,
     RESPONSABLE_TORNEO_TYPE,
     CAPTURADOR_TYPE,
     SECRETARA_TYPE,
-    PARTICIPANTE_TYPE,
-    INTERNAUTA_TYPE
+    PARTICIPANTE_TYPE
 };

@@ -4,6 +4,8 @@ import { connect } from "react-redux";
 import { setUsers } from "../../../../Redux/actions";
 import { API_ENDPOINT } from "../../../../environment/environment";
 import { ReactComponent as Plus } from "../../../../assets/plus.svg";
+import { ReactComponent as Lupa } from "../../../../assets/lupa.svg";
+import { ReactComponent as Gear } from "../../../../assets/gear.svg";
 import ImgAdmin from "../../../../assets/imagen-admin.png";
 import "./Usuarios.scss";
 
@@ -11,6 +13,7 @@ class Usuarios extends Component {
     state = {
         currentUserType: userTypes.ADMIN_TYPE
     };
+
     componentDidMount() {
         this.loadUsers();
     }
@@ -36,10 +39,15 @@ class Usuarios extends Component {
             <main id="dashboard-admin">
                 <section className="line" />
                 <section className="user-types">
-                    <h1>Tipo de usuario</h1>
+                    <h5>Tipo de usuario</h5>
                     <div className="types-list">
                         {Object.keys(userTypes).map((data, index) => (
-                            <div className="type" key={index}>
+                            <div
+                                className={`type ${
+                                    index === 0 ? "selected" : ""
+                                }`}
+                                key={index}
+                            >
                                 <div className="linea"></div>
                                 <p>{userTypes[data]?.description}</p>
                             </div>
@@ -50,7 +58,13 @@ class Usuarios extends Component {
                     <div className="user-section-carousel">
                         <div className="wrapper">
                             <div className="users">
-                                <input type="text" />
+                                <div className="input">
+                                    <Lupa />
+                                    <input
+                                        type="text"
+                                        placeholder="Nombre de usuario"
+                                    />
+                                </div>
                                 <div className="user-list">
                                     {Object.keys(users)
                                         .filter(
@@ -59,7 +73,10 @@ class Usuarios extends Component {
                                                 currentUserType.role
                                         )
                                         .map((data, index) => (
-                                            <div key={index} className="user">
+                                            <div
+                                                key={index}
+                                                className="user selected"
+                                            >
                                                 <div className="linea" />
                                                 <div className="user-info">
                                                     <img
@@ -67,9 +84,9 @@ class Usuarios extends Component {
                                                         alt="Foto de Administrador."
                                                     />
                                                     <div className="user-data">
-                                                        <h2>
+                                                        <h5>
                                                             {users[data]?.name}
-                                                        </h2>
+                                                        </h5>
                                                         <p>
                                                             {
                                                                 currentUserType.description
@@ -77,12 +94,19 @@ class Usuarios extends Component {
                                                         </p>
                                                     </div>
                                                 </div>
+                                                <div className="engrane-container">
+                                                    <Gear className="gear" />
+                                                    <div className="menu">
+                                                        <p>Dar de baja</p>
+                                                        <p>Modificar</p>
+                                                    </div>
+                                                </div>
                                             </div>
                                         ))}
                                 </div>
                                 <div className="agregar-contacto">
                                     <Plus />
-                                    <h4>Agregar contacto</h4>
+                                    <h4>Agregar nuevo usuario</h4>
                                 </div>
                             </div>
                             <div className="create-user"></div>

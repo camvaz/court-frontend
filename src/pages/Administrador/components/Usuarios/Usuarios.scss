@@ -1,0 +1,173 @@
+#dashboard-admin {
+    width: calc(100% - 28px);
+    display: flex;
+    margin-left: 25px;
+    .line {
+        height: auto;
+        width: 0.5px;
+        background-color: var(--typo-gris);
+    }
+    .user-types {
+        display: flex;
+        width: 34%;
+        margin-right: 2%;
+        flex-direction: column;
+        justify-content: center;
+        h5 {
+            margin: 30px auto 20px 20px;
+            font-weight: 500;
+        }
+        .types-list {
+            display: flex;
+            flex-direction: column;
+            .type {
+                display: flex;
+                align-items: center;
+                &.selected {
+                    background-color: var(--verde-0);
+                    .linea {
+                        background: var(--verde-2);
+                    }
+                }
+                .linea {
+                    width: 8px;
+                    height: 50px;
+                }
+                p {
+                    font-weight: 500;
+                    margin: 0 auto 0 25px;
+                }
+            }
+        }
+    }
+    .user-section {
+        height: 756px;
+        width: 63%;
+        .user-section-carousel {
+            height: inherit;
+            box-shadow: -4px -4px 20px rgba(0, 0, 0, 0.25);
+            border-top-left-radius: 20px;
+            border-top-right-radius: 20px;
+            .wrapper {
+                height: inherit;
+                .users {
+                    height: inherit;
+                    position: relative;
+                    .input {
+                        width: 100%;
+                        border-top: none;
+                        border-left: none;
+                        border-right: none;
+                        border-bottom: 1px solid var(--typo-gris);
+                        border-top-left-radius: 20px;
+                        border-top-right-radius: 20px;
+                        display: flex;
+                        align-items: center;
+                        padding: 22px 0;
+                        svg {
+                            width: 30px;
+                            height: 30px;
+                            padding-left: 22px;
+                        }
+                        input {
+                            width: auto;
+                            font-size: 21px;
+                            margin-left: 14px;
+                            border: none;
+                            outline: none;
+                            &::placeholder {
+                                color: var(--typo-gris);
+                            }
+                        }
+                    }
+                    .user-list {
+                        margin: 30px auto;
+                        display: flex;
+                        flex-direction: column;
+                        width: 100%;
+                        min-height: 544px;
+                        // overflow-y: scroll;
+                        .user {
+                            display: flex;
+                            align-items: center;
+                            .linea {
+                                width: 8px;
+                                height: 65px;
+                            }
+                            &.selected {
+                                background-color: var(--verde-0);
+                                .linea {
+                                    background: var(--verde-2);
+                                }
+                            }
+                            .user-info {
+                                display: flex;
+                                align-items: center;
+                                img {
+                                    width: 65px;
+                                    height: 65px;
+                                    margin-left: 20px;
+                                }
+                                .user-data {
+                                    display: flex;
+                                    flex-direction: column;
+                                    justify-content: center;
+                                    margin: auto auto auto 15px;
+                                    h5 {
+                                        margin: 0;
+                                        font-size: 18px;
+                                    }
+                                    p {
+                                        font-size: 15px;
+                                        margin: 0;
+                                    }
+                                }
+                            }
+                            .engrane-container {
+                                margin: auto 28px auto auto;
+                                display: flex;
+                                justify-self: center;
+                                align-items: center;
+                                position: relative;
+                                .menu {
+                                    display: none;
+                                    position: absolute;
+                                    top: 0;
+                                    right: 0;
+                                    padding: 20px 10px;
+                                    background: var(--blanco);
+                                    border: 1px solid var(--typo-gris);
+                                    p {
+                                        width: 90px;
+                                        margin: auto auto 0;
+                                        color: var(--typo-gris);
+                                        &:first-child {
+                                            margin-bottom: 5px;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    .agregar-contacto {
+                        margin-top: auto;
+                        background-color: var(--fuerte-1);
+                        display: flex;
+                        align-items: center;
+                        padding: 20px;
+                        svg {
+                            margin-left: 5%;
+                        }
+                        h4 {
+                            font-weight: 600;
+                            font-size: 20px;
+                            color: var(--blanco);
+                            margin: 0;
+                            margin-left: 28%;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

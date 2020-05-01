@@ -1,30 +1,33 @@
 /* fuentes */
-@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap");
 
 /* reset */
-*{ padding: 0px; margin: 0px;}
+* {
+    padding: 0px;
+    margin: 0px;
+}
 
 /* librería de variables*/
 :root {
-  
-  --typo-negro: #001630;
-  --typo-gris: #aebac3;
-  --fondo: #fbfbfb;
-  --azul-1: #728ea2;
-  --azul-2: #456173;
-  --azul-3: #1a3748;
-  --fuerte-1: #1a3748;
-  --fuerte-2: #e4e4e4;
-  --fuerte-3: #001630;
-  --verde-1: #d9ffbf;
-  --verde-2: #a6ed8e;
-  --verde-3: #74ba5f;
+    --typo-negro: #001630;
+    --typo-gris: #aebac3;
+    --fondo: #fbfbfb;
+    --azul-1: #728ea2;
+    --azul-2: #456173;
+    --azul-3: #1a3748;
+    --fuerte-1: #1a3748;
+    --fuerte-2: #e4e4e4;
+    --fuerte-3: #001630;
+    --verde-0: #f7fff2;
+    --verde-1: #d9ffbf;
+    --verde-2: #a6ed8e;
+    --verde-3: #74ba5f;
 
-  --negro: #000000;
-  --blanco: #FFFFFF;
+    --negro: #000000;
+    --blanco: #ffffff;
 
-  --fuente-1: 'Roboto';
-  --fuente-2: 'SF Pro Display';
+    --fuente-1: "Roboto";
+    --fuente-2: "SF Pro Display";
 }
 
 /* dipositivo.js */
@@ -37,11 +40,11 @@
   laptopL: '1440px',
 */
 
-a{
-  user-select: none;
-  -moz-user-select: none;
-  -webkit-user-select: none;
-  -ms-user-select: none;
+a {
+    user-select: none;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
 }
 
 h1,
@@ -51,78 +54,78 @@ h4,
 h5,
 p,
 small,
-.caption{
-  margin-bottom: 1.5rem;
-  color: var(--typo-negro);
-  font-family: var(--fuente-1), sans-serif;
-  text-rendering: optimizeLegibility;
+.caption {
+    margin-bottom: 1.5rem;
+    color: var(--typo-negro);
+    font-family: var(--fuente-1), sans-serif;
+    text-rendering: optimizeLegibility;
 }
 
 h1,
 h2,
 h3,
 h4,
-h5{ 
-  font-family: var(--fuente-2), sans-serif; 
+h5 {
+    font-family: var(--fuente-2), sans-serif;
 }
 
-p, 
-small, 
+p,
+small,
 .caption {
-  line-height: 1.5rem;
-  color: var(--typo-negro-2);
-  letter-spacing: 0.02rem;
+    line-height: 1.5rem;
+    color: var(--typo-negro-2);
+    letter-spacing: 0.02rem;
 }
-.caption{
-  margin-bottom: 0rem;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  display: inline-block; 
-  color: var(--typo-gris);
+.caption {
+    margin-bottom: 0rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    display: inline-block;
+    color: var(--typo-gris);
 }
 
 h1 {
-  margin: 0 0 0.5em 0;
-  font-size: 4rem;
+    margin: 0 0 0.5em 0;
+    font-size: 4rem;
 }
 @media (max-width: 500px) {
-  h1 {
-    font-size: 2rem;
-  }
+    h1 {
+        font-size: 2rem;
+    }
 }
 
 h2 {
-  margin: 1.5em 0 0.5em 0;
-  font-size: 2rem;
+    margin: 1.5em 0 0.5em 0;
+    font-size: 2rem;
 }
 @media (max-width: 500px) {
-  h2 {
-      font-size: 1.8rem;
-  }
+    h2 {
+        font-size: 1.8rem;
+    }
 }
 
 h3 {
-  margin: 1.5em 0 0.5em 0;
-  font-size: 1.8rem;
+    margin: 1.5em 0 0.5em 0;
+    font-size: 1.8rem;
 }
 @media (max-width: 500px) {
-  h3 {
-    font-size: 1.7rem;
-  }
+    h3 {
+        font-size: 1.7rem;
+    }
 }
 
 h4 {
-  margin: 1.5em 0 0.5em 0;
-  font-size: 1.6rem;
+    margin: 1.5em 0 0.5em 0;
+    font-size: 1.6rem;
 }
 
 h5 {
-  margin: 1.5em 0 0.5em 0;
-  font-size: 1.4rem;
+    margin: 1.5em 0 0.5em 0;
+    font-size: 1.4rem;
 }
 
-small, 
-.caption{
-  font-size: 0.833em;
-  font-weight: 400 !important;
+small,
+.caption {
+    font-size: 0.833em;
+    font-weight: 400 !important;
 }
