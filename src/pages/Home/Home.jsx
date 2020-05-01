@@ -2,7 +2,7 @@ import React from 'react';
 import Boton from '../../components/Elements/Boton';
 import tenista from '../../assets/tenista.svg';
 import styled from 'styled-components';
-
+import NavBar from '../../components/Navbar/Navbar';
 
 
 const ContenedorHome = styled.div `
@@ -25,7 +25,9 @@ const Contenido = styled.div `
     @media screen and (min-width: 680px){
         width: 60%;
     }
- 
+    @media screen and (min-width: 767px){
+        width: 70%;
+    }
     @media screen and (min-width: 950px){
         width: 80%;
     }
@@ -36,10 +38,6 @@ const Contenido = styled.div `
         left: 40%;
         top: 20px;
 
-        @media screen and (min-width: 680px){
-            font-size: 1.3rem;
-        }
-
         @media screen and (min-width: 950px){
             width: 30%;
             font-size: 1.5rem;
@@ -48,21 +46,13 @@ const Contenido = styled.div `
         }
     }
     img{
-
-        position: absolute;
-        top: 50px;
-
-        @media screen and (min-width: 680px){
-            width: 90%;
-            left: -100px;
-            top: 0px;
-        }
+      position: absolute;
+      top: 50px;
       
-        @media screen and (min-width: 950px){
-            top: 50px;
-            width: 50%;
-            left: 0px;
-        }
+      @media screen and (min-width: 950px){
+          width: 50%;
+          left: 0px;
+      }
 
 
     }
