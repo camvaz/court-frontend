@@ -6,6 +6,7 @@ import { API_ENDPOINT } from "../../../../environment/environment";
 import { ReactComponent as Plus } from "../../../../assets/plus.svg";
 import { ReactComponent as Lupa } from "../../../../assets/lupa.svg";
 import { ReactComponent as Gear } from "../../../../assets/gear.svg";
+import { ReactComponent as Flecha } from "../../../../assets/flecha-azul.svg";
 import ImgAdmin from "../../../../assets/imagen-admin.png";
 import "./Usuarios.scss";
 import "animate.css";
@@ -27,6 +28,8 @@ class Usuarios extends Component {
             telefono: "",
             contraseña: ""
         },
+        slide: false,
+        accionEnForm: true,
         userToDelete: {}
     };
 
@@ -49,7 +52,7 @@ class Usuarios extends Component {
 
     render() {
         const { users } = this.props;
-        const { currentUserType } = this.state;
+        const { currentUserType, accionEnForm, slide } = this.state;
         return (
             <main id="dashboard-admin">
                 <section className="line" />
@@ -78,7 +81,14 @@ class Usuarios extends Component {
                 </section>
                 <section className="user-section">
                     <div className="user-section-carousel">
-                        <div className="wrapper">
+                        <div
+                            className="wrapper"
+                            style={{
+                                transform: `translate(${
+                                    slide ? "-50" : "0"
+                                }%, 0%)`
+                            }}
+                        >
                             <div className="users">
                                 <div className="input">
                                     <Lupa />
@@ -149,12 +159,76 @@ class Usuarios extends Component {
                                             </div>
                                         ))}
                                 </div>
-                                <div className="agregar-contacto">
+                                <div
+                                    className="bottom-button"
+                                    onClick={() => {
+                                        this.setState({ slide: true });
+                                    }}
+                                >
                                     <Plus />
-                                    <h4>Agregar nuevo usuario</h4>
+                                    <h4>
+                                        {accionEnForm
+                                            ? "Crear Usuario"
+                                            : "Modificar usuario"}
+                                    </h4>
                                 </div>
                             </div>
-                            <div className="create-user"></div>
+                            <div className="user-cu">
+                                <div className="flecha-container">
+                                    <Flecha
+                                        onClick={() => {
+                                            this.setState({ slide: false });
+                                        }}
+                                    />
+                                </div>
+                                <form>
+                                    <h2>Crear Usuario</h2>
+                                    <div className="field">
+                                        <label htmlFor="nombre">
+                                            Nombre completo
+                                        </label>
+                                        <input type="text" />
+                                    </div>
+                                    <div className="field">
+                                        <label htmlFor="nombre">Correo</label>
+                                        <input type="text" />
+                                    </div>
+                                    <div className="field">
+                                        <label htmlFor="nombre">Puesto</label>
+                                        <select name="puesto" id="">
+                                            {Object.keys(userTypes).map(
+                                                (data, index) => (
+                                                    <option
+                                                        value={
+                                                            userTypes[data]
+                                                                ?.role
+                                                        }
+                                                        key={index}
+                                                    >
+                                                        {
+                                                            userTypes[data]
+                                                                ?.description
+                                                        }
+                                                    </option>
+                                                )
+                                            )}
+                                        </select>
+                                    </div>
+                                    <div className="field">
+                                        <label htmlFor="telefono">
+                                            Telefono
+                                        </label>
+                                        <input type="text" />
+                                    </div>
+                                    <div className="field">
+                                        <label htmlFor="img">Foto</label>
+                                        <input type="file" />
+                                    </div>
+                                </form>
+                                <div className="bottom-button">
+                                    <h4>Guardar</h4>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </section>
