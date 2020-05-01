@@ -1,19 +1,16 @@
 import React, { Component } from "react";
-import { userTypes } from "../../constants/userTypes";
+import { userTypes } from "../../../../constants/userTypes";
 import { connect } from "react-redux";
-import { setUsers } from "../../Redux/actions";
-import { API_ENDPOINT } from "../../environment/environment";
-import { ReactComponent as Plus } from "../../assets/plus.svg";
-import ImgAdmin from "../../assets/imagen-admin.png";
-import NotFound from "../NotFound/NotFound";
-import "./Administrador.scss";
+import { setUsers } from "../../../../Redux/actions";
+import { API_ENDPOINT } from "../../../../environment/environment";
+import { ReactComponent as Plus } from "../../../../assets/plus.svg";
+import ImgAdmin from "../../../../assets/imagen-admin.png";
+import "./Usuarios.scss";
 
-class Administrador extends Component {
+class Usuarios extends Component {
     state = {
-        currentUserType: userTypes.ADMIN_TYPE,
-        fetchError: false
+        currentUserType: userTypes.ADMIN_TYPE
     };
-
     componentDidMount() {
         this.loadUsers();
     }
@@ -32,12 +29,10 @@ class Administrador extends Component {
     }
 
     render() {
-        const { users, fetchError } = this.props;
+        const { users } = this.props;
         const { currentUserType } = this.state;
 
-        return fetchError ? (
-            <NotFound />
-        ) : (
+        return (
             <main id="dashboard-admin">
                 <section className="line" />
                 <section className="user-types">
@@ -109,4 +104,4 @@ const mapDispatchToProps = dispatch => {
     };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Administrador);
+export default connect(mapStateToProps, mapDispatchToProps)(Usuarios);

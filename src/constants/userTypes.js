@@ -1,5 +1,11 @@
 const ADMIN_TYPE = {
     route: "admin",
+    routes: {
+        inicio: "/",
+        torneos: "/torneos",
+        usuarios: "/usuarios",
+        resultados: "/resultados"
+    },
     description: "Administrador",
     role: "Global Admin"
 };
