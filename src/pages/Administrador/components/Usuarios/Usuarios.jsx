@@ -8,10 +8,26 @@ import { ReactComponent as Lupa } from "../../../../assets/lupa.svg";
 import { ReactComponent as Gear } from "../../../../assets/gear.svg";
 import ImgAdmin from "../../../../assets/imagen-admin.png";
 import "./Usuarios.scss";
+import "animate.css";
 
 class Usuarios extends Component {
     state = {
-        currentUserType: userTypes.ADMIN_TYPE
+        currentUserType: userTypes.ADMIN_TYPE,
+        currentUserToModify: {
+            nombre: "",
+            correo: "",
+            puesto: "",
+            telefono: "",
+            contraseña: ""
+        },
+        userToCreate: {
+            nombre: "",
+            correo: "",
+            puesto: "",
+            telefono: "",
+            contraseña: ""
+        },
+        userToDelete: {}
     };
 
     componentDidMount() {
@@ -34,7 +50,6 @@ class Usuarios extends Component {
     render() {
         const { users } = this.props;
         const { currentUserType } = this.state;
-
         return (
             <main id="dashboard-admin">
                 <section className="line" />
@@ -44,8 +59,15 @@ class Usuarios extends Component {
                         {Object.keys(userTypes).map((data, index) => (
                             <div
                                 className={`type ${
-                                    index === 0 ? "selected" : ""
+                                    currentUserType === userTypes[data]
+                                        ? "selected"
+                                        : ""
                                 }`}
+                                onClick={() => {
+                                    this.setState({
+                                        currentUserType: userTypes[data]
+                                    });
+                                }}
                                 key={index}
                             >
                                 <div className="linea"></div>
@@ -75,7 +97,7 @@ class Usuarios extends Component {
                                         .map((data, index) => (
                                             <div
                                                 key={index}
-                                                className="user selected"
+                                                className="user animated fadeIn"
                                             >
                                                 <div className="linea" />
                                                 <div className="user-info">
@@ -95,8 +117,31 @@ class Usuarios extends Component {
                                                     </div>
                                                 </div>
                                                 <div className="engrane-container">
-                                                    <Gear className="gear" />
-                                                    <div className="menu">
+                                                    <Gear
+                                                        className="gear"
+                                                        onClick={() => {
+                                                            document
+                                                                .getElementById(
+                                                                    `admin-user-${index}`
+                                                                )
+                                                                .classList.add(
+                                                                    "show"
+                                                                );
+                                                        }}
+                                                    />
+                                                    <div
+                                                        className="menu"
+                                                        id={`admin-user-${index}`}
+                                                        onMouseLeave={() => {
+                                                            document
+                                                                .getElementById(
+                                                                    `admin-user-${index}`
+                                                                )
+                                                                .classList.remove(
+                                                                    "show"
+                                                                );
+                                                        }}
+                                                    >
                                                         <p>Dar de baja</p>
                                                         <p>Modificar</p>
                                                     </div>

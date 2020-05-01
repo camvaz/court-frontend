@@ -23,6 +23,11 @@
             .type {
                 display: flex;
                 align-items: center;
+                transition: 250ms ease-in-out;
+                cursor: pointer;
+                &:hover {
+                    background-color: var(--verde-0);
+                }
                 &.selected {
                     background-color: var(--verde-0);
                     .linea {
@@ -32,6 +37,7 @@
                 .linea {
                     width: 8px;
                     height: 50px;
+                    transition: inherit;
                 }
                 p {
                     font-weight: 500;
@@ -85,16 +91,30 @@
                         display: flex;
                         flex-direction: column;
                         width: 100%;
-                        min-height: 544px;
-                        // overflow-y: scroll;
+                        height: 544px;
+                        overflow-y: auto;
+                        &::-webkit-scrollbar {
+                            width: 5px;
+                        }
+
+                        &::-webkit-scrollbar-track {
+                            background: var(--typo-gris);
+                        }
+
+                        &::-webkit-scrollbar-thumb {
+                            background: var(--fuerte-1);
+                        }
+
                         .user {
                             display: flex;
                             align-items: center;
+                            transition: 200ms ease-in-out;
                             .linea {
                                 width: 8px;
                                 height: 65px;
+                                transition: inherit;
                             }
-                            &.selected {
+                            &:hover {
                                 background-color: var(--verde-0);
                                 .linea {
                                     background: var(--verde-2);
@@ -129,15 +149,26 @@
                                 justify-self: center;
                                 align-items: center;
                                 position: relative;
+                                svg {
+                                    cursor: pointer;
+                                }
                                 .menu {
-                                    display: none;
+                                    visibility: hidden;
+                                    opacity: 0;
                                     position: absolute;
                                     top: 0;
                                     right: 0;
                                     padding: 20px 10px;
                                     background: var(--blanco);
                                     border: 1px solid var(--typo-gris);
+                                    transition: 250ms ease-in-out;
+                                    z-index: 100;
+                                    &.show {
+                                        opacity: 1;
+                                        visibility: visible;
+                                    }
                                     p {
+                                        cursor: pointer;
                                         width: 90px;
                                         margin: auto auto 0;
                                         color: var(--typo-gris);
@@ -154,8 +185,13 @@
                         background-color: var(--fuerte-1);
                         display: flex;
                         align-items: center;
+                        justify-content: center;
                         padding: 20px;
+                        position: relative;
+                        height: 35px;
                         svg {
+                            position: absolute;
+                            left: 0;
                             margin-left: 5%;
                         }
                         h4 {
@@ -163,7 +199,6 @@
                             font-size: 20px;
                             color: var(--blanco);
                             margin: 0;
-                            margin-left: 28%;
                         }
                     }
                 }
