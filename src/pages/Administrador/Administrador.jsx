@@ -5,6 +5,8 @@ import { setUsers } from "../../Redux/actions";
 import { API_ENDPOINT } from "../../environment/environment";
 import { ReactComponent as Plus } from "../../assets/plus.svg";
 import ImgAdmin from "../../assets/imagen-admin.png";
+import NotFound from "../NotFound/NotFound";
+import "./Administrador.scss";
 
 class Administrador extends Component {
     state = {
@@ -30,9 +32,12 @@ class Administrador extends Component {
     }
 
     render() {
-        const { users } = this.props;
+        const { users, fetchError } = this.props;
         const { currentUserType } = this.state;
-        return (
+
+        return fetchError ? (
+            <NotFound />
+        ) : (
             <main id="dashboard-admin">
                 <section className="line" />
                 <section className="user-types">
@@ -47,42 +52,46 @@ class Administrador extends Component {
                     </div>
                 </section>
                 <section className="user-section">
-                    <div className="wrapper">
-                        <div className="users">
-                            <input type="text" />
-                            <div className="user-list">
-                                {Object.keys(users)
-                                    .filter(
-                                        key =>
-                                            users[key]?.role ===
-                                            currentUserType.role
-                                    )
-                                    .map((data, index) => (
-                                        <div key={index} className="user">
-                                            <div className="linea" />
-                                            <div className="user-info">
-                                                <img
-                                                    src={ImgAdmin}
-                                                    alt="Foto de Administrador."
-                                                />
-                                                <div className="user-data">
-                                                    <h2>{users[data]?.name}</h2>
-                                                    <p>
-                                                        {
-                                                            currentUserType.description
-                                                        }
-                                                    </p>
+                    <div className="user-section-carousel">
+                        <div className="wrapper">
+                            <div className="users">
+                                <input type="text" />
+                                <div className="user-list">
+                                    {Object.keys(users)
+                                        .filter(
+                                            key =>
+                                                users[key]?.role ===
+                                                currentUserType.role
+                                        )
+                                        .map((data, index) => (
+                                            <div key={index} className="user">
+                                                <div className="linea" />
+                                                <div className="user-info">
+                                                    <img
+                                                        src={ImgAdmin}
+                                                        alt="Foto de Administrador."
+                                                    />
+                                                    <div className="user-data">
+                                                        <h2>
+                                                            {users[data]?.name}
+                                                        </h2>
+                                                        <p>
+                                                            {
+                                                                currentUserType.description
+                                                            }
+                                                        </p>
+                                                    </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                    ))}
+                                        ))}
+                                </div>
+                                <div className="agregar-contacto">
+                                    <Plus />
+                                    <h4>Agregar contacto</h4>
+                                </div>
                             </div>
-                            <div className="agregar-contacto">
-                                <Plus />
-                                <h4>Agregar contacto</h4>
-                            </div>
+                            <div className="create-user"></div>
                         </div>
-                        <div className="create-user"></div>
                     </div>
                 </section>
             </main>
