@@ -2,14 +2,12 @@ import React from 'react';
 import Boton from '../../components/Elements/Boton';
 import tenista from '../../assets/tenista.svg';
 import styled from 'styled-components';
-import NavBar from '../../components/Navbar/Navbar';
-
+import Cabecera from './Cabecera';
 
 const ContenedorHome = styled.div `
     width: 100%;
     height: 100vh;
-    display: flex;
-    align-items: center;
+   
 `;
 
 const Contenido = styled.div `
@@ -18,6 +16,7 @@ const Contenido = styled.div `
     left: 50%;
     transform: translateX(-50%);
     height: 400px;
+    margin-top: 80px;
     
     @media screen and (min-width: 425px){
         width: 70%;
@@ -72,6 +71,7 @@ const Contenido = styled.div `
 function Home(){
     return(
         <ContenedorHome>
+            <Cabecera/>
             <Contenido>
                 <img src={tenista} alt="Imagen ilustracion Tennis"/>
                 <p>Podrás visualizar los mejores partidos de tenis y ver los resultados al momento</p>

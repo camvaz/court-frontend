@@ -163,11 +163,10 @@ class Navbar extends Component {
         }));
     }
 
-
     render() {
         var estado = this.state.isToggleOn  
         let equis;
-        
+
         if(estado){
             equis = "equis";  
         }else{
