@@ -28,6 +28,7 @@ class Usuarios extends Component {
             telefono: "",
             contraseña: ""
         },
+        searchInput: "",
         slide: false,
         accionEnForm: true,
         userToDelete: {}
@@ -52,7 +53,12 @@ class Usuarios extends Component {
 
     render() {
         const { users } = this.props;
-        const { currentUserType, accionEnForm, slide } = this.state;
+        const {
+            currentUserType,
+            accionEnForm,
+            slide,
+            searchInput
+        } = this.state;
         return (
             <main id="dashboard-admin">
                 <section className="line" />
@@ -95,6 +101,12 @@ class Usuarios extends Component {
                                     <input
                                         type="text"
                                         placeholder="Nombre de usuario"
+                                        value={searchInput}
+                                        onChange={e => {
+                                            this.setState({
+                                                searchInput: e.target.value
+                                            });
+                                        }}
                                     />
                                 </div>
                                 <div className="user-list">
@@ -102,7 +114,10 @@ class Usuarios extends Component {
                                         .filter(
                                             key =>
                                                 users[key]?.role ===
-                                                currentUserType.role
+                                                    currentUserType.role &&
+                                                users[key]?.name
+                                                    .toLowerCase()
+                                                    .includes(searchInput)
                                         )
                                         .map((data, index) => (
                                             <div
@@ -153,7 +168,16 @@ class Usuarios extends Component {
                                                         }}
                                                     >
                                                         <p>Dar de baja</p>
-                                                        <p>Modificar</p>
+                                                        <p
+                                                            onClick={() => {
+                                                                this.setState({
+                                                                    slide: true,
+                                                                    accionEnForm: false
+                                                                });
+                                                            }}
+                                                        >
+                                                            Modificar
+                                                        </p>
                                                     </div>
                                                 </div>
                                             </div>
@@ -162,15 +186,14 @@ class Usuarios extends Component {
                                 <div
                                     className="bottom-button"
                                     onClick={() => {
-                                        this.setState({ slide: true });
+                                        this.setState({
+                                            slide: true,
+                                            accionEnForm: true
+                                        });
                                     }}
                                 >
                                     <Plus />
-                                    <h4>
-                                        {accionEnForm
-                                            ? "Crear Usuario"
-                                            : "Modificar usuario"}
-                                    </h4>
+                                    <h4>Agregar nuevo usuario</h4>
                                 </div>
                             </div>
                             <div className="user-cu">
@@ -182,7 +205,11 @@ class Usuarios extends Component {
                                     />
                                 </div>
                                 <form>
-                                    <h2>Crear Usuario</h2>
+                                    {accionEnForm ? (
+                                        <h2>Crear Usuario</h2>
+                                    ) : (
+                                        <h2>Modificar Usuario</h2>
+                                    )}
                                     <div className="field">
                                         <label htmlFor="nombre">
                                             Nombre completo
