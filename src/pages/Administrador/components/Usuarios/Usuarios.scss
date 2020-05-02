@@ -10,6 +10,8 @@
         width: 90%;
         flex-direction: column;
         margin: auto;
+        height: auto;
+        position: initial;
     }
     .line {
         height: auto;
@@ -103,6 +105,7 @@
         bottom: 0;
         right: 0;
         @media #{$tabletless} {
+            position: initial;
             width: 100%;
             height: 756px;
         }
