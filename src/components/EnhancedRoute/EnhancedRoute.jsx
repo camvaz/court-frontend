@@ -58,13 +58,16 @@ export default class EnhancedRoute extends Component {
    
     render() {
         const { path, exact, withNavbar, withFooter, component } = this.props;
+        
         let clase = "";
         let ocultarTenista = "";
+        let items = links;
 
         withNavbar === true ? clase = "aplicarGrid" : clase = "";
         path === "/" ? ocultarTenista = "ocultarTenista" : ocultarTenista=""; 
 
-        let items = links;
+        //Buscamos en constants/links.js el usuario que esta activo para mostrar sus opciones del menú
+        //Cambiar administrador por el usuario actual
         let usuarioSeleccionado = items.find(user => user.usuario === "administrador");
         
         
