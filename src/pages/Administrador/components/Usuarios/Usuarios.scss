@@ -39,6 +39,12 @@
         .types-list {
             display: flex;
             flex-direction: column;
+            overflow-x: auto;
+            padding-bottom: 7px;
+
+            &::-webkit-scrollbar {
+                height: 0px;
+            }
 
             @media #{$tabletless} {
                 flex-direction: row;
