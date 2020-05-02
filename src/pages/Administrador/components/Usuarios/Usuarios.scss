@@ -1,11 +1,21 @@
+@import "../../../responsive.scss";
+
 #dashboard-admin {
     width: calc(100% - 28px);
     display: flex;
     margin-left: 25px;
+    @media #{$tabletless} {
+        width: 90%;
+        flex-direction: column;
+        margin: auto;
+    }
     .line {
         height: auto;
         width: 0.5px;
         background-color: var(--typo-gris);
+        @media #{$tabletless} {
+            display: none;
+        }
     }
     .user-types {
         display: flex;
@@ -14,22 +24,37 @@
         flex-direction: column;
         justify-content: center;
         z-index: 99999999999;
-       
+
+        @media #{$tabletless} {
+            width: 100%;
+            margin-bottom: 25px;
+        }
         h5 {
             margin: 30px auto 20px 20px;
             font-weight: 500;
+            @media #{$tabletless} {
+                display: none;
+            }
         }
         .types-list {
             display: flex;
             flex-direction: column;
-           
+
+            @media #{$tabletless} {
+                flex-direction: row;
+                overflow-x: auto;
+                width: 100%;
+            }
             .type {
                 display: flex;
                 align-items: center;
                 transition: 250ms ease-in-out;
                 cursor: pointer;
-                
-                
+
+                @media #{$tabletless} {
+                    flex-direction: column;
+                    justify-self: center;
+                }
                 &:hover {
                     background-color: var(--verde-0);
                 }
@@ -43,19 +68,34 @@
                     width: 8px;
                     height: 50px;
                     transition: inherit;
-                    
+
+                    @media #{$tabletless} {
+                        width: 100%;
+                        height: 5px !important;
+                        margin-top: auto;
+                        order: 1;
+                    }
                 }
                 p {
                     font-weight: 500;
                     margin: 0 auto 0 25px;
+                    @media #{$tabletless} {
+                        margin: auto auto;
+                        text-align: center;
+                        width: 150px;
+                    }
                 }
             }
         }
     }
     .user-section {
-        height: 756px;
+        height: 550px;
         width: 63%;
-        
+
+        @media #{$tabletless} {
+            width: 100%;
+            height: 756px;
+        }
         .user-section-carousel {
             height: inherit;
             box-shadow: -4px -4px 20px rgba(0, 0, 0, 0.25);
@@ -106,7 +146,7 @@
                         display: flex;
                         flex-direction: column;
                         width: 100%;
-                        height: 544px;
+                        height: 339px;
                         overflow-y: auto;
                         &::-webkit-scrollbar {
                             width: 5px;
@@ -119,7 +159,9 @@
                         &::-webkit-scrollbar-thumb {
                             background: var(--fuerte-1);
                         }
-
+                        @media #{$tabletless} {
+                            height: 544px;
+                        }
                         .user {
                             display: flex;
                             align-items: center;
@@ -204,16 +246,26 @@
                         display: flex;
                         svg {
                             cursor: pointer;
-                            margin: 25px auto 25px 25px;
+                            margin: 25px auto 0px 25px;
+                            @media #{$tabletless} {
+                                margin: 25px auto 50px 25px;
+                            }
                         }
                     }
                     form {
                         width: 70%;
                         margin: auto;
-                        height: 560px;
+                        height: 424px;
+                        @media #{$tabletless} {
+                            height: 579px;
+                        }
                         h2 {
                             text-align: center;
-                            margin-bottom: 50px;
+                            margin-top: 0;
+                            margin-bottom: 20px;
+                            @media #{$tabletless} {
+                                margin-bottom: 50px;
+                            }
                         }
                         .field {
                             display: flex;
