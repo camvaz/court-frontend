@@ -1,7 +1,12 @@
 import { SET_USER_SESSION } from "../actionTypes";
 
 const initialUserSessionState = {
-    session: {}
+    session: {
+        role: "",
+        nombre: "",
+        img: "",
+        id: ""
+    }
 };
 
 export default function (state = initialUserSessionState, action) {

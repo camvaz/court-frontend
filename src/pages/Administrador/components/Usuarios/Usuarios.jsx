@@ -4,13 +4,36 @@ import { connect } from "react-redux";
 import { setUsers } from "../../../../Redux/actions";
 import { API_ENDPOINT } from "../../../../environment/environment";
 import { ReactComponent as Plus } from "../../../../assets/plus.svg";
+import { ReactComponent as Lupa } from "../../../../assets/lupa.svg";
+import { ReactComponent as Gear } from "../../../../assets/gear.svg";
+import { ReactComponent as Flecha } from "../../../../assets/flecha-azul.svg";
 import ImgAdmin from "../../../../assets/imagen-admin.png";
 import "./Usuarios.scss";
+import "animate.css";
 
 class Usuarios extends Component {
     state = {
-        currentUserType: userTypes.ADMIN_TYPE
+        currentUserType: userTypes.ADMIN_TYPE,
+        currentUserToModify: {
+            nombre: "",
+            correo: "",
+            puesto: "",
+            telefono: "",
+            contraseña: ""
+        },
+        userToCreate: {
+            nombre: "",
+            correo: "",
+            puesto: "",
+            telefono: "",
+            contraseña: ""
+        },
+        searchInput: "",
+        slide: false,
+        accionEnForm: true,
+        userToDelete: {}
     };
+
     componentDidMount() {
         this.loadUsers();
     }
@@ -30,16 +53,32 @@ class Usuarios extends Component {
 
     render() {
         const { users } = this.props;
-        const { currentUserType } = this.state;
-
+        const {
+            currentUserType,
+            accionEnForm,
+            slide,
+            searchInput
+        } = this.state;
         return (
             <main id="dashboard-admin">
                 <section className="line" />
                 <section className="user-types">
-                    <h1>Tipo de usuario</h1>
+                    <h5>Tipo de usuario</h5>
                     <div className="types-list">
                         {Object.keys(userTypes).map((data, index) => (
-                            <div className="type" key={index}>
+                            <div
+                                className={`type ${
+                                    currentUserType === userTypes[data]
+                                        ? "selected"
+                                        : ""
+                                }`}
+                                onClick={() => {
+                                    this.setState({
+                                        currentUserType: userTypes[data]
+                                    });
+                                }}
+                                key={index}
+                            >
                                 <div className="linea"></div>
                                 <p>{userTypes[data]?.description}</p>
                             </div>
@@ -48,18 +87,43 @@ class Usuarios extends Component {
                 </section>
                 <section className="user-section">
                     <div className="user-section-carousel">
-                        <div className="wrapper">
+                        <div
+                            className="wrapper"
+                            style={{
+                                transform: `translate(${
+                                    slide ? "-50" : "0"
+                                }%, 0%)`
+                            }}
+                        >
                             <div className="users">
-                                <input type="text" />
+                                <div className="input">
+                                    <Lupa />
+                                    <input
+                                        type="text"
+                                        placeholder="Nombre de usuario"
+                                        value={searchInput}
+                                        onChange={e => {
+                                            this.setState({
+                                                searchInput: e.target.value
+                                            });
+                                        }}
+                                    />
+                                </div>
                                 <div className="user-list">
                                     {Object.keys(users)
                                         .filter(
                                             key =>
                                                 users[key]?.role ===
-                                                currentUserType.role
+                                                    currentUserType.role &&
+                                                users[key]?.name
+                                                    .toLowerCase()
+                                                    .includes(searchInput)
                                         )
                                         .map((data, index) => (
-                                            <div key={index} className="user">
+                                            <div
+                                                key={index}
+                                                className="user animated fadeIn"
+                                            >
                                                 <div className="linea" />
                                                 <div className="user-info">
                                                     <img
@@ -67,9 +131,9 @@ class Usuarios extends Component {
                                                         alt="Foto de Administrador."
                                                     />
                                                     <div className="user-data">
-                                                        <h2>
+                                                        <h5>
                                                             {users[data]?.name}
-                                                        </h2>
+                                                        </h5>
                                                         <p>
                                                             {
                                                                 currentUserType.description
@@ -77,15 +141,121 @@ class Usuarios extends Component {
                                                         </p>
                                                     </div>
                                                 </div>
+                                                <div className="engrane-container">
+                                                    <Gear
+                                                        className="gear"
+                                                        onClick={() => {
+                                                            document
+                                                                .getElementById(
+                                                                    `admin-user-${index}`
+                                                                )
+                                                                .classList.add(
+                                                                    "show"
+                                                                );
+                                                        }}
+                                                    />
+                                                    <div
+                                                        className="menu"
+                                                        id={`admin-user-${index}`}
+                                                        onMouseLeave={() => {
+                                                            document
+                                                                .getElementById(
+                                                                    `admin-user-${index}`
+                                                                )
+                                                                .classList.remove(
+                                                                    "show"
+                                                                );
+                                                        }}
+                                                    >
+                                                        <p>Dar de baja</p>
+                                                        <p
+                                                            onClick={() => {
+                                                                this.setState({
+                                                                    slide: true,
+                                                                    accionEnForm: false
+                                                                });
+                                                            }}
+                                                        >
+                                                            Modificar
+                                                        </p>
+                                                    </div>
+                                                </div>
                                             </div>
                                         ))}
                                 </div>
-                                <div className="agregar-contacto">
+                                <div
+                                    className="bottom-button"
+                                    onClick={() => {
+                                        this.setState({
+                                            slide: true,
+                                            accionEnForm: true
+                                        });
+                                    }}
+                                >
                                     <Plus />
-                                    <h4>Agregar contacto</h4>
+                                    <h4>Agregar nuevo usuario</h4>
                                 </div>
                             </div>
-                            <div className="create-user"></div>
+                            <div className="user-cu">
+                                <div className="flecha-container">
+                                    <Flecha
+                                        onClick={() => {
+                                            this.setState({ slide: false });
+                                        }}
+                                    />
+                                </div>
+                                <form>
+                                    {accionEnForm ? (
+                                        <h2>Crear Usuario</h2>
+                                    ) : (
+                                        <h2>Modificar Usuario</h2>
+                                    )}
+                                    <div className="field">
+                                        <label htmlFor="nombre">
+                                            Nombre completo
+                                        </label>
+                                        <input type="text" />
+                                    </div>
+                                    <div className="field">
+                                        <label htmlFor="nombre">Correo</label>
+                                        <input type="text" />
+                                    </div>
+                                    <div className="field">
+                                        <label htmlFor="nombre">Puesto</label>
+                                        <select name="puesto" id="">
+                                            {Object.keys(userTypes).map(
+                                                (data, index) => (
+                                                    <option
+                                                        value={
+                                                            userTypes[data]
+                                                                ?.role
+                                                        }
+                                                        key={index}
+                                                    >
+                                                        {
+                                                            userTypes[data]
+                                                                ?.description
+                                                        }
+                                                    </option>
+                                                )
+                                            )}
+                                        </select>
+                                    </div>
+                                    <div className="field">
+                                        <label htmlFor="telefono">
+                                            Telefono
+                                        </label>
+                                        <input type="text" />
+                                    </div>
+                                    <div className="field">
+                                        <label htmlFor="img">Foto</label>
+                                        <input type="file" />
+                                    </div>
+                                </form>
+                                <div className="bottom-button">
+                                    <h4>Guardar</h4>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </section>
