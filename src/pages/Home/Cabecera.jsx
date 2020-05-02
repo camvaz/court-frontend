@@ -5,29 +5,32 @@ import Logo from '../../assets/logo.svg';
 const ComponenteCabecera = styled.div`
     width: 100%;
     position: relative;
-    display: grid;
-    grid-template-columns: 50% 50%;
-    justify-items: flex-end;
-    padding: 15px 0;
-    background: white;
-    margin-bottom: 50px;
+
     @media screen and (min-width: 767px){
-       
+        margin: 0;
+        height: 50px;  
+        margin-bottom: 50px;    
     }
 
     h1{
-        position:relative;
-        font-size: 1.2rem;
-        display: flex;
-        align-items: center;
-        height: 100%;
-        width: 100%;
-        left: 20px;
+        font-size:1.4rem;
+        position: relative;
+        width: 200px;
+        padding: 10px;
+    
+        @media screen and (min-width: 767px){
+            position: absolute;
+            top: 0;
+            right: 60px;
+            text-align: right;
+            margin-top: 5px;
+        }
     }
     img{
-        width: 50px; 
-        position: relative;
-        right: 20px;
+        height: 50px;
+        top: 0;
+        right: 10px;
+        position: absolute;
     }
 `;
 

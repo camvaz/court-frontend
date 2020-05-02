@@ -10,6 +10,7 @@ const ContenedorHome = styled.div `
     height: 100vh;
     margin: 0;
     left:0;
+    
    
 `;
 
@@ -18,7 +19,8 @@ const Contenido = styled.div `
     width: 90%;
     left: 50%;
     transform: translateX(-50%);
-    margin-top: 80px;
+    margin-top: 100px;
+   
 
     img{
         position: absolute;

@@ -11,7 +11,7 @@ const Contenedor = styled.div`
     top: 0px;
     overflow: hidden;
     width: 100%;
-    z-index: 9999;
+    z-index: 91;
 
     @media screen and (min-width: 767px){
         position: relative;

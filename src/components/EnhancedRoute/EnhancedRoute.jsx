@@ -6,8 +6,9 @@ import styled, {css} from 'styled-components';
 import tenista from '../../assets/TennistaGris.svg';
 
 const Derecho = styled.div`
-    z-index: 999999;
+   z-index: 0;
     @media screen and (min-width: 767px){
+        z-index: 99;
         grid-column-start: 1;
         grid-column-end: 3;
     }
@@ -18,7 +19,7 @@ const Tennista = styled.img`
       bottom: 30px;
       left: 15%;
       width: 20%;
-      z-index: 999992;
+      z-index: 92;
   
 `;
 
@@ -38,10 +39,7 @@ const Contenedor = styled.div`
         }
  
     }
-    @media screen and (min-width: 1100px){  
-       grid-template-columns: 25% 75%;  
-    }
-
+  
     .ocultarTenista{
         display: none;
     }
