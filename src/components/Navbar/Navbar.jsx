@@ -28,6 +28,7 @@ const ContenedorUsuario = styled.div`
     align-content: center;
     justify-content: flex-start;
     padding-left: 20px;
+   
 
     img{
         grid-area: imagen;
@@ -168,16 +169,19 @@ const getWidth = () => window.innerWidth
 
 function Navbar(props){
     const [isToggleOn, setToggleOn] = useState(null);
+    const [screenSize, setSize] = useState(getWidth());
    
     const ocultar = () => {
         setToggleOn(!isToggleOn);
     };
+    
 
     //Visualiza el tamaño de la pantalla antes de montarse
     //Si es menor al tamaño de una tablet entonces muestra el menu hamburguesa, si no no
     useEffect(() => {
         getWidth() < 767 ? setToggleOn(false) : setToggleOn(true);
         const handleResize = () => {
+            setSize(getWidth);
             getWidth() < 767 ? setToggleOn(false) : setToggleOn(true);
         };  
         window.addEventListener('resize', handleResize);
@@ -190,6 +194,8 @@ function Navbar(props){
     //Agrega la clase equis a nuestro menu hamburguesa para mostrar la equis en lugar del menu
     let equis;
     isToggleOn ? equis="equis" : equis="";
+    let mobile;
+    screenSize<768 ? mobile=ocultar : mobile = ()=>{};
   
     return (
         <React.Fragment>
@@ -200,7 +206,7 @@ function Navbar(props){
             {isToggleOn ? (
                 <Contenedor>
                     <Usuario />
-                    <Menu itemsMenu = {props.itemsMenu} ocultarMenu={ocultar}/>
+                    <Menu itemsMenu = {props.itemsMenu} ocultarMenu={mobile}/>
                     
                 </Contenedor> 
             ) : ""

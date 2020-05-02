@@ -8,6 +8,7 @@ import links from '../../constants/links';
 
 const Derecho = styled.div`
    z-index: 0;
+   height: 100vh;
     @media screen and (min-width: 767px){
         z-index: 99;
         grid-column-start: 1;
@@ -21,6 +22,11 @@ const Tennista = styled.img`
       left: 15%;
       width: 20%;
       z-index: 92;
+      display: none;
+
+      @media screen and (min-width: 767px){
+          display: block;
+      }
   
 `;
 
