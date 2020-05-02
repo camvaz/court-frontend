@@ -8,6 +8,7 @@ import { ReactComponent as Lupa } from "../../../../assets/lupa.svg";
 import { ReactComponent as Gear } from "../../../../assets/gear.svg";
 import { ReactComponent as Flecha } from "../../../../assets/flecha-azul.svg";
 import ImgAdmin from "../../../../assets/imagen-admin.png";
+import Cabecera from '../../../Home/Cabecera';
 import "./Usuarios.scss";
 import "animate.css";
 
@@ -60,6 +61,8 @@ class Usuarios extends Component {
             searchInput
         } = this.state;
         return (
+            <React.Fragment>
+            <Cabecera />
             <main id="dashboard-admin">
                 <section className="line" />
                 <section className="user-types">
@@ -260,6 +263,7 @@ class Usuarios extends Component {
                     </div>
                 </section>
             </main>
+            </React.Fragment>
         );
     }
 }

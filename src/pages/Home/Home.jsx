@@ -10,10 +10,6 @@ const ContenedorHome = styled.div `
     height: 100vh;
     margin: 0;
     left:0;
- 
-    @media screen and (min-width: 767px){
-        
-    }
    
 `;
 

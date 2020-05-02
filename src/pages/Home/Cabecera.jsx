@@ -10,6 +10,7 @@ const ComponenteCabecera = styled.div`
     justify-items: flex-end;
     padding: 15px 0;
     background: white;
+    margin-bottom: 50px;
     @media screen and (min-width: 767px){
        
     }

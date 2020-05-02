@@ -2,14 +2,16 @@ import React, { useState, useEffect } from "react";
 import styled from 'styled-components';
 import imgUsuario from '../../assets/imgUsuario.svg';
 
+
 const Contenedor = styled.div`
     background: var(--fuerte-1);
-    height: 100vh;
+    height: 100%;
     z-index: 9;
     position: fixed;
     top: 0px;
     overflow: hidden;
     width: 100%;
+    z-index: 9999;
 
     @media screen and (min-width: 767px){
         position: relative;
@@ -54,7 +56,7 @@ const ContenedorHam = styled.div`
     position: fixed;
     width: 50px; 
     height: 50px;
-    z-index: 9999;
+    z-index: 9999992;
     right: 16px;
     bottom: 20px;
 
@@ -190,6 +192,7 @@ function Navbar(){
                 <Contenedor>
                     <Usuario />
                     <Menu/>
+                    
                 </Contenedor> 
             ) : ""
             }
