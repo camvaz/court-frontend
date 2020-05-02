@@ -5,8 +5,15 @@ import styled from 'styled-components';
 import Cabecera from './Cabecera';
 
 const ContenedorHome = styled.div `
+    position: relative;
     width: 100%;
     height: 100vh;
+    margin: 0;
+    left:0;
+ 
+    @media screen and (min-width: 767px){
+        
+    }
    
 `;
 
@@ -15,57 +22,57 @@ const Contenido = styled.div `
     width: 90%;
     left: 50%;
     transform: translateX(-50%);
-    height: 400px;
     margin-top: 80px;
-    
-    @media screen and (min-width: 425px){
-        width: 70%;
-    }
-    @media screen and (min-width: 680px){
-        width: 60%;
-    }
-    @media screen and (min-width: 767px){
-        width: 70%;
-    }
-    @media screen and (min-width: 950px){
-        width: 80%;
+
+    img{
+        position: absolute;
+        top:30px;
+        @media screen and (min-width: 550px){
+            top:0;
+            width: 70%;
+        }
+        @media screen and (min-width: 767px){
+            top:0;
+            width: 60%;
+            left: 0px;
+        }
+
+        @media screen and (min-width: 1200px){
+            top:-60px;
+            width: 50%;
+            left: 100px;
+        }
+       
+
     }
 
     p{
         position: relative;
-        width: 60%;
-        left: 40%;
-        top: 20px;
+        width: 200px;
+        left: 55%;
+        transform: translateX(-30%);
+        text-align: left;
 
-        @media screen and (min-width: 950px){
-            width: 30%;
+        @media screen and (min-width: 767px){
             font-size: 1.5rem;
-            top: 150px;
-            left: 50%;
+            width: 300px;
+            top:0px;
+            line-height: 25px;
+            text-align: center;
         }
-    }
-    img{
-      position: absolute;
-      top: 50px;
-      
-      @media screen and (min-width: 950px){
-          width: 50%;
-          left: 0px;
-      }
-
-
     }
     .btn{
         position: relative;
-        left: 40%;
-        top: 100px;
+        left: 55%;
+        margin-top: 50px;
+        transform: translateX(-30%);   
 
-        @media screen and (min-width: 950px){
-          left: 55%;
-          top: 200px;
-        }  
-    }
+        @media screen and (min-width: 550px){
+            margin-top: 100px;
+        }
     
+    }
+
 `;
 
 function Home(){

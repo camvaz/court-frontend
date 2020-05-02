@@ -38,6 +38,7 @@ class App extends Component {
                                     component={data.component}
                                 />
                             ))}
+                            
                             <EnhancedRoute component={NotFound} />
                         </Switch>
                     </Suspense>
