@@ -39,7 +39,9 @@ class App extends Component {
                                 />
                             ))}
                             
-                            <EnhancedRoute component={NotFound} />
+                            <EnhancedRoute component={NotFound}
+                                           withNavbar 
+                            />
                         </Switch>
                     </Suspense>
                 </ScrollToTop>

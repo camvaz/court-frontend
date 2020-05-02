@@ -10,16 +10,20 @@ const ContenedorHome = styled.div `
     height: 100vh;
     margin: 0;
     left:0;
-    
    
 `;
 
 const Contenido = styled.div `
     position: relative;
     width: 90%;
-    left: 50%;
+    left: 55%;
     transform: translateX(-50%);
+    
     margin-top: 100px;
+
+    @media screen and (min-width: 767px){    
+        margin-top: 200px;
+    }
    
 
     img{

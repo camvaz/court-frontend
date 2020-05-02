@@ -4,9 +4,11 @@ import Navbar from "../Navbar/Navbar";
 import Footer from "../Footer/Footer";
 import styled, {css} from 'styled-components';
 import tenista from '../../assets/TennistaGris.svg';
+import links from '../../constants/links';
 
 const Derecho = styled.div`
    z-index: 0;
+   height: 100vh;
     @media screen and (min-width: 767px){
         z-index: 99;
         grid-column-start: 1;
@@ -20,6 +22,11 @@ const Tennista = styled.img`
       left: 15%;
       width: 20%;
       z-index: 92;
+      display: none;
+
+      @media screen and (min-width: 767px){
+          display: block;
+      }
   
 `;
 
@@ -48,6 +55,7 @@ const Contenedor = styled.div`
 `;
 
 export default class EnhancedRoute extends Component {
+   
     render() {
         const { path, exact, withNavbar, withFooter, component } = this.props;
         let clase = "";
@@ -55,6 +63,10 @@ export default class EnhancedRoute extends Component {
 
         withNavbar === true ? clase = "aplicarGrid" : clase = "";
         path === "/" ? ocultarTenista = "ocultarTenista" : ocultarTenista=""; 
+
+        let items = links;
+        let usuarioSeleccionado = items.find(user => user.usuario === "administrador");
+        
         
         return (
                 <Route
@@ -63,7 +75,7 @@ export default class EnhancedRoute extends Component {
                     render={props => (
                         <>
                             <Contenedor>
-                                {withNavbar && <Navbar/>}
+                                {withNavbar && <Navbar itemsMenu={usuarioSeleccionado} />}
                                 <Derecho className={clase}>
                                     {React.createElement(component, props)}
                                 </Derecho>
