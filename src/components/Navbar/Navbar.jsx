@@ -1,15 +1,19 @@
-import React, { Component } from "react";
+import React, { useState, useEffect } from "react";
 import styled from 'styled-components';
 import imgUsuario from '../../assets/imgUsuario.svg';
 
 const Contenedor = styled.div`
     background: var(--fuerte-1);
-    width: 100%;
     height: 100vh;
     z-index: 9;
     position: fixed;
     top: 0px;
     overflow: hidden;
+    width: 100%;
+
+    @media screen and (min-width: 767px){
+        position: relative;
+    }
 `;
 
 const ContenedorUsuario = styled.div`
@@ -147,47 +151,50 @@ function Menu(){
      );
 }
 
-class Navbar extends Component {
-    constructor(props){
-        super(props);
-        this.state={
-            isToggleOn: false 
-        }
+const getWidth = () => window.innerWidth 
+    || document.documentElement.clientWidth 
+    || document.body.clientWidth; 
 
-        this.ocultar = this.ocultar.bind(this);
-    }
+function Navbar(){
+    const [isToggleOn, setToggleOn] = useState(null);
+   
+    const ocultar = () => {
+        setToggleOn(!isToggleOn);
+    };
 
-    ocultar(){
-        this.setState(state=>({ 
-            isToggleOn: !state.isToggleOn
-        }));
-    }
-
-    render() {
-        var estado = this.state.isToggleOn  
-        let equis;
-
-        if(estado){
-            equis = "equis";  
-        }else{
-            equis = ""; 
-        }
-        return (
-            <React.Fragment>
-                <ContenedorHam onClick={this.ocultar}>
-                    <Icono className={equis} ></Icono>
-                </ContenedorHam>
-                {this.state.isToggleOn ? (
-                    <Contenedor>
-                        <Usuario />
-                        <Menu />
-                    </Contenedor> 
-                ) : ""
-                }
-                
-            </React.Fragment>
+    //Visualiza el tamaño de la pantalla antes de montarse
+    //Si es menor al tamaño de una tablet entonces muestra el menu hamburguesa, si no no
+    useEffect(() => {
+        getWidth() < 767 ? setToggleOn(false) : setToggleOn(true);
+        const handleResize = () => {
+            getWidth() < 767 ? setToggleOn(false) : setToggleOn(true);
+        };  
+        window.addEventListener('resize', handleResize);
         
-        );
-    }
+        return () => {
+            window.removeEventListener('resize', handleResize);
+        };
+    }, []);
+
+    //Agrega la clase equis a nuestro menu hamburguesa para mostrar la equis en lugar del menu
+    let equis;
+    isToggleOn ? equis="equis" : equis="";
+  
+    return (
+        <React.Fragment>
+            <ContenedorHam onClick={ocultar}>
+                <Icono className={equis} ></Icono>
+            </ContenedorHam>
+            
+            {isToggleOn ? (
+                <Contenedor>
+                    <Usuario />
+                    <Menu/>
+                </Contenedor> 
+            ) : ""
+            }
+        </React.Fragment>
+    );
+
 }
 export default Navbar;

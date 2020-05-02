@@ -30,3 +30,4 @@ export const adminRoutes = [
         component: Usuarios
     }
 ];
+

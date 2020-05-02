@@ -9,13 +9,9 @@ const ComponenteCabecera = styled.div`
     grid-template-columns: 50% 50%;
     justify-items: flex-end;
     padding: 15px 0;
-
+    background: white;
     @media screen and (min-width: 767px){
-        position: absolute;
-        top:0;
-        width: 400px;
-        right:0;
-        justify-items: flex-start;
+       
     }
 
     h1{
