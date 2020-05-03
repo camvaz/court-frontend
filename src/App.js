@@ -4,9 +4,13 @@ import ScrollToTop from "react-router-scroll-top";
 import EnhancedRoute from "./components/EnhancedRoute/EnhancedRoute";
 import { adminRoutes } from "./pages/Administrador/AdministradorRoutes";
 import { connect } from "react-redux";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 const NotFound = React.lazy(() => import("./pages/NotFound/NotFound"));
 const Home = React.lazy(() => import("./pages/Home/Home"));
 const Login = React.lazy(() => import("./pages/Login/Login"));
+
+toast.configure();
 
 class App extends Component {
     render() {
@@ -38,10 +42,8 @@ class App extends Component {
                                     component={data.component}
                                 />
                             ))}
-                            
-                            <EnhancedRoute component={NotFound}
-                                           withNavbar 
-                            />
+
+                            <EnhancedRoute component={NotFound} withNavbar />
                         </Switch>
                     </Suspense>
                 </ScrollToTop>

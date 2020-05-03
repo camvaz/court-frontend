@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { toast } from "react-toastify";
 import { userTypes } from "../../../../constants/userTypes";
 import { connect } from "react-redux";
 import { setUsers } from "../../../../Redux/actions";
@@ -74,7 +75,13 @@ class Usuarios extends Component {
         console.log(response);
 
         if (response) {
-            if (response.status === 202) this.loadUsers();
+            if (response.status === 202) {
+                this.loadUsers();
+                toast.success("✔️ Usuario eliminado con éxito", {
+                    position: toast.POSITION.TOP_RIGHT,
+                    autoClose: 5000
+                });
+            }
             const toJson = await response.json();
             console.log(toJson);
         }
@@ -103,6 +110,13 @@ class Usuarios extends Component {
                 const toJson = await response.json();
                 console.log(toJson);
                 this.loadUsers();
+                toast.success("✔️ Usuario creado con éxito", {
+                    position: toast.POSITION.TOP_RIGHT,
+                    autoClose: 5000
+                });
+                this.setState({
+                    slide: false
+                });
             }
         } else {
             console.log("object");
@@ -128,6 +142,13 @@ class Usuarios extends Component {
                 const toJson = await response.json();
                 console.log(toJson);
                 this.loadUsers();
+                toast.success("✔️ Usuario modificado con éxito", {
+                    position: toast.POSITION.TOP_RIGHT,
+                    autoClose: 5000
+                });
+                this.setState({
+                    slide: false
+                });
             }
         }
     };
@@ -204,9 +225,6 @@ class Usuarios extends Component {
                                                     users[key]?.name
                                                         .toLowerCase()
                                                         .includes(searchInput)
-                                                //     &&
-                                                // users[key]?.status ===
-                                                //     "active"
                                             )
                                             .map((data, index) => (
                                                 <div
