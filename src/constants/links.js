@@ -3,7 +3,7 @@ export default [
         "usuario": "administrador",
         "opciones": [
             {
-                "nombre":"Incio",
+                "nombre":"Inicio",
                 "url":"/"
             },
             {
