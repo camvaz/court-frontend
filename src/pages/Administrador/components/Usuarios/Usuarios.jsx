@@ -22,10 +22,10 @@ class Usuarios extends Component {
             role: userTypes.ADMIN_TYPE.role,
             password: ""
         },
+        uid: 0,
         searchInput: "",
         slide: false,
-        accionEnForm: true,
-        userToDelete: {}
+        accionEnForm: true
     };
 
     componentDidMount() {
@@ -43,6 +43,18 @@ class Usuarios extends Component {
                 fetchError: true
             });
         }
+    }
+
+    resetFormData() {
+        this.setState({
+            formData: {
+                name: "",
+                email: "",
+                phone: "",
+                role: userTypes.ADMIN_TYPE.role,
+                password: ""
+            }
+        });
     }
 
     onChange = (target, campo) => {
@@ -71,25 +83,52 @@ class Usuarios extends Component {
     onSubmit = async e => {
         e.preventDefault();
         const { name, email, phone, role, password } = this.state.formData;
-        const response = await fetch(`${API_ENDPOINT}/api/users`, {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({
-                name,
-                email,
-                phone,
-                role,
-                password
-            })
-        });
-        console.log(response);
+        if (this.state.accionEnForm) {
+            const response = await fetch(`${API_ENDPOINT}/api/users`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    name,
+                    email,
+                    phone,
+                    role,
+                    password
+                })
+            });
+            console.log(response);
 
-        if (response) {
-            const toJson = await response.json();
-            console.log(toJson);
-            this.loadUsers();
+            if (response) {
+                const toJson = await response.json();
+                console.log(toJson);
+                this.loadUsers();
+            }
+        } else {
+            console.log("object");
+            const response = await fetch(
+                `${API_ENDPOINT}/api/users/${this.state.uid}`,
+                {
+                    method: "PUT",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({
+                        name,
+                        email,
+                        phone,
+                        role,
+                        password
+                    })
+                }
+            );
+
+            console.log(response);
+            if (response) {
+                const toJson = await response.json();
+                console.log(toJson);
+                this.loadUsers();
+            }
         }
     };
 
@@ -241,7 +280,32 @@ class Usuarios extends Component {
                                                                     this.setState(
                                                                         {
                                                                             slide: true,
-                                                                            accionEnForm: false
+                                                                            accionEnForm: false,
+                                                                            formData: {
+                                                                                name:
+                                                                                    users[
+                                                                                        data
+                                                                                    ]
+                                                                                        ?.name,
+                                                                                email:
+                                                                                    users[
+                                                                                        data
+                                                                                    ]
+                                                                                        ?.email,
+                                                                                phone:
+                                                                                    users[
+                                                                                        data
+                                                                                    ]
+                                                                                        ?.phone,
+                                                                                role:
+                                                                                    users[
+                                                                                        data
+                                                                                    ]
+                                                                                        ?.role,
+                                                                                password:
+                                                                                    ""
+                                                                            },
+                                                                            uid: data
                                                                         }
                                                                     );
                                                                 }}
@@ -256,6 +320,7 @@ class Usuarios extends Component {
                                     <div
                                         className="bottom-button"
                                         onClick={() => {
+                                            this.resetFormData();
                                             this.setState({
                                                 slide: true,
                                                 accionEnForm: true
