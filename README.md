@@ -1,51 +1,44 @@
-# Front end para aplicacion Court
+# Sitio Web Court
 
-Para crear una nueva página o componente, crear una carpeta en su respectivo directorio que contenga los archivos .scss, .jsx y si es posible .test.js.
+## Onboarding
 
-Tanto en components como en pages se encuentran los archivos colores.scss y responsive.scss para manejar los colores y las media querys.
+Para iniciar aportando a este proyecto, es necesario:
 
-======
+-   Actualizar/Instalar las dependencias (`npm install`)
+-   Tener instalada la extensión de prettier (por default npm install lo hará pero hay que verificar que se esté usando en cada archivo)
+-   Revisar que las dependencias esten actualizadas cada que se hace un pull desde master y en caso de que no, actualizarlas y verificar que no haya vulnerabilidades, en caso de que haya, actualizarlas.
+-   Crear una rama para trabajo local y que posteriormente será una PR.
+-   El uso del server de producción es opcional, si decides correr la aplicacion Laravel localmente solo cambia la variable `inProduction` a `false` dentro del archivo `src/environment/environment.js`. Solo acuerdate de no agregar ese cambio en tus commits.
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Scripts para desarrollo
 
-## Available Scripts
+Scripts utilizados para desarrollo:
 
-In the project directory, you can run:
+### `npm start`
 
-### `yarn start`
+Corre la aplicación en modo desarrollo.<br />
+Abre la app en [http://localhost:3000](http://localhost:3000) para verla en tu explorador.
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+Hotreloading está activado por default en create-react-app así que podrás hacer cambios mientras desarrollas y verlos en vivo.<br />
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+### `npm test`
 
-### `yarn test`
+Corre los tests del proyecto utilizando este script, te permitirá asegurar que tu código tiene calidad y siempre va a comportarse de forma determinada<br />
+Puedes encontrar mas documentación en [running tests](https://facebook.github.io/create-react-app/docs/running-tests).
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### `npm run build`
 
-### `yarn build`
+Utiliza este comando para construir el producto final que será distribuido por una CDN de alta disponibilidad como netlify. <br/>
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Para mayor información visita [deployment](https://facebook.github.io/create-react-app/docs/deployment).
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `yarn eject`
+### `npm run eject`
 
 **Note: this is a one-way operation. Once you `eject`, you can’t go back!**
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+Este comando solo debe ser utilizado para mejoras posteriores a la entrega final, solo para desarrolladores expertos.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
+## Learn More (Información sobre React y su documentación)
 
 You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
@@ -71,6 +64,6 @@ This section has moved here: https://facebook.github.io/create-react-app/docs/ad
 
 This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
 
-### `yarn build` fails to minify
+### `npm run build` fails to minify
 
 This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
