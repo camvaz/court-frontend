@@ -109,6 +109,12 @@
             width: 100%;
             height: 756px;
         }
+        @media screen and(min-height: 840px) {
+            height: 650px;
+        }
+        @media screen and(min-height: 1000px) {
+            height: 750px;
+        }
         .user-section-carousel {
             height: inherit;
             box-shadow: -4px -4px 20px rgba(0, 0, 0, 0.25);
@@ -174,6 +180,12 @@
                         }
                         @media #{$tabletless} {
                             height: 544px;
+                        }
+                        @media screen and(min-height: 840px) {
+                            height: 439px;
+                        }
+                        @media screen and(min-height: 1000px) {
+                            height: 539px;
                         }
                         .user {
                             display: flex;
@@ -272,12 +284,24 @@
                         @media #{$tabletless} {
                             height: 579px;
                         }
+                        @media screen and(min-height: 840px) {
+                            height: 524px;
+                        }
+                        @media screen and(min-height: 1000px) {
+                            height: 624px;
+                        }
                         h2 {
                             text-align: center;
                             margin-top: 0;
                             margin-bottom: 20px;
                             @media #{$tabletless} {
                                 margin-bottom: 50px;
+                            }
+                            @media screen and(min-height: 840px) {
+                                margin-bottom: 50px;
+                            }
+                            @media screen and(min-height: 1000px) {
+                                margin-bottom: 75px;
                             }
                         }
                         .field {
