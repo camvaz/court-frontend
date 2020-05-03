@@ -278,7 +278,7 @@
                         }
                     }
                     form {
-                        width: 70%;
+                        width: 100%;
                         margin: auto;
                         height: 424px;
                         @media #{$tabletless} {
@@ -305,6 +305,8 @@
                             }
                         }
                         .field {
+                            width: 70%;
+                            margin: auto;
                             display: flex;
                             flex-direction: column;
                             label {
@@ -343,6 +345,15 @@
                                     color: var(--typo-gris);
                                 }
                             }
+                        }
+                        button {
+                            width: 100%;
+                            border: none;
+                            background-color: var(--fuerte-1);
+                            margin: 0;
+                            padding: auto;
+                            margin-top: 20px;
+                            height: 74px;
                         }
                     }
                 }
