@@ -131,3 +131,8 @@ small,
     font-size: 0.833em;
     font-weight: 400 !important;
 }
+
+input,
+label{
+    font-family: var(--fuente-1), sans-serif;
+}

@@ -14,7 +14,7 @@ const BotonAzul = styled.button`
 
   padding: 15px 0;
   width: 180px;
-  border-radius: 8px;
+  border-radius: 20px;
 
   color: var(--blanco);
   background: var(--fuerte-3);

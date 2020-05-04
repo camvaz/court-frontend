@@ -69,8 +69,7 @@ export default class EnhancedRoute extends Component {
         //Buscamos en constants/links.js el usuario que esta activo para mostrar sus opciones del menú
         //Cambiar administrador por el usuario actual
         let usuarioSeleccionado = items.find(user => user.usuario === "administrador");
-        
-        
+         
         return (
                 <Route
                     path={path}
@@ -78,11 +77,16 @@ export default class EnhancedRoute extends Component {
                     render={props => (
                         <>
                             <Contenedor>
-                                {withNavbar && <Navbar itemsMenu={usuarioSeleccionado} />}
+                                {withNavbar && (
+                                    <React.Fragment>
+                                        <Navbar itemsMenu={usuarioSeleccionado} /> 
+                                        <Tennista className={ocultarTenista} src={tenista}/>
+                                    </React.Fragment>
+                                )}
                                 <Derecho className={clase}>
                                     {React.createElement(component, props)}
                                 </Derecho>
-                                <Tennista className={ocultarTenista} src={tenista}/>
+                                
                             </Contenedor>
                             {withFooter && <Footer />}
                         </>
