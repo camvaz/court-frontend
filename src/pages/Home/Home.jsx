@@ -3,6 +3,7 @@ import Boton from '../../components/Elements/Boton';
 import tenista from '../../assets/tenista.svg';
 import styled from 'styled-components';
 import Cabecera from './Cabecera';
+import {Link} from 'react-router-dom';
 
 const ContenedorHome = styled.div `
     position: relative;
@@ -72,6 +73,12 @@ const Contenido = styled.div `
         @media screen and (min-width: 550px){
             margin-top: 100px;
         }
+        a{
+            position: relative;
+            text-decoration: none; 
+            color: white;
+            padding: 15px 30px;
+        }
     
     }
 
@@ -84,7 +91,7 @@ function Home(){
             <Contenido>
                 <img src={tenista} alt="Imagen ilustracion Tennis"/>
                 <p>Podrás visualizar los mejores partidos de tenis y ver los resultados al momento</p>
-                <Boton className="btn">Iniciar Sesión</Boton>
+                <Boton className="btn"> <Link to="/login"> Iniciar Sesión </Link></Boton>
             </Contenido>
         </ContenedorHome>
     );
