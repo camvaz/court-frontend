@@ -98,7 +98,7 @@ export default class Login extends Component {
         super(props)
         this.state = {
             error: null,
-            user_id: '',
+            user_data: '',
             user_token: '',
             form: {
                 email:'',
@@ -111,10 +111,25 @@ export default class Login extends Component {
     async handleSubmit(e){
         e.preventDefault();
         try {
-            let formData = new FormData();
-            formData.append('description',this.state.form.description)
-            formData.append('amount',this.state.form.amount)
-            formData.append('wallet_id',this.state.form.wallet_id)
+            let formData = new FormData()
+            formData.append('email',this.state.form.email)
+            formData.append('password',this.state.form.password)
+            let config ={
+                method:'POST',
+                headers:{
+                    'Accept':'application/json',
+                },
+                body:formData
+            }
+            let res = await fetch(`${url}/api/login`,config)
+            let data = await res.json();
+            this.setState({
+                ...this.state,
+                user_data: data.data.user,
+                user_token: data.data.token
+            })
+            
+            alert('Success:'+data.success+'\n'+data.message)
         } catch (error) {
             this.setState({
                 error
@@ -157,7 +172,7 @@ export default class Login extends Component {
            
                         <label>Contraseña</label>
                         <input 
-                            type="text"
+                            type="password"
                             placeholder="*********************"
                             name="password"
                             value={this.state.form.password}
@@ -165,7 +180,7 @@ export default class Login extends Component {
                         />
                         
                   
-                        <Boton className="btn" type="submit">Ingresar</Boton>
+                        <Boton className="btn" type="submit" onSubmit={this.handleSubmit}>Ingresar</Boton>
                     </form>
                 </ContenedorInfo>
             </ContenedorLogin>
