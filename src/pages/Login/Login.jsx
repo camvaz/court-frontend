@@ -1,10 +1,9 @@
 import React, { Component } from "react"
 import iconousuario from '../../assets/icono-usuario.svg'
-import url from './url'
 import Boton from '../../components/Elements/Boton';
 import styled from 'styled-components';
 import {Link} from 'react-router-dom';
-
+import API_ENDPOINt from '../../environment/environment'
 
 const ContenedorLogin = styled.div`
     position: relative;
@@ -121,7 +120,7 @@ export default class Login extends Component {
                 },
                 body:formData
             }
-            let res = await fetch(`${url}/api/login`,config)
+            let res = await fetch(`${API_ENDPOINt}/api/login`,config)
             let data = await res.json();
             this.setState({
                 ...this.state,
