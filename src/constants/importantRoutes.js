@@ -1,5 +1,3 @@
-const importantRoutes = {
-    dashboard: "/dashboard/"
-};
+const importantRoutes = {};
 
 export default importantRoutes;

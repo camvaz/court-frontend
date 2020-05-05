@@ -1,12 +1,10 @@
-@import "../../../responsive.scss";
-
 #dashboard-admin {
     width: calc(100% - 28px);
     display: flex;
     margin-left: 25px;
     height: calc(100vh - 100px);
     position: relative;
-    @media #{$tabletless} {
+    @media #{var(--tablet-mobile)} {
         width: 90%;
         flex-direction: column;
         margin: auto;
@@ -17,7 +15,7 @@
         height: auto;
         width: 0.5px;
         background-color: var(--typo-gris);
-        @media #{$tabletless} {
+        @media #{var(--tablet-mobile)} {
             display: none;
         }
     }
@@ -29,14 +27,14 @@
         justify-content: center;
         z-index: 99999999999;
 
-        @media #{$tabletless} {
+        @media #{var(--tablet-mobile)} {
             width: 100%;
             margin-bottom: 25px;
         }
         h5 {
             margin: 30px auto 20px 20px;
             font-weight: 500;
-            @media #{$tabletless} {
+            @media #{var(--tablet-mobile)} {
                 display: none;
             }
         }
@@ -50,7 +48,7 @@
                 height: 0px;
             }
 
-            @media #{$tabletless} {
+            @media #{var(--tablet-mobile)} {
                 flex-direction: row;
                 overflow-x: auto;
                 width: 100%;
@@ -61,7 +59,7 @@
                 transition: 250ms ease-in-out;
                 cursor: pointer;
 
-                @media #{$tabletless} {
+                @media #{var(--tablet-mobile)} {
                     flex-direction: column;
                     justify-self: center;
                 }
@@ -79,7 +77,7 @@
                     height: 50px;
                     transition: inherit;
 
-                    @media #{$tabletless} {
+                    @media #{var(--tablet-mobile)} {
                         width: 100%;
                         height: 5px !important;
                         margin-top: auto;
@@ -89,7 +87,7 @@
                 p {
                     font-weight: 500;
                     margin: 0 auto 0 25px;
-                    @media #{$tabletless} {
+                    @media #{var(--tablet-mobile)} {
                         margin: auto auto;
                         text-align: center;
                         width: 150px;
@@ -104,7 +102,7 @@
         position: absolute;
         bottom: 0;
         right: 0;
-        @media #{$tabletless} {
+        @media #{var(--tablet-mobile)} {
             position: initial;
             width: 100%;
             height: 756px;
@@ -178,7 +176,7 @@
                         &::-webkit-scrollbar-thumb {
                             background: var(--fuerte-1);
                         }
-                        @media #{$tabletless} {
+                        @media #{var(--tablet-mobile)} {
                             height: 544px;
                         }
                         @media screen and(min-height: 840px) {
@@ -273,7 +271,7 @@
                         svg {
                             cursor: pointer;
                             margin: 25px auto 0px 25px;
-                            @media #{$tabletless} {
+                            @media #{var(--tablet-mobile)} {
                                 margin: 25px auto 50px 25px;
                             }
                         }
@@ -282,7 +280,7 @@
                         width: 100%;
                         margin: auto;
                         height: 424px;
-                        @media #{$tabletless} {
+                        @media #{var(--tablet-mobile)} {
                             height: 579px;
                         }
                         @media screen and(min-height: 840px) {
@@ -295,7 +293,7 @@
                             text-align: center;
                             margin-top: 0;
                             margin-bottom: 20px;
-                            @media #{$tabletless} {
+                            @media #{var(--tablet-mobile)} {
                                 margin-bottom: 50px;
                             }
                             @media screen and(min-height: 840px) {

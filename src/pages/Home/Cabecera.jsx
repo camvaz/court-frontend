@@ -1,24 +1,24 @@
-import React from 'react';
-import styled from 'styled-components';
-import Logo from '../../assets/logo.svg';
+import React from "react";
+import styled from "styled-components";
+import Logo from "../../assets/logo.svg";
 
 const ComponenteCabecera = styled.div`
     width: 100%;
     position: relative;
 
-    @media screen and (min-width: 767px){
+    @media screen and (min-width: 767px) {
         margin: 0;
-        height: 50px;  
-        margin-bottom: 50px;    
+        height: 50px;
+        margin-bottom: 50px;
     }
 
-    h1{
-        font-size:1.4rem;
+    h1 {
+        font-size: 1.4rem;
         position: relative;
         width: 200px;
         padding: 10px;
-    
-        @media screen and (min-width: 767px){
+
+        @media screen and (min-width: 767px) {
             position: absolute;
             top: 0;
             right: 60px;
@@ -26,7 +26,7 @@ const ComponenteCabecera = styled.div`
             margin-top: 5px;
         }
     }
-    img{
+    img {
         height: 50px;
         top: 0;
         right: 10px;
@@ -34,12 +34,11 @@ const ComponenteCabecera = styled.div`
     }
 `;
 
-function Cabecera(){
-
-    return(
+function Cabecera() {
+    return (
         <ComponenteCabecera>
             <h1>CROSS COURT</h1>
-            <img src={Logo} />
+            <img src={Logo} alt="Logo" />
         </ComponenteCabecera>
     );
 }

@@ -4,7 +4,7 @@ import Boton from "../../components/Elements/Boton";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 import { API_ENDPOINT } from "../../environment/environment";
-import { toast } from "react-toastify";
+//import { toast } from "react-toastify";
 import { connect } from "react-redux";
 import { setUserSession } from "../../Redux/actions";
 

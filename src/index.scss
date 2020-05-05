@@ -30,6 +30,13 @@
 
     --fuente-1: "Roboto";
     --fuente-2: "SF Pro Display";
+
+    --mobile: "only screen and (max-width : 767px)";
+    --tablet: "only screen and (min-width : 768px) and (max-width : 991px)";
+    --mobile-tablet: "only screen and (max-width : 991px)";
+    --desktop: "only screen and (min-width : 992px)";
+    --desktopsmall: "only screen and (min-width : 992px) and (max-width : 1365px)";
+    --desktoplarge: "only screen and (min-width : 1650px)";
 }
 
 /* dipositivo.js */
@@ -133,6 +140,6 @@ small,
 }
 
 input,
-label{
+label {
     font-family: var(--fuente-1), sans-serif;
 }

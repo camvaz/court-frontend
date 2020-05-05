@@ -1,5 +1,5 @@
 const ADMIN_TYPE = {
-    route: "admin",
+    route: "/admin",
     routes: {
         inicio: "/",
         torneos: "/torneos",
@@ -11,25 +11,25 @@ const ADMIN_TYPE = {
 };
 
 const RESPONSABLE_TORNEO_TYPE = {
-    route: "admin-torneos",
+    route: "/admin-torneos",
     description: "Responsable de torneos",
     role: "Tournament Manager"
 };
 
 const CAPTURADOR_TYPE = {
-    route: "capturador",
+    route: "/capturador",
     description: "Capturador de resultados",
     role: "Results Capturer"
 };
 
 const SECRETARA_TYPE = {
-    route: "secretaria",
+    route: "/secretaria",
     description: "Secretaria",
     role: "Secretary"
 };
 
 const PARTICIPANTE_TYPE = {
-    route: "participante",
+    route: "/participante",
     description: "Participante",
     role: "Player"
 };
