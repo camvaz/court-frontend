@@ -2,7 +2,7 @@ import React, { Suspense, Component } from "react";
 import { BrowserRouter as Router, Switch } from "react-router-dom";
 import ScrollToTop from "react-router-scroll-top";
 import EnhancedRoute from "./components/EnhancedRoute/EnhancedRoute";
-import { adminRoutes } from "./pages/Administrador/AdministradorRoutes";
+import { adminRoutes } from "./pages/Administrador/administrador.routes";
 import { connect } from "react-redux";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
