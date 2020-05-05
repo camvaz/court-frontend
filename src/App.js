@@ -13,6 +13,9 @@ const Login = React.lazy(() => import("./pages/Login/Login"));
 toast.configure();
 
 class App extends Component {
+    state = {
+        user: "n"
+    };
     render() {
         return (
             <Router>

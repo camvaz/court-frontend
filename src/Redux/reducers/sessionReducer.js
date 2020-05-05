@@ -2,10 +2,8 @@ import { SET_USER_SESSION } from "../actionTypes";
 
 const initialUserSessionState = {
     session: {
-        role: "",
-        nombre: "",
-        img: "",
-        id: ""
+        user: {},
+        token: ""
     }
 };
 
