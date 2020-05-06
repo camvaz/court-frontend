@@ -3,8 +3,9 @@ import iconousuario from "../../assets/icono-usuario.svg";
 import Boton from "../../components/Elements/Boton";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
+import { userTypes } from "../../constants/userTypes";
 import { API_ENDPOINT } from "../../environment/environment";
-//import { toast } from "react-toastify";
+import { toast } from "react-toastify";
 import { connect } from "react-redux";
 import { setUserSession } from "../../Redux/actions";
 
@@ -108,13 +109,23 @@ class Login extends Component {
                 },
                 body: formData
             };
+
             let res = await fetch(`${API_ENDPOINT}/api/login`, config);
             let data = await res.json();
-            const { user, token } = data.data;
-            //Enviar data a Redux
-            this.props.setUserSession({ user, token });
-            //  Toast de bienvenida
-            // toast.success("Bienvenido.")
+            if (data.success) {
+                const { user, token } = data.data;
+                const { history } = this.props;
+                await this.props.setUserSession({ user, token });
+                toast.success("Sesión iniciada.");
+                switch (user.role) {
+                    case userTypes.ADMIN_TYPE.role: {
+                        history.push("/admin/usuarios");
+                        break;
+                    }
+                    default:
+                        break;
+                }
+            }
         } catch (error) {
             this.setState({
                 error

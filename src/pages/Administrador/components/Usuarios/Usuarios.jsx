@@ -34,11 +34,18 @@ class Usuarios extends Component {
     }
 
     async loadUsers() {
-        const response = await fetch(`${API_ENDPOINT}/api/users`);
-
+        const { token } = this.props.userSession.session;
+        console.log(this.props);
+        const response = await fetch(`${API_ENDPOINT}/api/users`, {
+            method: "GET",
+            headers: {
+                Accept: "application/json",
+                Authorization: `Bearer ${token}`
+            }
+        });
         if (response) {
             const res = await response.json();
-            this.props.updateUsers(res);
+            this.props.updateUsers(res.data);
         } else {
             this.setState({
                 fetchError: true
@@ -68,8 +75,12 @@ class Usuarios extends Component {
     };
 
     onDelete = async user => {
+        const { token } = this.props.userSession.session;
         const response = await fetch(`${API_ENDPOINT}/api/users/${user}`, {
-            method: "DELETE"
+            method: "DELETE",
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
         });
 
         console.log(response);
@@ -89,20 +100,25 @@ class Usuarios extends Component {
 
     onSubmit = async e => {
         e.preventDefault();
+        const { token } = this.props.userSession.session;
         const { name, email, phone, role, password } = this.state.formData;
+        const formData = new FormData();
+
+        formData.append("name", name);
+        formData.append("email", email);
+        formData.append("phone", phone);
+        formData.append("role", role);
+        formData.append("password", password);
+        formData.append("c_password", password);
+
         if (this.state.accionEnForm) {
             const response = await fetch(`${API_ENDPOINT}/api/users`, {
                 method: "POST",
                 headers: {
-                    "Content-Type": "application/json"
+                    Accept: "application/json",
+                    Authorization: `Bearer ${token}`
                 },
-                body: JSON.stringify({
-                    name,
-                    email,
-                    phone,
-                    role,
-                    password
-                })
+                body: formData
             });
             console.log(response);
 
@@ -125,15 +141,10 @@ class Usuarios extends Component {
                 {
                     method: "PUT",
                     headers: {
-                        "Content-Type": "application/json"
+                        Accept: "application/json",
+                        Authorization: `Bearer ${token}`
                     },
-                    body: JSON.stringify({
-                        name,
-                        email,
-                        phone,
-                        role,
-                        password
-                    })
+                    body: formData
                 }
             );
 
@@ -483,7 +494,8 @@ class Usuarios extends Component {
 }
 
 const mapStateToProps = state => ({
-    users: state.users.list
+    users: state.users.list,
+    userSession: state.userSession
 });
 
 const mapDispatchToProps = dispatch => {

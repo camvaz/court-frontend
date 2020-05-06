@@ -13,7 +13,7 @@ export default function (state = initialUserSessionState, action) {
     switch (type) {
         case SET_USER_SESSION: {
             const { userSession } = payload;
-            newState.userSession = userSession;
+            newState.session = userSession;
             return newState;
         }
         default: {

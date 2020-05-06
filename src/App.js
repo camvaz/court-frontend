@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Switch } from "react-router-dom";
 import ScrollToTop from "react-router-scroll-top";
 import EnhancedRoute from "./components/EnhancedRoute/EnhancedRoute";
 import { adminRoutes } from "./pages/Administrador/administrador.routes";
+import { userTypes } from "./constants/userTypes";
 import { connect } from "react-redux";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -17,6 +18,7 @@ class App extends Component {
         user: "n"
     };
     render() {
+        const { role } = this.props.userSession.user;
         return (
             <Router>
                 <ScrollToTop>
@@ -36,15 +38,16 @@ class App extends Component {
                                 exact
                                 component={Login}
                             />
-                            {adminRoutes.map((data, index) => (
-                                <EnhancedRoute
-                                    key={index}
-                                    withNavbar
-                                    exact
-                                    path={data.route}
-                                    component={data.component}
-                                />
-                            ))}
+                            {role === userTypes.ADMIN_TYPE.role &&
+                                adminRoutes.map((data, index) => (
+                                    <EnhancedRoute
+                                        key={index}
+                                        withNavbar
+                                        exact
+                                        path={data.route}
+                                        component={data.component}
+                                    />
+                                ))}
 
                             <EnhancedRoute component={NotFound} withNavbar />
                         </Switch>
