@@ -10,6 +10,11 @@ import "react-toastify/dist/ReactToastify.css";
 const NotFound = React.lazy(() => import("./pages/NotFound/NotFound"));
 const Home = React.lazy(() => import("./pages/Home/Home"));
 const Login = React.lazy(() => import("./pages/Login/Login"));
+const Torneos = React.lazy(() => import("./pages/Administrador/components/Torneos/Torneos"));
+const VisualizarTorneo = React.lazy(() => import ("./pages/Administrador/components/Torneos/TarjetaVisualizarTorneo"));
+const AgregarTorneo = React.lazy(() => import ("./pages/Administrador/components/Torneos/AgregarTorneo"));
+const Jugadores= React.lazy(() => import ("./pages/Administrador/components/Torneos/Jugadores"));
+const TarjetaJugador= React.lazy(() => import ("./pages/Administrador/components/Torneos/TarjetaJugador"));
 
 toast.configure();
 
@@ -32,6 +37,41 @@ class App extends Component {
                                 withNavbar
                                 withFooter
                                 component={Home}
+                            />
+                            <EnhancedRoute
+                                path="/torneos"
+                                exact
+                                withNavbar
+                                withFooter
+                                component={Torneos}
+                            />
+                            <EnhancedRoute
+                                path="/torneos/visualizar"
+                                exact
+                                withNavbar
+                                withFooter
+                                component={VisualizarTorneo}
+                            />
+                            <EnhancedRoute
+                                path="/torneos/agregar"
+                                exact
+                                withNavbar
+                                withFooter
+                                component={AgregarTorneo}
+                            />
+                            <EnhancedRoute
+                                path="/torneos/jugadores"
+                                exact
+                                withNavbar
+                                withFooter
+                                component={Jugadores}
+                            />
+                            <EnhancedRoute
+                                path="/torneos/TarjetaJugador"
+                                exact
+                                withNavbar
+                                withFooter
+                                component={TarjetaJugador}
                             />
                             <EnhancedRoute
                                 path="/login"
