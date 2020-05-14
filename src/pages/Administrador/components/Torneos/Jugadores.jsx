@@ -20,11 +20,15 @@ const SubHeader = styled.div`
         font-size: 16px;
         color: #1A3748;
         float: left;
+        @media screen and (min-width: 767px){ 
+            margin-top: 0px;
+            font-size: 25px;
+        }
     }
     input{
         margin: 15px 0px 15px;
         border: 1px solid #ACB5BD;
-        width: 70%;
+        width: 80%;
         height: 20px;
         border-radius: 3px;
         float: left;
@@ -33,17 +37,22 @@ const SubHeader = styled.div`
         -webkit-box-sizing: border-box;
         -moz-box-sizing: border-box;
         box-sizing: border-box;
+
+        @media screen and (min-width: 767px){ 
+            height: 30px;
+        }
     }
 
     position: relative;
-    left: 30px;
+    left: 8%;
     width: 80%;
     height: 130px;
-
     // position: relative;
     // width: 80%;
     // left: 30px;
-    // background: blue;
+
+    @media screen and (min-width: 767px){ 
+    }
 `;
 
 const ContenedorJugadores = styled.div`

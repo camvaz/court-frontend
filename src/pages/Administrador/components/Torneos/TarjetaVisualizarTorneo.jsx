@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import styled from 'styled-components';
 import fondoTorneo from "../../../../assets/fondoVisualizarWeb.jpg";
+import {Link} from 'react-router-dom';
 const Cabecera = React.lazy(() => import("../../../Home/Cabecera"));
 
 const ContenedorGeneral = styled.div`
@@ -163,7 +164,9 @@ export default class TarjetaVisualizarTorneo extends Component {
                         <p>Descripcion: {this.props.descripcion}</p>
                     </ContenedorDetalles>
                     <ContenedorBotones>
-                        <button type="button" id="verJugadores">Ver Jugadores</button>
+                        <Link to="/torneos/jugadores">
+                            <button type="button" id="verJugadores">Ver Jugadores</button>
+                        </Link>
                         <button type="button" id="cancelar">Cancelar Torneo</button>
                         <button type="button" id="editar">Editar</button>
                     </ContenedorBotones>
