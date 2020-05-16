@@ -1,5 +1,5 @@
 import React,{Component} from 'react';
-import './agregarParticipant.scss'
+import './mensajes.scss'
 
 export class Mensaje extends Component
 {
