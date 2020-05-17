@@ -8,7 +8,7 @@ import { connect } from "react-redux";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-import {Mensaje} from './pages/Secretaria/components/inscribirParticipantes/mensajeExito';
+import {AgregarParticipante} from './pages/Secretaria/components/inscribirParticipantes/agregarParticipante';
 const NotFound = React.lazy(() => import("./pages/NotFound/NotFound"));
 const Home = React.lazy(() => import("./pages/Home/Home"));
 const Login = React.lazy(() => import("./pages/Login/Login"));
@@ -22,7 +22,7 @@ class App extends Component {
     render() {
         const { role } = this.props.userSession.user;
         return (
-           <Mensaje/>
+           <AgregarParticipante/>
             /*
             <Router>
                 <ScrollToTop>
