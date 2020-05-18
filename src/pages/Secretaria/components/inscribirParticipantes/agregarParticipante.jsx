@@ -20,6 +20,7 @@ export class AgregarParticipante extends Component
 
         return(
             <div className="ContAddParticipantes">
+                <form>
                 <div  id="contbtX"><button className="btnX">X</button></div>
                 <h1 className="cargar">Cargar Archivo Excel</h1>
                 
@@ -50,8 +51,9 @@ export class AgregarParticipante extends Component
                 <div className="contbtnCargar">
                     <button className="btcCargar"> CARGAR </button>
                 </div>
-
+                </form>
             </div>
+            
         )
     }
 }
