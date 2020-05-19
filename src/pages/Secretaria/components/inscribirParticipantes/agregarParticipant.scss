@@ -1,98 +1,103 @@
-.ContAddParticipantes
-{
-    position:relative ;
-    display:flex;
-    width: 481px;
-    height: 600px;
+.ContAddParticipantes {
+    display: flex;
     left: 636px;
+    height: 100vh;
     top: 115px;
+    width: 100%;
 
-    background: #F5F5F5;
     border-radius: 10px;
     justify-content: center;
+    align-items: center;
     text-align: center;
-    
-    form{
-        //background-color: blue;
 
-        .file-name
-        {
+    form {
+        //background-color: blue;
+        height: 600px;
+        width: 481px;
+        display: flex;
+        flex-direction: column;
+        justify-self: center;
+        align-items: center;
+
+        background: #f5f5f5;
+        .file-name {
             background: white;
             border: none;
             font-size: 15px;
             padding-left: 2em;
             padding-right: 0em;
             text-align: center;
-
         }
 
-        #contbtX{
+        #contbtX {
+            width: 100%;
             display: flex;
             justify-content: flex-end;
-            
         }
 
-        i.im{  //New
+        i.im {
+            //New
             padding-top: 1em;
             font-family: Roboto;
             font-style: normal;
             font-weight: normal;
             font-size: 18px;
             line-height: 21px;
-            color: #1A3748;
+            color: #1a3748;
         }
 
-        img.im{ //new
+        img.im {
+            //new
             width: 20px;
-        height:20px;
+            height: 20px;
         }
 
-        .btnX
-        {
-            padding:1em;
+        .btnX {
+            padding: 1em;
             font-family: Roboto;
             font-style: normal;
             font-weight: bold;
             font-size: 25px;
-            border:none;
-            background-color:#F5F5F5;
-            color: #1A3748;
+            border: none;
+            background-color: #f5f5f5;
+            color: #1a3748;
         }
 
-        h1.cargar{
-            text-align:center;
+        h1.cargar {
+            text-align: center;
             font-family: Roboto;
             font-style: normal;
             font-weight: bold;
             font-size: 25px;
-            padding-bottom:1em;
+            padding-bottom: 1em;
 
-            color: #1A3748;
+            color: #1a3748;
         }
-
 
         .cargarFile //change
         {
             width: 400px;
             height: 67px;
             top: 264px;
-        // background: #FBFBFB;
+            // background: #FBFBFB;
             background: white;
             box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.25);
             border-radius: 5px;
         }
 
-        .file{//new
+        .file {
+            //new
             padding-bottom: 2em;
         }
 
-        .file-label{//new
+        .file-label {
+            //new
             font-family: Roboto;
             font-style: normal;
             font-weight: normal;
             font-size: 18px;
             line-height: 21px;
-            color: #1A3748;
+            color: #1a3748;
         }
 
         .cargarFile2 //change
@@ -118,15 +123,14 @@
             height: 64px;
             top: 650px;
 
-            background: #1A3748;
+            background: #1a3748;
             border-radius: 5px;
             font-family: Roboto;
             font-style: normal;
             font-weight: bold;
             font-size: 18px;
             line-height: 21px;
-            color: #FBFBFB;
+            color: #fbfbfb;
         }
     }
 }
-
