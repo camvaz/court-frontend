@@ -1,5 +1,5 @@
 import React, { Suspense, Component } from "react";
-import { BrowserRouter as Router, Switch } from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import ScrollToTop from "react-router-scroll-top";
 import EnhancedRoute from "./components/EnhancedRoute/EnhancedRoute";
 import { adminRoutes } from "./pages/Administrador/administrador.routes";
@@ -8,7 +8,8 @@ import { connect } from "react-redux";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-import {AgregarParticipante} from './pages/Secretaria/components/inscribirParticipantes/agregarParticipante';
+import { AgregarParticipante } from "./pages/Secretaria/components/inscribirParticipantes/agregarParticipante";
+import Secretaria from "./pages/Secretaria/Secretaria";
 const NotFound = React.lazy(() => import("./pages/NotFound/NotFound"));
 const Home = React.lazy(() => import("./pages/Home/Home"));
 const Login = React.lazy(() => import("./pages/Login/Login"));
@@ -22,8 +23,6 @@ class App extends Component {
     render() {
         const { role } = this.props.userSession.user;
         return (
-           <AgregarParticipante/>
-            /*
             <Router>
                 <ScrollToTop>
                     <Suspense
@@ -53,11 +52,14 @@ class App extends Component {
                                     />
                                 ))}
 
+                            <Route path="/dashboard/secretaria">
+                                <Secretaria />
+                            </Route>
                             <EnhancedRoute component={NotFound} withNavbar />
                         </Switch>
                     </Suspense>
                 </ScrollToTop>
-            </Router>*/
+            </Router>
         );
     }
 }
