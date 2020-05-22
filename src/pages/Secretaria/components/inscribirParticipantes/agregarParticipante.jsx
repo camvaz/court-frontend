@@ -2,24 +2,48 @@ import React, { Component } from "react";
 import "./agregarParticipant.scss";
 import plus from "../../../../assets/plus2.svg";
 import "bulma/css/bulma.css";
+import { toast } from "react-toastify";
+import { API_ENDPOINT } from "../../../../environment/environment";
 
 export class AgregarParticipante extends Component {
     state = {
-        nombreArchivo: ""
+        nombreArchivo: "",
+        file: {}
     };
 
     fileSelectedHandler = event => {
-        this.setState({ nombreArchivo: event.target.files[0].name });
+        this.setState({
+            nombreArchivo: event.target.files[0].name,
+            file: event.target.files[0]
+        });
     };
 
-    handleSubmit = async () => {
-        // AJAX implementation
+    handleSubmit = async e => {
+        e.preventDefault();
+        toast.info("Subiendo archivo...");
+        const formData = new FormData();
+        formData.append("archivo", this.state.file);
+
+        const response = await fetch(`${API_ENDPOINT}/subir`, {
+            method: "POST",
+            headers: {
+                Accept: "application/json"
+            },
+            body: formData
+        })
+            .then(res => {
+                console.log(res);
+                return res.json();
+            })
+            .catch(e => console.log(e));
+        toast.success("Archivo subido con éxito.");
+        console.log(response);
     };
 
     render() {
         return (
             <div className="ContAddParticipantes">
-                <form>
+                <form onSubmit={this.handleSubmit}>
                     <div id="contbtX">
                         <button className="btnX">X</button>
                     </div>
@@ -67,7 +91,9 @@ export class AgregarParticipante extends Component {
                         </label>
                     </div>
                     <div className="contbtnCargar">
-                        <button className="btcCargar"> CARGAR </button>
+                        <button type="submit" className="btcCargar">
+                            CARGAR
+                        </button>
                     </div>
                 </form>
             </div>
