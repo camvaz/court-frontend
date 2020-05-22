@@ -1,5 +1,6 @@
 .ContenedorMensaje
 {
+    display: flex;
     width: 570px;
     height: 298px;
     left: 636px;
@@ -9,145 +10,158 @@
     border: 4px solid #74BA5F;
     box-sizing: border-box;
     border-radius: 10px;
-    padding-left: 2em;
 
-    h2{
-        font-family: Roboto;
-        font-style: normal;
-        font-weight: bold;
-        font-size: 25px;
-        padding-bottom: 0.5em   ;
-        color: #1A3748;
-    }
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    form{
+        height: 250px;
+        width: 267x;
+        display: flex;
+        flex-direction: column;
+        justify-self: center;
+        align-items: center;
 
-    .btcCargar
-    {
-        width: 480px;
-        height: 64px;
-        top: 650px;
+        h2{
+            font-family: Roboto;
+            font-style: normal;
+            font-weight: bold;
+            font-size: 25px;
+            padding-bottom: 1em   ;
+            color: #1A3748;
+        }
 
-        background: #1A3748;
-        border-radius: 5px;
-        font-family: Roboto;
-        font-style: normal;
-        font-weight: bold;
-        font-size: 18px;
-        /* identical to box height */
+        .btcCargar
+        {
+            width: 480px;
+            height: 64px;
+            top: 650px;
 
-
-        /* blanco */
-
-        color: #FBFBFB;
-    }
-
-    #contbtX{
-        text-align: right;
-        padding-top: .5em;
-        padding-right: 2em;
-    }
-
-    .btnX
-    {
-       // padding:0.5em;
-        font-family: Roboto;
-        font-style: normal;
-        font-weight: bold;
-        font-size: 25px;
-        border:none;
-        background-color:#F5F5F5;
-        color: #1A3748;
-    }
-
-    p.msn{
-        font-family: Roboto;
-        font-style: normal;
-        font-weight: normal;
-        font-size: 18px;
-        line-height: 21px;
-        color: #AEBAC4;
-        padding-bottom: 1.5em;
-    }
-}
-
-.ContenedorMensaje2
-{
-    width: 581px;
-    height: 383px;
-    left: 636px;
-    top: 267px;
-    background: #F5F5F5;
-    border: 4px solid #F55F44;
-    box-sizing: border-box;
-    border-radius: 10px;
-    padding-left: 2em;
-
-    .jugadoresError
-    {
-        height:80px;
-        overflow: auto;
-        font-family: Roboto;
-        font-style: normal;
-        font-weight: normal;
-        font-size: 18px;       
-        color: #AEBAC4;
-    }
-    
-
-    h2{
-        font-family: Roboto;
-        font-style: normal;
-        font-weight: bold;
-        font-size: 25px;
-        padding-bottom: 0.5em   ;
-        color: #1A3748;
-    }
-
-    .btcCargar
-    {
-        width: 480px;
-        height: 64px;
-        top: 650px;
-
-        background: #1A3748;
-        border-radius: 5px;
-        font-family: Roboto;
-        font-style: normal;
-        font-weight: bold;
-        font-size: 18px;
-        /* identical to box height */
+            background: #1A3748;
+            border-radius: 5px;
+            font-family: Roboto;
+            font-style: normal;
+            font-weight: bold;
+            font-size: 18px;
+            /* identical to box height */
 
 
-        /* blanco */
+            /* blanco */
 
-        color: #FBFBFB;
-    }
+            color: #FBFBFB;
+        }
 
-    #contbtX{
-        text-align: right;
-        padding-top: .5em;
-        padding-right: 2em;
-    }
+        #contbtX{
+            width: 100%;
+            display: flex;
+            justify-content: flex-end;
+            
+        }
 
-    .btnX
-    {
-       // padding:0.5em;
-        font-family: Roboto;
-        font-style: normal;
-        font-weight: bold;
-        font-size: 25px;
-        border:none;
-        background-color:#F5F5F5;
-        color: #1A3748;
-    }
+        .btnX
+        {
+        // padding:0.5em;
+            font-family: Roboto;
+            font-style: normal;
+            font-weight: bold;
+            font-size: 25px;
+            border:none;
+            background-color:#F5F5F5;
+            color: #1A3748;
+        }
 
-    p.msn{
-        font-family: Roboto;
-        font-style: normal;
-        font-weight: normal;
-        font-size: 18px;
-        line-height: 21px;
-        color: #AEBAC4;
-        padding-top: 1.5em;
-        padding-bottom: .5em;
+        p.msn{
+            width: 480px;
+            font-family: Roboto;
+            font-style: normal;
+            font-weight: normal;
+            font-size: 18px;
+            line-height: 21px;
+            color: #AEBAC4;
+            padding-bottom: 3em;
+        }
     }
 }
+
+    .ContenedorMensaje2
+    {
+        width: 581px;
+        height: 383px;
+        left: 636px;
+        top: 267px;
+        background: #F5F5F5;
+        border: 4px solid #F55F44;
+        box-sizing: border-box;
+        border-radius: 10px;
+        padding-left: 2em;
+
+        .jugadoresError
+        {
+            height:80px;
+            overflow: auto;
+            font-family: Roboto;
+            font-style: normal;
+            font-weight: normal;
+            font-size: 18px;       
+            color: #AEBAC4;
+        }
+        
+
+        h2{
+            font-family: Roboto;
+            font-style: normal;
+            font-weight: bold;
+            font-size: 25px;
+            padding-bottom: 0.5em   ;
+            color: #1A3748;
+        }
+
+        .btcCargar
+        {
+            width: 480px;
+            height: 64px;
+            top: 650px;
+
+            background: #1A3748;
+            border-radius: 5px;
+            font-family: Roboto;
+            font-style: normal;
+            font-weight: bold;
+            font-size: 18px;
+            /* identical to box height */
+
+
+            /* blanco */
+
+            color: #FBFBFB;
+        }
+
+        #contbtX{
+            text-align: right;
+            padding-top: .5em;
+            padding-right: 2em;
+        }
+
+        .btnX
+        {
+        // padding:0.5em;
+            font-family: Roboto;
+            font-style: normal;
+            font-weight: bold;
+            font-size: 25px;
+            border:none;
+            background-color:#F5F5F5;
+            color: #1A3748;
+        }
+
+        p.msn{
+            font-family: Roboto;
+            font-style: normal;
+            font-weight: normal;
+            font-size: 18px;
+            line-height: 21px;
+            color: #AEBAC4;
+            padding-top: 1.5em;
+            padding-bottom: .5em;
+        }
+    }
