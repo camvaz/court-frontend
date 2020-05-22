@@ -1,0 +1,104 @@
+.ContenedorFederacion{
+    width: 417px;
+    height: 161px;
+    left: 491px;
+    top: 193px;
+
+    background: #FFFFFF;
+    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.25);
+    .jugadores{
+        display: flex;
+        flex-wrap: unset;
+        justify-content: unset;
+        padding: 1em;
+        
+    }
+
+    .jugadorPorFed
+    {
+        padding:1em;
+    }
+
+    #imguser{
+        border:10px solid #74BA5F;
+        border-radius: 500px;
+    }
+
+    .botonFed{
+
+        width: 417px;
+        height: 22px;
+        left: 491px;
+        top: 354px;
+
+        /* azul-1 */
+
+        background: #1A3748;
+        font-family: Roboto;
+        font-style: normal;
+        font-weight: bold;
+        font-size: 12px;
+        line-height: 14px;
+        /* identical to box height */
+
+        text-align: center;
+
+        color: #FFFFFF;
+    }
+}
+
+.Federaciones{
+
+    .Federacion{
+        padding-right: 1em;
+    }
+
+    .field{
+        padding-bottom: 1.2em;
+    }
+
+    .input{
+        background: #FFFFFF;
+        /* Gray 3 */
+        width: 500px;
+        height: 40px;
+        border: 1px solid #ACB5BD;
+        box-sizing: border-box;
+        border-radius: 5px;
+    }
+
+    h1.torneo{
+        padding-bottom: 2em;
+        font-family: SF Pro Display;
+        font-style: normal;
+        font-weight: bold;
+        font-size: 26px;
+        line-height: 10px;
+        color: #1A3748;
+    }
+
+    .btnAgregar
+    {
+        width: 55px;
+        height: 55px;
+        left: 1337px;
+        top: 797px;
+
+        background: #1A3748;
+        box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.25);
+        border-radius: 500px;
+
+        background-image: url('../../../assets/plus.svg');
+        background-size: 2.3em;
+        background-repeat:no-repeat;
+        background-position:center;
+        
+    }
+
+    .ContbtnAgregar{
+        position:absolute;
+        bottom:5px;
+        right:10px;
+    }
+
+}
