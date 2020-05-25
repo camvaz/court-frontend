@@ -1,32 +1,32 @@
 import React, { Component } from "react";
-import styled from 'styled-components';
+import styled from "styled-components";
 import fondoTorneo from "../../../../assets/fondoVisualizarWeb.jpg";
-import {Link} from 'react-router-dom';
+import { Link } from "react-router-dom";
 const Cabecera = React.lazy(() => import("../../../Home/Cabecera"));
 
 const ContenedorGeneral = styled.div`
     position: relative;
     width: 100%;
 `;
-const ContenedorTarjeta = styled.div `
+const ContenedorTarjeta = styled.div`
     position: relative;
     width: 340px;
     height: 489px;
     margin: 30px auto;
-    left:0;
+    left: 0;
     background: white;
     border-radius: 5px;
-    -webkit-box-shadow: 0px 0px 4px 3px rgba(150,150,150,1);
-    -moz-box-shadow: 0px 0px 4px 3px rgba(150,150,150,1);
-    box-shadow: 0px 0px 4px 3px rgba(150,150,150,1);
+    -webkit-box-shadow: 0px 0px 4px 3px rgba(150, 150, 150, 1);
+    -moz-box-shadow: 0px 0px 4px 3px rgba(150, 150, 150, 1);
+    box-shadow: 0px 0px 4px 3px rgba(150, 150, 150, 1);
 
-    @media screen and (min-width: 1300px){ 
+    @media screen and (min-width: 1300px) {
         width: 650px;
     }
 `;
 
 const ContenedorImagen = styled.div`
-    img{
+    img {
         position: relative;
         width: 100%;
         height: 100%;
@@ -37,21 +37,21 @@ const ContenedorImagen = styled.div`
     width: 100%;
     height: 15vh;
     margin: 0;
-    left:0;
-    background: #D9FFBF;
+    left: 0;
+    background: #d9ffbf;
     border-radius: 5px 5px 0px 0px;
 
-    @media screen and (min-width: 1300px){ 
+    @media screen and (min-width: 1300px) {
         height: 20vh;
     }
 `;
 
 const NombreTorneo = styled.div`
-    h1{
+    h1 {
         position: relative;
-        vertical-align:middle;
+        vertical-align: middle;
         color: white;
-        font: 'San Francisco', Helvetica, Arial, san-serif;
+        font: "San Francisco", Helvetica, Arial, san-serif;
         font-size: 15px;
         font-weight: normal;
     }
@@ -61,24 +61,24 @@ const NombreTorneo = styled.div`
     width: 100%;
     height: 5vh;
     margin: 0;
-    left:0;
-    background: #1A3748;
+    left: 0;
+    background: #1a3748;
     font-size: 15px;
-    color:white;
+    color: white;
     text-align: center;
 
-    @media screen and (min-width: 1300px){ 
+    @media screen and (min-width: 1300px) {
         height: 7vh;
     }
 `;
 
 const ContenedorDetalles = styled.div`
-    p{
+    p {
         position: relative;
         width: 100%;
         margin: 2px 20px 2px 20px;
         padding: 5px;
-        color: #797C7D;
+        color: #797c7d;
         font-family: Roboto;
         font-style: normal;
         font-weight: normal;
@@ -93,86 +93,104 @@ const ContenedorDetalles = styled.div`
 `;
 
 const ContenedorBotones = styled.div`
-    #verJugadores{
+    #verJugadores {
         position: relative;
         float: left;
         margin-left: 10px;
         width: 100px;
         height: 26.2px;
-        border: 2px solid #1A3748;
+        border: 2px solid #1a3748;
         border-radius: 2px;
         background: none;
 
-        @media screen and (min-width: 1300px){ 
+        @media screen and (min-width: 1300px) {
             margin-left: 40px;
             width: 170px;
         }
     }
-   #cancelar{
+    #cancelar {
         position: relative;
         margin-left: 10px;
         width: 99.55px;
         height: 26.2px;
-        border: 1px solid #EB5757;
+        border: 1px solid #eb5757;
         border-radius: 50px;
-        background: #EB5757;
+        background: #eb5757;
         color: white;
 
-        @media screen and (min-width: 1300px){ 
+        @media screen and (min-width: 1300px) {
             margin-right: 30px;
             float: right;
         }
-   } 
-   #editar{
+    }
+    #editar {
         position: relative;
         margin-left: 10px;
         width: 99.55px;
         height: 26.2px;
-        border: 1px solid #1A3748;
+        border: 1px solid #1a3748;
         border-radius: 50px;
-        background: #1A3748;
+        background: #1a3748;
         color: white;
 
-        @media screen and (min-width: 1300px){ 
+        @media screen and (min-width: 1300px) {
             float: right;
         }
-   }
+    }
 
     position: absolute;
     padding-top: 10px;
     width: 100%;
     height: 5.5vh;
-    bottom:1px;
+    bottom: 1px;
 `;
 export default class TarjetaVisualizarTorneo extends Component {
     render() {
         return (
             <ContenedorGeneral>
-                <Cabecera/>
+                <Cabecera />
                 <ContenedorTarjeta>
                     <ContenedorImagen>
-                        <img src={fondoTorneo} alt=""/>
+                        <img src={fondoTorneo} alt="" />
                     </ContenedorImagen>
                     <NombreTorneo>
-                        <h1>{this.props.titulo}</h1>
+                        <h1>{this.props.location.state.data.name}</h1>
                     </NombreTorneo>
                     <ContenedorDetalles>
-                        <p>Fecha: {this.props.fecha}</p>
-                        <p>Lugar: {this.props.lugar}</p>
-                        <p>Numero de equipos: {this.props.equipos}</p>
-                        <p>Categoria: {this.props.categoria}</p>
-                        <p>Descripcion: {this.props.descripcion}</p>
+                        <p>Fecha: {this.props.location.state.data.date}</p>
+                        <p>Lugar: {this.props.location.state.data.location}</p>
+                        <p>Numero de equipos: 10</p>
+                        <p>
+                            Categoria: {this.props.location.state.data.category}
+                        </p>
+                        <p>
+                            Descripcion:{" "}
+                            {this.props.location.state.data.competition}
+                        </p>
                     </ContenedorDetalles>
                     <ContenedorBotones>
-                        <Link to="/torneos/jugadores">
-                            <button type="button" id="verJugadores">Ver Jugadores</button>
+                        <Link
+                            to={{
+                                pathname: "/torneos/jugadores",
+                                state: {
+                                    tournamentId: this.props.location.state
+                                        .tournamentId
+                                }
+                            }}
+                        >
+                            <button type="button" id="verJugadores">
+                                Ver Jugadores
+                            </button>
                         </Link>
-                        <button type="button" id="cancelar">Cancelar Torneo</button>
-                        <button type="button" id="editar">Editar</button>
+                        <button type="button" id="cancelar">
+                            Cancelar Torneo
+                        </button>
+                        <button type="button" id="editar">
+                            Editar
+                        </button>
                     </ContenedorBotones>
                 </ContenedorTarjeta>
             </ContenedorGeneral>
-            
         );
     }
 }

@@ -5,19 +5,38 @@ import EnhancedRoute from "./components/EnhancedRoute/EnhancedRoute";
 import { adminRoutes } from "./pages/Administrador/administrador.routes";
 import { userTypes } from "./constants/userTypes";
 import { connect } from "react-redux";
+import {
+    setTournaments,
+    setInscriptions,
+    setParticipants,
+    setPlayers
+} from "./Redux/actions";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-import { AgregarParticipante } from "./pages/Secretaria/components/inscribirParticipantes/agregarParticipante";
+import AgregarParticipante from "./pages/Secretaria/components/inscribirParticipantes/agregarParticipante";
 import Secretaria from "./pages/Secretaria/Secretaria";
+import { API_ENDPOINT } from "./environment/environment";
+import tournamentReducer from "./Redux/reducers/tournamentReducer";
+import { Participante } from "./pages/Secretaria/components/participante";
 const NotFound = React.lazy(() => import("./pages/NotFound/NotFound"));
 const Home = React.lazy(() => import("./pages/Home/Home"));
 const Login = React.lazy(() => import("./pages/Login/Login"));
-const Torneos = React.lazy(() => import("./pages/Administrador/components/Torneos/Torneos"));
-const VisualizarTorneo = React.lazy(() => import ("./pages/Administrador/components/Torneos/TarjetaVisualizarTorneo"));
-const AgregarTorneo = React.lazy(() => import ("./pages/Administrador/components/Torneos/AgregarTorneo"));
-const Jugadores= React.lazy(() => import ("./pages/Administrador/components/Torneos/Jugadores"));
-const TarjetaJugador= React.lazy(() => import ("./pages/Administrador/components/Torneos/TarjetaJugador"));
+const Torneos = React.lazy(() =>
+    import("./pages/Administrador/components/Torneos/Torneos")
+);
+const VisualizarTorneo = React.lazy(() =>
+    import("./pages/Administrador/components/Torneos/TarjetaVisualizarTorneo")
+);
+const AgregarTorneo = React.lazy(() =>
+    import("./pages/Administrador/components/Torneos/AgregarTorneo")
+);
+const Jugadores = React.lazy(() =>
+    import("./pages/Administrador/components/Torneos/Jugadores")
+);
+const TarjetaJugador = React.lazy(() =>
+    import("./pages/Administrador/components/Torneos/TarjetaJugador")
+);
 
 toast.configure();
 
@@ -25,6 +44,36 @@ class App extends Component {
     state = {
         user: "n"
     };
+
+    componentDidMount() {
+        this.getTournaments();
+    }
+
+    async getTournaments() {
+        const tournaments = await fetch(`${API_ENDPOINT}/all/tournaments`)
+            .then(res => res.json())
+            .catch(e => console.log(e));
+
+        const inscriptions = await fetch(`${API_ENDPOINT}/all/inscriptions`)
+            .then(res => res.json())
+            .catch(e => console.log(e));
+
+        const participants = await fetch(`${API_ENDPOINT}/all/participants`)
+            .then(res => res.json())
+            .catch(e => console.log(e));
+
+        const players = await fetch(`${API_ENDPOINT}/all/players`)
+            .then(res => res.json())
+            .catch(e => console.log(e));
+
+        if (tournaments && inscriptions && participants && players) {
+            this.props.setTournaments(tournaments);
+            this.props.setPlayers(players);
+            this.props.setParticipants(participants);
+            this.props.setInscriptions(inscriptions);
+        }
+    }
+
     render() {
         const { role } = this.props.userSession.user;
         return (
@@ -92,8 +141,15 @@ class App extends Component {
                                     />
                                 ))}
 
-                            <Route path="/dashboard/secretaria">
-                                <Secretaria />
+                            <EnhancedRoute
+                                path="/agregar-participantes"
+                                exact
+                                withNavbar
+                                withFooter
+                                component={AgregarParticipante}
+                            />
+                            <Route path="/testing">
+                                <Participante />
                             </Route>
                             <EnhancedRoute component={NotFound} withNavbar />
                         </Switch>
@@ -105,7 +161,19 @@ class App extends Component {
 }
 
 const mapStateToProps = state => ({
-    userSession: state.userSession.session
+    userSession: state.userSession.session,
+    tournaments: state.tournaments
 });
 
-export default connect(mapStateToProps)(App);
+const mapDispatchToProps = dispatch => {
+    return {
+        setTournaments: users => dispatch(setTournaments(users)),
+        setInscriptions: inscriptions =>
+            dispatch(setInscriptions(inscriptions)),
+        setParticipants: participants =>
+            dispatch(setParticipants(participants)),
+        setPlayers: players => dispatch(setPlayers(players))
+    };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);

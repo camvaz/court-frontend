@@ -4,8 +4,15 @@ import plus from "../../../../assets/plus2.svg";
 import "bulma/css/bulma.css";
 import { toast } from "react-toastify";
 import { API_ENDPOINT } from "../../../../environment/environment";
+import {
+    setTournaments,
+    setInscriptions,
+    setParticipants,
+    setPlayers
+} from "../../../../Redux/actions";
+import { connect } from "react-redux";
 
-export class AgregarParticipante extends Component {
+class AgregarParticipante extends Component {
     state = {
         nombreArchivo: "",
         file: {}
@@ -38,7 +45,33 @@ export class AgregarParticipante extends Component {
             .catch(e => console.log(e));
         toast.success("Archivo subido con éxito.");
         console.log(response);
+        this.getTournaments();
     };
+
+    async getTournaments() {
+        const tournaments = await fetch(`${API_ENDPOINT}/all/tournaments`)
+            .then(res => res.json())
+            .catch(e => console.log(e));
+
+        const inscriptions = await fetch(`${API_ENDPOINT}/all/inscriptions`)
+            .then(res => res.json())
+            .catch(e => console.log(e));
+
+        const participants = await fetch(`${API_ENDPOINT}/all/participants`)
+            .then(res => res.json())
+            .catch(e => console.log(e));
+
+        const players = await fetch(`${API_ENDPOINT}/all/players`)
+            .then(res => res.json())
+            .catch(e => console.log(e));
+
+        if (tournaments && inscriptions && participants && players) {
+            this.props.setTournaments(tournaments);
+            this.props.setPlayers(players);
+            this.props.setParticipants(participants);
+            this.props.setInscriptions(inscriptions);
+        }
+    }
 
     render() {
         return (
@@ -100,3 +133,16 @@ export class AgregarParticipante extends Component {
         );
     }
 }
+
+const mapDispatchToProps = dispatch => {
+    return {
+        setTournaments: users => dispatch(setTournaments(users)),
+        setInscriptions: inscriptions =>
+            dispatch(setInscriptions(inscriptions)),
+        setParticipants: participants =>
+            dispatch(setParticipants(participants)),
+        setPlayers: players => dispatch(setPlayers(players))
+    };
+};
+
+export default connect(null, mapDispatchToProps)(AgregarParticipante);

@@ -3,4 +3,7 @@ import { production } from "./production";
 
 const inProduction = false;
 
-export const API_ENDPOINT = inProduction ? production : development;
+const API_ENDPOINT = inProduction ? production : development;
+const STORAGE_ENDPOINT = "http://localhost:8000";
+
+export { API_ENDPOINT, STORAGE_ENDPOINT };

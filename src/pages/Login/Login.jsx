@@ -122,6 +122,10 @@ class Login extends Component {
                         history.push("/admin/usuarios");
                         break;
                     }
+                    case userTypes.SECRETARA_TYPE.role: {
+                        history.push("/torneos");
+                        break;
+                    }
                     default:
                         break;
                 }
