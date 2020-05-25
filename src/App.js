@@ -38,6 +38,10 @@ const TarjetaJugador = React.lazy(() =>
     import("./pages/Administrador/components/Torneos/TarjetaJugador")
 );
 
+const ResultadosPartidos = React.lazy(() =>
+    import("./pages/Home/ResultadosPartidos")
+);
+
 toast.configure();
 
 class App extends Component {
@@ -124,6 +128,13 @@ class App extends Component {
                                 withNavbar
                                 withFooter
                                 component={TarjetaJugador}
+                            />
+                             <EnhancedRoute
+                                path="/resultados"
+                                exact
+                                withNavbar
+                                withFooter
+                                component={ResultadosPartidos}
                             />
                             <EnhancedRoute
                                 path="/login"
