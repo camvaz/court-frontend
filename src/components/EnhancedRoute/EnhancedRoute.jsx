@@ -37,7 +37,7 @@ const Contenedor = styled.div`
     grid-template-columns: auto;
 
     @media screen and (min-width: 767px) {
-        grid-template-columns: 30% 70%;
+        grid-template-columns: 25% 75%;
 
         .aplicarGrid {
             grid-column-start: 2;
