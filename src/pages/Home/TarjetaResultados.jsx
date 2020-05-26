@@ -4,7 +4,7 @@ import styled from 'styled-components';
 
 const ContenedorTarjeta = styled.div`
     position: relative;
-    width: 333px;
+    width: 300px;
     background: white;
     cursor: pointer;
     margin: 20px;
@@ -26,7 +26,7 @@ const ComponenteTarjeta = styled.div`
         position: relative;
         margin-top: 10px;
         p{
-            font-size: .8rem;
+            font-size: .7rem;
         }
 
         .fecha-hora,
@@ -68,7 +68,7 @@ const NombreJugador = styled.div`
     }
     h3{
         display: inline-block;
-        font-size: .9rem;
+        font-size: .7rem;
         font-weight: bold;
        
     }
@@ -79,7 +79,7 @@ const DatosEstadistica = styled.div`
     position: relative;
     width: 100%;
     p{
-        font-size: .8rem;
+        font-size: .7rem;
         margin: 10px 0;
     }
     
@@ -148,6 +148,7 @@ const ComponenteImagenesJugadores = styled.div`
         left: 50%;
         transform:translateX(-50%);
         font-weight: bold;
+     
     }
    
    
