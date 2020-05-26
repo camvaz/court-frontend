@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import styled from 'styled-components';
 import agregar from "../../../../assets/botonMas.png";
+import {Link} from 'react-router-dom';
 const Cabecera = React.lazy(() => import("../../../Home/Cabecera"));
 const TarjetaTorneo = React.lazy(() => import("./TarjetaTorneo"));
 const AgregarTorneo = React.lazy(()=> import("./AgregarTorneo"));
@@ -154,9 +155,11 @@ export default class Torneos extends Component {
                     <TarjetaTorneo nombreTorneo="Torneo Relampago" fechaTorneo="26/11/2020"/>
                     <TarjetaTorneo nombreTorneo="Torneo Relampago" fechaTorneo="26/11/2020"/>
                     <TarjetaTorneo nombreTorneo="Torneo Relampago" fechaTorneo="26/11/2020"/>
-                    <div id="contenedorAgregar">
-                    <img src={agregar} id="agregar" alt=""/>
-                    </div>
+                    <Link to = "/torneos/agregar">
+                        <div id="contenedorAgregar">
+                            <img src={agregar} id="agregar" alt=""/>
+                        </div>
+                    </Link>
                 </ContenedorTorneos>
 
                 {/* <TarjetaVisualizarTorneo 

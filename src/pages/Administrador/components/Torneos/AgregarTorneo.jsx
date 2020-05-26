@@ -2,15 +2,13 @@ import React, { Component } from "react";
 import styled from 'styled-components';
 import salir from "../../../../assets/cerrar.svg";
 
-// const  ContenedorGeneral = styled.div`
-//     position: relative;
-//     width: 100%;
-//     height: 100%;
-//     text-align: center;
-//     Opacity: 50%;
-//     Blend: Pass Through;
-//     background: red;
-// `;
+const  ContenedorGeneral = styled.div`
+    position: relative;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    Blend: Pass Through;
+`;
 
 const ContenedorTarjeta = styled.div`    
     h1{
@@ -148,6 +146,7 @@ const ContenedorFormulario = styled.div`
 export default class AgregarTorneo extends Component{
     render(){
         return(
+            <ContenedorGeneral>
                 <ContenedorTarjeta>
                     <ContenedorImagen>
                         <img src={salir}alt=""/>
@@ -168,6 +167,8 @@ export default class AgregarTorneo extends Component{
                     </ContenedorFormulario>
                     
                 </ContenedorTarjeta>    
+            </ContenedorGeneral>
+               
         )
     }
 }
