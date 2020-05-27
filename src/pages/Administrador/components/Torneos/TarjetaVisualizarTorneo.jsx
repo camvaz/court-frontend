@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import styled from "styled-components";
 import fondoTorneo from "../../../../assets/fondoVisualizarWeb.jpg";
+import fondoTorneoWeb from "../../../../assets/imgTorneoWeb.png";
 import { Link } from "react-router-dom";
 const Cabecera = React.lazy(() => import("../../../Home/Cabecera"));
 
@@ -10,18 +11,16 @@ const ContenedorGeneral = styled.div`
 `;
 const ContenedorTarjeta = styled.div`
     position: relative;
-    width: 340px;
+    width: 90%;
     height: 489px;
     margin: 30px auto;
     left: 0;
     background: white;
     border-radius: 5px;
-    -webkit-box-shadow: 0px 0px 4px 3px rgba(150, 150, 150, 1);
-    -moz-box-shadow: 0px 0px 4px 3px rgba(150, 150, 150, 1);
-    box-shadow: 0px 0px 4px 3px rgba(150, 150, 150, 1);
+    box-shadow: 0px 0px 10px gray;
 
     @media screen and (min-width: 1300px) {
-        width: 650px;
+        width: 55%;
     }
 `;
 
@@ -32,6 +31,30 @@ const ContenedorImagen = styled.div`
         height: 100%;
         border-radius: 10px 10px 0px 0px;
     }
+    .mobile{
+        display: block;
+        @media screen and (min-width: 767px){
+            display: none;
+        }
+    }
+
+    .web{
+        display: none;
+
+        @media screen and (min-width: 767px){
+            display: block;
+        }
+    }
+    .fondo-verde{
+        width: 100%;
+        height: 100%;
+        background: #74BA5F;
+        opacity: .5;
+        z-index: 99;
+        position: absolute;
+    }
+
+    
 
     position: relative;
     width: 100%;
@@ -73,6 +96,9 @@ const NombreTorneo = styled.div`
 `;
 
 const ContenedorDetalles = styled.div`
+    
+    padding: 20px;
+
     p {
         position: relative;
         width: 100%;
@@ -89,60 +115,45 @@ const ContenedorDetalles = styled.div`
     position: relative;
     width: 100%;
     text-align: left;
-    padding-top: 20px;
 `;
 
-const ContenedorBotones = styled.div`
-    #verJugadores {
-        position: relative;
-        float: left;
-        margin-left: 10px;
-        width: 100px;
-        height: 26.2px;
-        border: 2px solid #1a3748;
-        border-radius: 2px;
-        background: none;
+const ContenedorBotones = styled.div`   
+    margin-top: 50px;
+    position: relative;
+    display: grid;
+    grid-template-columns: 25% 25% 25% 25%;
+    justify-content: center;
 
-        @media screen and (min-width: 1300px) {
-            margin-left: 40px;
-            width: 170px;
-        }
-    }
-    #cancelar {
-        position: relative;
-        margin-left: 10px;
-        width: 99.55px;
-        height: 26.2px;
-        border: 1px solid #eb5757;
-        border-radius: 50px;
-        background: #eb5757;
+    button{
+        width: 130px;
+        padding: 5px 0;
+        border: none;
+        background: #1A3748;
         color: white;
-
-        @media screen and (min-width: 1300px) {
-            margin-right: 30px;
-            float: right;
-        }
+        border-radius: 20px;
     }
-    #editar {
-        position: relative;
-        margin-left: 10px;
-        width: 99.55px;
-        height: 26.2px;
-        border: 1px solid #1a3748;
-        border-radius: 50px;
-        background: #1a3748;
-        color: white;
-
-        @media screen and (min-width: 1300px) {
-            float: right;
-        }
+    button:nth-child(1){
+        grid-column-start:0;
+        grid-column-end: 1;
+        margin-left: 50px;
+    }
+    button:nth-child(2){
+        grid-column-start:3;
+        grid-column-end: 4;
+    }
+    button:nth-child(3){
+        grid-column-start: 4;
+        grid-column-end: 5;
     }
 
-    position: absolute;
-    padding-top: 10px;
-    width: 100%;
-    height: 5.5vh;
-    bottom: 1px;
+    button:hover{
+        background: white;
+        border: 1px solid #1A3748;
+        color: #1A3748;
+        cursor:pointer;
+        font-weight: bold;
+    }
+
 `;
 export default class TarjetaVisualizarTorneo extends Component {
     render() {
@@ -151,7 +162,9 @@ export default class TarjetaVisualizarTorneo extends Component {
                 <Cabecera />
                 <ContenedorTarjeta>
                     <ContenedorImagen>
-                        <img src={fondoTorneo} alt="" />
+                        <div className="fondo-verde" />
+                        <img className="mobile" src={fondoTorneo} alt="Imagen Torneo" />
+                        <img className="web" src={fondoTorneoWeb} alt="imagen Torneo"/>
                     </ContenedorImagen>
                     <NombreTorneo>
                         <h1>{this.props.location.state.data.name}</h1>
@@ -193,16 +206,11 @@ export default class TarjetaVisualizarTorneo extends Component {
                                 Ver Jugadores
                             </button>
                         </Link>
-
-                      
-
-                        
+  
                         <button type="button" id="cancelar">
-                            Cancelar Torneo
+                            Realizar Sorteo
                         </button>
-                        <button type="button" id="editar">
-                            Editar
-                        </button>
+                        
                     </ContenedorBotones>
                 </ContenedorTarjeta>
             </ContenedorGeneral>

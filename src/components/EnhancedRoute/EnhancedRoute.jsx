@@ -17,7 +17,7 @@ const Derecho = styled.div`
     }
 `;
 const Tennista = styled.img`
-    position: absolute;
+    position: fixed;
     z-index: 9999;
     bottom: 30px;
     left: 15%;

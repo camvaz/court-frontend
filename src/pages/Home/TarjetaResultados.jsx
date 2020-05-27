@@ -220,13 +220,13 @@ function Jugadores(props) {
     return (
         <ComponenteJugadores>
             <NombreJugador>
-                <img src={props.banderaJugador1} alt="Bandera" />
+                <img src={props.banderaJugador1} alt="" />
                 <h3>{props.jugador1}</h3>
             </NombreJugador>
 
             <NombreJugador>
                 <h3>{props.jugador2}</h3>
-                <img src={props.banderaJugador2} alt="Bandera" />
+                <img src={props.banderaJugador2} alt="" />
             </NombreJugador>
         </ComponenteJugadores>
     );

@@ -48,9 +48,7 @@ const SubHeader = styled.div`
     left: 8%;
     width: 80%;
     height: 130px;
-    // position: relative;
-    // width: 80%;
-    // left: 30px;
+    
 
     @media screen and (min-width: 767px) {
     }
