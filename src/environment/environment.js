@@ -4,6 +4,6 @@ import { production } from "./production";
 const inProduction = true;
 
 const API_ENDPOINT = inProduction ? production : development;
-const STORAGE_ENDPOINT = inProduction ? "https://courtapi.tlk" :"http://localhost:8000";
+const STORAGE_ENDPOINT = inProduction ? "https://courtapi.tk":"http://localhost:8000";
 
 export { API_ENDPOINT, STORAGE_ENDPOINT };

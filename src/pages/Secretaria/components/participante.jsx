@@ -24,10 +24,9 @@ export class Participante extends Component {
                         alt="Usuario"
                     />
                 </p>
-                <h3>{}</h3>
-                <p>Edad:años</p>
-                <p>Nacionalidad: {player.country}</p>
-                <p>correo: </p>
+                <h3>{player.user?.name}</h3>
+                <p>ATP Points:{player.atpPoints}</p>
+                <p>Nacionalidad: <img  className="flag"src={`${STORAGE_ENDPOINT}/storage/flags/${player.country.charAt(0).toLowerCase() + player.country.slice(1)}.png`} alt=""/></p>
                 <p id="cups">
                     <img src={cup} alt="copa" />5
                     <i className="contenedorBoton">
