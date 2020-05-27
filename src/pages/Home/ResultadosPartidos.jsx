@@ -120,15 +120,19 @@ class ResultadosPartidos extends Component {
                             console.log(tournamentId)
                             const player1 = players[partidos[keyName]?.player1];
                             const player2 = players[partidos[keyName]?.player2];
+                            var fecha = partidos[keyName]?.started_at.slice(0,10);
+                            var hora = partidos[keyName]?.started_at.slice(-8);
+                          
+                            
                             return index < 31 && (
                                 <TarjetaResultados 
                                     banderaJugador1={`${STORAGE_ENDPOINT}/storage/flags/${player1.country.charAt(0).toLowerCase() + player1.country.slice(1)}.png`}
                                     banderaJugador2={`${STORAGE_ENDPOINT}/storage/flags/${player2.country.charAt(0).toLowerCase() + player2.country.slice(1)}.png`}
                                     jugador1={player1.user.name}
                                     jugador2={player2.user.name}
-                                    fecha={partidos[keyName]?.started_at}
-                                    horaInicio={partidos[keyName]?.started_at}
-                                    status={"no supe que poner aqui"}
+                                    fecha={fecha}
+                                    horaInicio={hora}
+                                    status={"Proximamente"}
                                     imagen1={`${STORAGE_ENDPOINT}/${player1.photo}`}
                                     imagen2={`${STORAGE_ENDPOINT}/${player2.photo}`}
                                     key={index}

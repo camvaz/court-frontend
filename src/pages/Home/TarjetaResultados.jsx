@@ -42,7 +42,7 @@ const ComponenteTarjeta = styled.div`
             text-align: right;
             height: 50px;
             top: -10px;
-            color: #eb5757;
+            color: var(--verde-3);
         }
     }
 `;
