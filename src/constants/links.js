@@ -31,11 +31,11 @@ export default [
             },
             {
                 nombre: "Organizar Torneo",
-                url: ""
+                url: "/torneos/agregar"
             },
             {
                 nombre: "Organizar Participantes",
-                url: ""
+                url: "/agregar-participantes"
             },
             {
                 nombre: "Administrar Resultados",

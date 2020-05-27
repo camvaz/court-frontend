@@ -1,1 +1,2 @@
-export const production = "https://courtapi.tk";
+export const production = "https://courtapi.tk/api";
+

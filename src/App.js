@@ -58,6 +58,8 @@ class App extends Component {
             .then(res => res.json())
             .catch(e => console.log(e));
 
+        
+
         const inscriptions = await fetch(`${API_ENDPOINT}/all/inscriptions`)
             .then(res => res.json())
             .catch(e => console.log(e));
@@ -130,7 +132,7 @@ class App extends Component {
                                 component={TarjetaJugador}
                             />
                              <EnhancedRoute
-                                path="/resultados"
+                                path="/torneos/partidos"
                                 exact
                                 withNavbar
                                 withFooter
@@ -183,7 +185,7 @@ const mapDispatchToProps = dispatch => {
             dispatch(setInscriptions(inscriptions)),
         setParticipants: participants =>
             dispatch(setParticipants(participants)),
-        setPlayers: players => dispatch(setPlayers(players))
+        setPlayers: players => dispatch(setPlayers(players)),
     };
 };
 

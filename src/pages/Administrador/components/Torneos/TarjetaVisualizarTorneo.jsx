@@ -171,6 +171,17 @@ export default class TarjetaVisualizarTorneo extends Component {
                     <ContenedorBotones>
                         <Link
                             to={{
+                                pathname: "/torneos/partidos",
+                                state: {
+                                    tournamentId: this.props.location.state
+                                        .tournamentId
+                                }
+                            }}
+                        >
+                            <button type="button"> Ver Partidos </button>
+                        </Link>
+                        <Link
+                            to={{
                                 pathname: "/torneos/jugadores",
                                 state: {
                                     tournamentId: this.props.location.state
@@ -182,6 +193,10 @@ export default class TarjetaVisualizarTorneo extends Component {
                                 Ver Jugadores
                             </button>
                         </Link>
+
+                      
+
+                        
                         <button type="button" id="cancelar">
                             Cancelar Torneo
                         </button>

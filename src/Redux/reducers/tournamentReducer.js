@@ -2,7 +2,7 @@ import {
     SET_TOURNAMENTS,
     SET_PLAYERS,
     SET_INSCRIPTIONS,
-    SET_PARTICIPANTS
+    SET_PARTICIPANTS,
 } from "../actionTypes";
 
 const initialUserSessionState = {
