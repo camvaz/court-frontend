@@ -1,85 +1,100 @@
 export default [
     {
-        "usuario": "administrador",
-        "opciones": [
+        usuario: "administrador",
+        role: "Global Admin",
+        opciones: [
             {
-                "nombre":"Inicio",
-                "url":"/"
+                nombre: "Inicio",
+                url: "/"
             },
             {
-                "nombre":"Torneos",
-                "url":"/torneos"
+                nombre: "Torneos",
+                url: "/torneos"
             },
             {
-                "nombre":"Usuarios",
-                "url":"/dashboard/admin/usuarios"
+                nombre: "Usuarios",
+                url: "/admin/usuarios"
             },
             {
-                "nombre":"Resultados",
-                "url":"/resultados"
+                nombre: "Resultados",
+                url: "/resultados"
             }
         ]
-     },
-     {
-         "usuario":"administrador de torneos",
-         "opciones": [
+    },
+    {
+        usuario: "administrador de torneos",
+        role: "Tournament Manager",
+        opciones: [
             {
-                 "nombre":"Inicio",
-                 "url":"/"
+                nombre: "Inicio",
+                url: "/"
             },
             {
-                "nombre":"Organizar Torneo",
-                "url":""
+                nombre: "Organizar Torneo",
+                url: "/torneos/agregar"
             },
             {
-                "nombre":"Organizar Participantes",
-                "url":""
+                nombre: "Organizar Participantes",
+                url: "/agregar-participantes"
             },
             {
-                "nombre":"Administrar Resultados",
-                "url":""
+                nombre: "Administrar Resultados",
+                url: ""
             }
-         ]
-     },
-     {
-         "usuario":"capturador de resultados",
-         "opciones": [
+        ]
+    },
+    {
+        usuario: "capturador de resultados",
+        role: "Results Capturer",
+        opciones: [
             {
-                 "nombre":"Inicio",
-                 "url":"/"
+                nombre: "Inicio",
+                url: "/"
             },
             {
-                "nombre":"Organizar Torneos",
-                "url":""
+                nombre: "Organizar Torneos",
+                url: ""
             }
-         ]
-     },
-     {
-         "usuario":"secretaria",
-         "opciones": [
- 
-         ]
-     },
-     {
-         "usuario":"participante",
-         "opciones": [
+        ]
+    },
+    {
+        usuario: "secretaria",
+        role: "Secretary",
+        opciones: [
             {
-                "nombre":"Inicio",
-                "url":"/"
+                nombre: "Inicio",
+                url: "/"
             },
             {
-                "nombre":"Participar",
-                "url":""
+                nombre: "Torneos",
+                url: "/torneos"
             },
             {
-                "nombre":"Visualizar Resultados",
-                "url":""
-            },
-            {
-                 "nombre":"Ver jugadores",
-                 "url":""
+                nombre: "Agregar Participantes",
+                url: "/agregar-participantes"
             }
-         ]
-     }
-
-]
+        ]
+    },
+    {
+        usuario: "participante",
+        role: "Player",
+        opciones: [
+            {
+                nombre: "Inicio",
+                url: "/"
+            },
+            {
+                nombre: "Participar",
+                url: ""
+            },
+            {
+                nombre: "Visualizar Resultados",
+                url: ""
+            },
+            {
+                nombre: "Ver jugadores",
+                url: ""
+            }
+        ]
+    }
+];

@@ -5,6 +5,7 @@ import Footer from "../Footer/Footer";
 import styled from "styled-components";
 import tenista from "../../assets/TennistaGris.svg";
 import links from "../../constants/links";
+import { connect } from "react-redux";
 
 const Derecho = styled.div`
     z-index: 0;
@@ -36,7 +37,7 @@ const Contenedor = styled.div`
     grid-template-columns: auto;
 
     @media screen and (min-width: 767px) {
-        grid-template-columns: 30% 70%;
+        grid-template-columns: 25% 75%;
 
         .aplicarGrid {
             grid-column-start: 2;
@@ -49,7 +50,7 @@ const Contenedor = styled.div`
     }
 `;
 
-export default class EnhancedRoute extends Component {
+class EnhancedRoute extends Component {
     render() {
         const { path, exact, withNavbar, withFooter, component } = this.props;
 
@@ -64,7 +65,7 @@ export default class EnhancedRoute extends Component {
 
         //Buscamos en constants/links.js el usuario que esta activo para mostrar sus opciones del menú
         //Cambiar administrador por el usuario actual
-        let usuarioSeleccionado = items.find(
+        const usuarioSeleccionado = items.find(
             user => user.usuario === "administrador"
         );
 
@@ -95,3 +96,5 @@ export default class EnhancedRoute extends Component {
         );
     }
 }
+
+export default EnhancedRoute;

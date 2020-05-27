@@ -1,36 +1,37 @@
 import React, { Component } from "react";
-import styled from 'styled-components';
+import styled from "styled-components";
 import agregar from "../../../../assets/botonMas.png";
 import {Link} from 'react-router-dom';
+import { connect } from "react-redux";
 const Cabecera = React.lazy(() => import("../../../Home/Cabecera"));
 const TarjetaTorneo = React.lazy(() => import("./TarjetaTorneo"));
-const AgregarTorneo = React.lazy(()=> import("./AgregarTorneo"));
+const AgregarTorneo = React.lazy(() => import("./AgregarTorneo"));
 
-
-const ContenedorHome = styled.div `
-    #divagrega{
+const ContenedorHome = styled.div`
+    overflow-y: auto;
+    #divagrega {
         display: none;
     }
 
-    AgregarTorneo{
+    AgregarTorneo {
         display: none;
         visibility: hidden;
     }
 
-    #contenedorAgregar{
+    #contenedorAgregar {
         position: fixed;
         bottom: 20px;
         left: 10px;
         width: 100%;
         float: left;
 
-        img{
+        img {
             position: relative;
             width: 50px;
             float: left;
         }
 
-        img:hover{
+        img:hover {
             cursor: pointer;
         }
     }
@@ -41,15 +42,15 @@ const ContenedorHome = styled.div `
     margin: auto;
     text-align: center;
 
-    @media screen and (min-width: 767px){ 
+    @media screen and (min-width: 767px) {
         text-align: center;
-        #contenedorAgregar{
+        #contenedorAgregar {
             bottom: 20px;
             right: 20px;
             width: 100%;
             float: right;
-    
-            img{
+
+            img {
                 position: relative;
                 width: 50px;
                 float: right;
@@ -58,13 +59,13 @@ const ContenedorHome = styled.div `
         }
     }
 
-    @media screen and (min-width: 1425px){ 
+    @media screen and (min-width: 1425px) {
         text-align: left;
     }
-`;  
+`;
 
 const ContenedorBuscador = styled.div`
-    input{
+    input {
         position: relative;
         border: 1px solid gray;
         border-radius: 5px;
@@ -74,33 +75,32 @@ const ContenedorBuscador = styled.div`
         margin: 0px 10px 0px 10px;
     }
 
-    #anios{
+    #anios {
         width: 100px;
         height: 25px;
-        background: #74BA5F;
+        background: #74ba5f;
         border-radius: 20px;
-        border: 1px solid #74BA5F;
+        border: 1px solid #74ba5f;
         margin: 0px 10px 0px 10px;
         color: white;
         display: none;
 
-        @media screen and (min-width: 1200px){ 
+        @media screen and (min-width: 1200px) {
             display: inline;
         }
-
     }
 
-    button{
+    button {
         width: 100px;
         height: 25px;
-        background: #74BA5F;
+        background: #74ba5f;
         margin: 0px 10px 0px 10px;
         border-radius: 8px;
-        border: 1px solid #74BA5F;
+        border: 1px solid #74ba5f;
         color: white;
         display: none;
 
-        @media screen and (min-width: 1200px){ 
+        @media screen and (min-width: 1200px) {
             display: inline;
         }
     }
@@ -109,11 +109,11 @@ const ContenedorBuscador = styled.div`
     width: 100%;
     text-align: center;
 
-    @media screen and (min-width: 800px){ 
+    @media screen and (min-width: 800px) {
         margin-bottom: 50px;
     }
 
-    @media screen and (min-width: 1425px){ 
+    @media screen and (min-width: 1425px) {
         margin-bottom: 60px;
     }
 `;
@@ -123,16 +123,16 @@ const ContenedorTorneos = styled.div`
     width: 100%;
 `;
 
-
-export default class Torneos extends Component {
+class Torneos extends Component {
     render() {
+        const { tournaments } = this.props.tournaments;
         return (
             <ContenedorHome>
-                <Cabecera/>
+                <Cabecera />
                 <div id="divagrega">
-                    <AgregarTorneo id="agrega"/>
+                    <AgregarTorneo id="agrega" />
                 </div>
-                
+
                 <ContenedorBuscador>
                     <select id="anios">
                         <option value="2020">2020</option>
@@ -147,19 +147,26 @@ export default class Torneos extends Component {
                     </select>
                     <button>Individuales</button>
                     <button>Dobles</button>
-                    <input type="text" name="nombre" size="40" placeholder = "Buscar torneo"/>
+                    <input
+                        type="text"
+                        name="nombre"
+                        size="40"
+                        placeholder="Buscar torneo"
+                    />
                 </ContenedorBuscador>
                 <ContenedorTorneos>
-                    <TarjetaTorneo nombreTorneo="Torneo Relampago" fechaTorneo="26/11/2020"/>
-                    <TarjetaTorneo nombreTorneo="Torneo Relampago" fechaTorneo="26/11/2020"/>
-                    <TarjetaTorneo nombreTorneo="Torneo Relampago" fechaTorneo="26/11/2020"/>
-                    <TarjetaTorneo nombreTorneo="Torneo Relampago" fechaTorneo="26/11/2020"/>
-                    <TarjetaTorneo nombreTorneo="Torneo Relampago" fechaTorneo="26/11/2020"/>
-                    <Link to = "/torneos/agregar">
-                        <div id="contenedorAgregar">
-                            <img src={agregar} id="agregar" alt=""/>
-                        </div>
-                    </Link>
+                    {Object.keys(tournaments).map((data, index) => (
+                        <TarjetaTorneo
+                            key={index}
+                            nombreTorneo={tournaments[data].name}
+                            fechaTorneo={tournaments[data].date}
+                            data={tournaments[data]}
+                            tournamentId={data}
+                        />
+                    ))}
+                    <div id="contenedorAgregar">
+                        <img src={agregar} id="agregar" alt="" />
+                    </div>
                 </ContenedorTorneos>
 
                 {/* <TarjetaVisualizarTorneo 
@@ -174,3 +181,9 @@ export default class Torneos extends Component {
         );
     }
 }
+
+const mapStateToProps = state => ({
+    tournaments: state.tournaments
+});
+
+export default connect(mapStateToProps)(Torneos);

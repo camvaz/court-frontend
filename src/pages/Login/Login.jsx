@@ -110,7 +110,7 @@ class Login extends Component {
                 body: formData
             };
 
-            let res = await fetch(`${API_ENDPOINT}/api/login`, config);
+            let res = await fetch(`${API_ENDPOINT}/login`, config);
             let data = await res.json();
             if (data.success) {
                 const { user, token } = data.data;
@@ -120,6 +120,10 @@ class Login extends Component {
                 switch (user.role) {
                     case userTypes.ADMIN_TYPE.role: {
                         history.push("/admin/usuarios");
+                        break;
+                    }
+                    case userTypes.SECRETARA_TYPE.role: {
+                        history.push("/torneos");
                         break;
                     }
                     default:

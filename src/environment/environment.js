@@ -3,4 +3,7 @@ import { production } from "./production";
 
 const inProduction = true;
 
-export const API_ENDPOINT = inProduction ? production : development;
+const API_ENDPOINT = inProduction ? production : development;
+const STORAGE_ENDPOINT = inProduction ? "https://courtapi.tlk" :"http://localhost:8000";
+
+export { API_ENDPOINT, STORAGE_ENDPOINT };

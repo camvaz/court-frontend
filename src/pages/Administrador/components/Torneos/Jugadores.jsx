@@ -1,9 +1,10 @@
 import React, { Component } from "react";
-import styled from 'styled-components';
+import styled from "styled-components";
 import salir from "../../../../assets/salirBlanco.svg";
+import { connect } from "react-redux";
+import { Participante } from "../../../Secretaria/components/participante";
 const Cabecera = React.lazy(() => import("../../../Home/Cabecera"));
 const TarjetaJugador = React.lazy(() => import("./TarjetaJugador"));
-
 
 const ContenedorGeneral = styled.div`
     position: relative;
@@ -13,21 +14,21 @@ const ContenedorGeneral = styled.div`
 `;
 
 const SubHeader = styled.div`
-    #titulo{
+    #titulo {
         margin-top: 35px;
         font-family: SF Pro Display;
         font-style: Bold;
         font-size: 16px;
-        color: #1A3748;
+        color: #1a3748;
         float: left;
-        @media screen and (min-width: 767px){ 
+        @media screen and (min-width: 767px) {
             margin-top: 0px;
             font-size: 25px;
         }
     }
-    input{
+    input {
         margin: 15px 0px 15px;
-        border: 1px solid #ACB5BD;
+        border: 1px solid #acb5bd;
         width: 80%;
         height: 20px;
         border-radius: 3px;
@@ -38,7 +39,7 @@ const SubHeader = styled.div`
         -moz-box-sizing: border-box;
         box-sizing: border-box;
 
-        @media screen and (min-width: 767px){ 
+        @media screen and (min-width: 767px) {
             height: 30px;
         }
     }
@@ -51,19 +52,24 @@ const SubHeader = styled.div`
     // width: 80%;
     // left: 30px;
 
-    @media screen and (min-width: 767px){ 
+    @media screen and (min-width: 767px) {
     }
 `;
 
 const ContenedorJugadores = styled.div`
-    #imagen{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-row-gap: 24px;
+
+    overflow-y: auto;
+    #imagen {
         position: relative;
         width: 100%;
         height: 40px;
-        background: #1A3748;
-        margin:0px;
+        background: #1a3748;
+        margin: 0px;
 
-        img{
+        img {
             position: relative;
             float: right;
             margin: 20px;
@@ -78,29 +84,57 @@ const ContenedorJugadores = styled.div`
     height: 540px;
     //background: red;
 
-    -webkit-box-shadow: 0px 0px 5px 0px rgba(176,176,176,1);
-    -moz-box-shadow: 0px 0px 5px 0px rgba(176,176,176,1);
-    box-shadow: 0px 0px 5px 0px rgba(176,176,176,1);
+    -webkit-box-shadow: 0px 0px 5px 0px rgba(176, 176, 176, 1);
+    -moz-box-shadow: 0px 0px 5px 0px rgba(176, 176, 176, 1);
+    box-shadow: 0px 0px 5px 0px rgba(176, 176, 176, 1);
 `;
 
-export default class Jugadores extends Component {
-    render(){
-        return(
+class Jugadores extends Component {
+    render() {
+        const { inscriptions, participants, players } = this.props;
+        const { tournamentId } = this.props.location.state;
+        return (
             <ContenedorGeneral>
-                <Cabecera/>
+                <Cabecera />
                 <SubHeader>
                     <h1 id="titulo">Jugadores del torneo</h1>
-                    <input type="text" placeholder="Buscar Jugador"/>
+                    <input type="text" placeholder="Buscar Jugador" />
                 </SubHeader>
                 <ContenedorJugadores>
-                    <div id = "imagen">
-                        <img src={salir} alt=""/>
-                    </div>
-                    {/* <TarjetaJugador/> */}
+                    {Object.keys(inscriptions)
+                        .filter(data => {
+                            return (
+                                inscriptions[data].tournament_id ===
+                                parseInt(tournamentId)
+                            );
+                        })
+                        .map((dato, index) => {
+                            const { participant_id } = inscriptions[dato];
+                            const { player_id } = participants[participant_id];
+                            return (
+                                <Participante
+                                    key={index}
+                                    player={{
+                                        photo: players[player_id].photo,
+                                        country: players[player_id].country
+                                    }}
+                                />
+                            );
+                        })}
+                    {/* <div id="imagen">
+                        <img src={salir} alt="" />
+                    </div> */}
+                    {/* <TarjetaJugador /> */}
                 </ContenedorJugadores>
             </ContenedorGeneral>
-
-
-        )
+        );
     }
 }
+
+const mapStateToProps = state => ({
+    inscriptions: state.tournaments.inscriptions,
+    participants: state.tournaments.participants,
+    players: state.tournaments.players
+});
+
+export default connect(mapStateToProps)(Jugadores);

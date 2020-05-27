@@ -36,7 +36,7 @@ class Usuarios extends Component {
     async loadUsers() {
         const { token } = this.props.userSession.session;
         console.log(this.props);
-        const response = await fetch(`${API_ENDPOINT}/api/users`, {
+        const response = await fetch(`${API_ENDPOINT}/users`, {
             method: "GET",
             headers: {
                 Accept: "application/json",
@@ -76,7 +76,7 @@ class Usuarios extends Component {
 
     onDelete = async user => {
         const { token } = this.props.userSession.session;
-        const response = await fetch(`${API_ENDPOINT}/api/users/${user}`, {
+        const response = await fetch(`${API_ENDPOINT}/users/${user}`, {
             method: "DELETE",
             headers: {
                 Authorization: `Bearer ${token}`
@@ -112,7 +112,7 @@ class Usuarios extends Component {
         formData.append("c_password", password);
 
         if (this.state.accionEnForm) {
-            const response = await fetch(`${API_ENDPOINT}/api/users`, {
+            const response = await fetch(`${API_ENDPOINT}/users`, {
                 method: "POST",
                 headers: {
                     Accept: "application/json",
@@ -137,7 +137,7 @@ class Usuarios extends Component {
         } else {
             console.log("object");
             const response = await fetch(
-                `${API_ENDPOINT}/api/users/${this.state.uid}`,
+                `${API_ENDPOINT}/users/${this.state.uid}`,
                 {
                     method: "PUT",
                     headers: {
