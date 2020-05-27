@@ -107,18 +107,20 @@ class ResultadosPartidos extends Component {
 
     render() { 
         const {partidos, players} = this.props;
+        const { tournamentId } = this.props.location.state
+        console.log(tournamentId)
         return ( 
             <Contenedor>
                 <Categorias />
                 
                 <ContenedorTarjetas>
                     {
-                        partidos && Object.keys(partidos).map((keyName,index) => {
-                            console.log(partidos)
-                            console.log(players)
+                        partidos && Object.keys(partidos).filter(data => partidos[data].tournament_id === parseInt(tournamentId)).map((keyName,index) => {
+                            console.log(partidos[keyName].tournamentId)
+                            console.log(tournamentId)
                             const player1 = players[partidos[keyName]?.player1];
                             const player2 = players[partidos[keyName]?.player2];
-                            return index < 30 && (
+                            return index < 31 && (
                                 <TarjetaResultados 
                                     banderaJugador1={`${STORAGE_ENDPOINT}/storage/flags/${player1.country.charAt(0).toLowerCase() + player1.country.slice(1)}.png`}
                                     banderaJugador2={`${STORAGE_ENDPOINT}/storage/flags/${player2.country.charAt(0).toLowerCase() + player2.country.slice(1)}.png`}
@@ -130,6 +132,7 @@ class ResultadosPartidos extends Component {
                                     imagen1={`${STORAGE_ENDPOINT}/${player1.photo}`}
                                     imagen2={`${STORAGE_ENDPOINT}/${player2.photo}`}
                                     key={index}
+                                    id={keyName}
                                 />
                             );
                         })
