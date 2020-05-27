@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import styled from "styled-components";
 import { API_ENDPOINT } from "../../environment/environment";
 import { toast } from "react-toastify";
@@ -249,8 +249,13 @@ function TarjetaResultados(props) {
         }
     };
 
+    const firstMountRef = useRef(true);
+
     useEffect(() => {
-        fetchPartidoById();
+        if (firstMountRef.current) {
+            fetchPartidoById();
+            firstMountRef.current = false;
+        }
         return () => {};
     }, [matchData, fetchPartidoById]);
 
