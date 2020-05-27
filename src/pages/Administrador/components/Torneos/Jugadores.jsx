@@ -114,17 +114,10 @@ class Jugadores extends Component {
                             return (
                                 <Participante
                                     key={index}
-                                    player={{
-                                        photo: players[player_id].photo,
-                                        country: players[player_id].country
-                                    }}
+                                    player={players[player_id]}
                                 />
                             );
                         })}
-                    {/* <div id="imagen">
-                        <img src={salir} alt="" />
-                    </div> */}
-                    {/* <TarjetaJugador /> */}
                 </ContenedorJugadores>
             </ContenedorGeneral>
         );
