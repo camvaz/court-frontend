@@ -4,6 +4,7 @@ import TarjetaResultados from './TarjetaResultados';
 import styled from 'styled-components';
 import Bandera from '../../assets/banderaBrasil.png';
 import Imagen from '../../assets/rogerfederer.png';
+import { connect } from "react-redux";
 
 const Contenedor = styled.div`
     width: 100%;
@@ -104,7 +105,7 @@ class ResultadosPartidos extends Component {
     //Pasar datos principales por props
 
     render() { 
-
+        
         return ( 
             <Contenedor>
                 <Categorias />
@@ -120,26 +121,7 @@ class ResultadosPartidos extends Component {
                                     imagen1={Imagen}
                                     imagen2={Imagen}
                     />
-                    <TarjetaResultados banderaJugador1={Bandera}
-                                    banderaJugador2={Bandera}
-                                    jugador1="Roger Federer"
-                                    jugador2="Mateo Barrettini"
-                                    fecha="Fecha: 20-10-2020"
-                                    horaInicio="Hora-inicio: 08:00"
-                                    status="Finalizado"
-                                    imagen1={Imagen}
-                                    imagen2={Imagen}
-                    />
-                    <TarjetaResultados banderaJugador1={Bandera}
-                                    banderaJugador2={Bandera}
-                                    jugador1="Roger Federer"
-                                    jugador2="Mateo Barrettini"
-                                    fecha="Fecha: 20-10-2020"
-                                    horaInicio="Hora-inicio: 08:00"
-                                    status="Finalizado"
-                                    imagen1={Imagen}
-                                    imagen2={Imagen}
-                    />
+                   
                 </ContenedorTarjetas>
                 
             </Contenedor>
@@ -148,4 +130,6 @@ class ResultadosPartidos extends Component {
     }
 }
  
+
+
 export default ResultadosPartidos;

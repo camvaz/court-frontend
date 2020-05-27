@@ -3,13 +3,15 @@ import {
     SET_PLAYERS,
     SET_INSCRIPTIONS,
     SET_PARTICIPANTS,
+    SET_MATCHES
 } from "../actionTypes";
 
 const initialUserSessionState = {
     tournaments: {},
     inscriptions: {},
     participants: {},
-    players: {}
+    players: {},
+    matches: {}
 };
 
 export default function (state = initialUserSessionState, action) {
@@ -34,6 +36,11 @@ export default function (state = initialUserSessionState, action) {
         case SET_PARTICIPANTS: {
             const { participants } = payload;
             newState.participants = participants;
+            return newState;
+        }
+        case SET_MATCHES: {
+            const { matches } = payload;
+            newState.matches = matches;
             return newState;
         }
         default: {

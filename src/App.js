@@ -9,7 +9,8 @@ import {
     setTournaments,
     setInscriptions,
     setParticipants,
-    setPlayers
+    setPlayers,
+    setMatches
 } from "./Redux/actions";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -58,7 +59,9 @@ class App extends Component {
             .then(res => res.json())
             .catch(e => console.log(e));
 
-        
+        const matches = await fetch(`${API_ENDPOINT}/all/matches`)
+            .then(res => res.json())
+            .catch(e => console.log(e)); 
 
         const inscriptions = await fetch(`${API_ENDPOINT}/all/inscriptions`)
             .then(res => res.json())
@@ -72,15 +75,18 @@ class App extends Component {
             .then(res => res.json())
             .catch(e => console.log(e));
 
-        if (tournaments && inscriptions && participants && players) {
+        if (tournaments && inscriptions && participants && players && matches) {
             this.props.setTournaments(tournaments);
             this.props.setPlayers(players);
             this.props.setParticipants(participants);
             this.props.setInscriptions(inscriptions);
+            this.props.setMatches(matches);
         }
     }
 
     render() {
+       
+        
         const { role } = this.props.userSession.user;
         return (
             <Router>
@@ -180,12 +186,16 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => {
     return {
-        setTournaments: users => dispatch(setTournaments(users)),
+        setTournaments: users => 
+        dispatch(setTournaments(users)),
         setInscriptions: inscriptions =>
             dispatch(setInscriptions(inscriptions)),
         setParticipants: participants =>
             dispatch(setParticipants(participants)),
-        setPlayers: players => dispatch(setPlayers(players)),
+        setPlayers: players => 
+        dispatch(setPlayers(players)),
+        setMatches: matches => 
+        dispatch(setMatches(matches)),
     };
 };
 

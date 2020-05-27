@@ -4,7 +4,8 @@ import {
     SET_TOURNAMENTS,
     SET_INSCRIPTIONS,
     SET_PARTICIPANTS,
-    SET_PLAYERS
+    SET_PLAYERS,
+    SET_MATCHES
 } from "./actionTypes";
 
 export const setUsers = users => ({
@@ -48,3 +49,10 @@ export const setPlayers = players => ({
         players
     }
 });
+
+export const setMatches = matches => ({
+    type: SET_MATCHES,
+    payload: {
+        matches
+    }
+})
