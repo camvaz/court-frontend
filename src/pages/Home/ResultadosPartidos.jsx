@@ -4,6 +4,7 @@ import TarjetaResultados from './TarjetaResultados';
 import styled from 'styled-components';
 import Bandera from '../../assets/banderaBrasil.png';
 import Imagen from '../../assets/rogerfederer.png';
+import {STORAGE_ENDPOINT} from '../../environment/environment';
 import { connect } from "react-redux";
 
 const Contenedor = styled.div`
@@ -105,13 +106,35 @@ class ResultadosPartidos extends Component {
     //Pasar datos principales por props
 
     render() { 
-        
+        const {partidos, players} = this.props;
         return ( 
             <Contenedor>
                 <Categorias />
                 
                 <ContenedorTarjetas>
-                    <TarjetaResultados banderaJugador1={Bandera}
+                    {
+                        partidos && Object.keys(partidos).map((keyName,index) => {
+                            console.log(partidos)
+                            console.log(players)
+                            const player1 = players[partidos[keyName]?.player1];
+                            const player2 = players[partidos[keyName]?.player2];
+                            return index < 30 && (
+                                <TarjetaResultados 
+                                    banderaJugador1={`${STORAGE_ENDPOINT}/storage/flags/${player1.country.charAt(0).toLowerCase() + player1.country.slice(1)}.png`}
+                                    banderaJugador2={`${STORAGE_ENDPOINT}/storage/flags/${player2.country.charAt(0).toLowerCase() + player2.country.slice(1)}.png`}
+                                    jugador1={player1.user.name}
+                                    jugador2={player2.user.name}
+                                    fecha={partidos[keyName]?.started_at}
+                                    horaInicio={partidos[keyName]?.started_at}
+                                    status={"no supe que poner aqui"}
+                                    imagen1={`${STORAGE_ENDPOINT}/${player1.photo}`}
+                                    imagen2={`${STORAGE_ENDPOINT}/${player2.photo}`}
+                                    key={index}
+                                />
+                            );
+                        })
+                    }
+                    {/* <TarjetaResultados banderaJugador1={Bandera}
                                     banderaJugador2={Bandera}
                                     jugador1="Roger Federer"
                                     jugador2="Mateo Barrettini"
@@ -120,7 +143,7 @@ class ResultadosPartidos extends Component {
                                     status="Finalizado"
                                     imagen1={Imagen}
                                     imagen2={Imagen}
-                    />
+                    /> */}
                    
                 </ContenedorTarjetas>
                 
@@ -130,6 +153,9 @@ class ResultadosPartidos extends Component {
     }
 }
  
+const mapStateToProps = state => ({
+    partidos: state.tournaments.matches,
+    players: state.tournaments.players
+})
 
-
-export default ResultadosPartidos;
+export default connect(mapStateToProps)(ResultadosPartidos);
