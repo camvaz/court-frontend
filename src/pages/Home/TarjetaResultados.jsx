@@ -5,9 +5,12 @@ import { toast } from "react-toastify";
 
 const ContenedorTarjeta = styled.div`
     position: relative;
-    width: 300px;
+    width: 100%;
     background: white;
     cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     margin: 20px;
 
     &:hover .componente-tarjeta,
@@ -19,10 +22,12 @@ const ContenedorTarjeta = styled.div`
 
 const ComponenteTarjeta = styled.div`
     position: relative;
-
+    width: 300px;
     border-radius: 10px;
     box-shadow: 3px 3px 10px gray;
     padding: 0 20px;
+    transition: 300ms ease-in-out;
+    top: 0;
 
     .fecha-hora-status {
         position: relative;
@@ -46,24 +51,23 @@ const ComponenteTarjeta = styled.div`
         }
     }
 `;
+
 const ComponenteJugadores = styled.div`
-    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
     width: 100%;
 `;
+
 const NombreJugador = styled.div`
-    position: relative;
-    width: 50%;
-    display: inline-block;
-    margin: 0;
-    padding: 10px 0;
+    display: flex;
+    align-items: center;
+    margin: 16px 0;
 
     img {
         width: 20px;
-        height: 20px;
         display: inline-block;
         margin: 0px 5px;
-        position: relative;
-        top: 5px;
     }
     h3 {
         display: inline-block;
@@ -104,15 +108,16 @@ const Sets = styled.div`
 `;
 
 const PuntajeJugador = styled.div`
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
     p {
         font-size: 0.7rem;
     }
     .nombre-jugador {
-        width: 50%;
         display: inline-block;
     }
     .sets {
-        width: 50%;
         display: inline-block;
         text-align: right;
 
@@ -157,10 +162,13 @@ function Puntaje(props) {
         <PuntajeJugador>
             <p className="nombre-jugador">{props.jugador}</p>
             <div className="sets">
-                <p>1</p>
-                <p>2</p>
-                <p>3</p>
-                <p>3</p>
+                {props.sets.map((data, index) => (
+                    <p key={index}>
+                        {props.player === 1
+                            ? data.player1Score
+                            : data.player2Score}
+                    </p>
+                ))}
             </div>
         </PuntajeJugador>
     );
@@ -169,8 +177,16 @@ function Puntaje(props) {
 function ComponenteSets(props) {
     return (
         <Sets>
-            <Puntaje jugador={props.jugador1}></Puntaje>
-            <Puntaje jugador={props.jugador2}></Puntaje>
+            <Puntaje
+                jugador={props.jugador1}
+                sets={props.sets}
+                player={1}
+            ></Puntaje>
+            <Puntaje
+                jugador={props.jugador2}
+                sets={props.sets}
+                player={2}
+            ></Puntaje>
         </Sets>
     );
 }
@@ -179,39 +195,40 @@ function ComponenteResultados(props) {
     return (
         <ComponenteDatos>
             <ComponenteSets
+                sets={props.sets}
                 jugador1={props.jugador1}
                 jugador2={props.jugador2}
             />
 
             <Estadistica
-                resultadoJugador1="15"
+                resultadoJugador1={props.stats.acesP1}
                 caracteristica="Aces"
-                resultadoJugador2="15"
+                resultadoJugador2={props.stats.acesP2}
             />
             <Estadistica
-                resultadoJugador1="15"
+                resultadoJugador1={props.stats.doubleFaultP1}
                 caracteristica="Dobles faltas"
-                resultadoJugador2="15"
+                resultadoJugador2={props.stats.doubleFaultP2}
             />
             <Estadistica
-                resultadoJugador1="15"
+                resultadoJugador1={props.stats.firstServicePercentageP1}
                 caracteristica="% de primer servicio"
-                resultadoJugador2="15"
+                resultadoJugador2={props.stats.firstServicePercentageP2}
             />
             <Estadistica
-                resultadoJugador1="15"
+                resultadoJugador1={props.stats.servicePointsWonP1}
                 caracteristica="Puntos de servicio ganados"
-                resultadoJugador2="15"
+                resultadoJugador2={props.stats.servicePointsWonP2}
             />
             <Estadistica
-                resultadoJugador1="15"
+                resultadoJugador1={props.stats.tiebreaksWonP1}
                 caracteristica="Tiebreaks"
-                resultadoJugador2="15"
+                resultadoJugador2={props.stats.tiebreaksWonP2}
             />
             <Estadistica
-                resultadoJugador1="15"
-                caracteristica="Aces"
-                resultadoJugador2="15"
+                resultadoJugador1={props.stats.serverGamesWonP1}
+                caracteristica="Juegos ganados al servicio"
+                resultadoJugador2={props.stats.serverGamesWonP2}
             />
         </ComponenteDatos>
     );
@@ -283,6 +300,8 @@ function TarjetaResultados(props) {
                 </div>
                 {estaDesplegado && (
                     <ComponenteResultados
+                        stats={matchData.stat}
+                        sets={matchData.sets}
                         jugador1={props.jugador1}
                         jugador2={props.jugador2}
                     />
