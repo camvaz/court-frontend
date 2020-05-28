@@ -1,11 +1,9 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
 import TarjetaResultados from "./TarjetaResultados";
 import styled from "styled-components";
-import Bandera from "../../assets/banderaBrasil.png";
-import Imagen from "../../assets/rogerfederer.png";
 import { STORAGE_ENDPOINT } from "../../environment/environment";
 import { connect } from "react-redux";
+import "animate.css";
 
 const Contenedor = styled.div`
     width: 100%;
@@ -90,7 +88,7 @@ class Categorias extends Component {
     render() {
         const { setInput, date } = this.props;
         return (
-            <ContenedorCategorias>
+            <ContenedorCategorias className="animated fadeIn">
                 <Button>
                     <div
                         onClick={() => setInput("currentRound", "fourth")}
@@ -159,7 +157,7 @@ class ResultadosPartidos extends Component {
             <Contenedor>
                 <Categorias date={this.state.date} setInput={this.setInput} />
 
-                <ContenedorTarjetas>
+                <ContenedorTarjetas className="animated fadeIn">
                     {partidos &&
                         Object.keys(partidos)
                             .filter(

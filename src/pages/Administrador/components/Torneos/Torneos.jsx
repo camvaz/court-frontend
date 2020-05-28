@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import styled from "styled-components";
 import agregar from "../../../../assets/botonMas.png";
 import { connect } from "react-redux";
+import "animate.css";
 const Cabecera = React.lazy(() => import("../../../Home/Cabecera"));
 const TarjetaTorneo = React.lazy(() => import("./TarjetaTorneo"));
 const AgregarTorneo = React.lazy(() => import("./AgregarTorneo"));
@@ -148,7 +149,7 @@ class Torneos extends Component {
         const { competition } = this.state;
         const { tournaments } = this.props.tournaments;
         return (
-            <ContenedorHome>
+            <ContenedorHome className="animated fadeIn">
                 <Cabecera />
                 <div id="divagrega">
                     <AgregarTorneo id="agrega" />

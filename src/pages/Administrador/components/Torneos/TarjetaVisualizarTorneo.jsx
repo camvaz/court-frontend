@@ -3,6 +3,7 @@ import styled from "styled-components";
 import fondoTorneo from "../../../../assets/fondoVisualizarWeb.jpg";
 import fondoTorneoWeb from "../../../../assets/imgTorneoWeb.png";
 import { Link } from "react-router-dom";
+import "animate.css";
 const Cabecera = React.lazy(() => import("../../../Home/Cabecera"));
 
 const ContenedorGeneral = styled.div`
@@ -129,7 +130,7 @@ const ContenedorBotones = styled.div`
         color: white;
         border-radius: 20px;
         border: 1px solid var(--azul-3);
-    transition: 0.24s ease-in-out;
+        transition: 0.24s ease-in-out;
     }
     button:nth-child(1) {
         grid-column-start: 0;
@@ -157,7 +158,7 @@ const ContenedorBotones = styled.div`
 export default class TarjetaVisualizarTorneo extends Component {
     render() {
         return (
-            <ContenedorGeneral>
+            <ContenedorGeneral className="animated fadeIn">
                 <Cabecera />
                 <ContenedorTarjeta>
                     <ContenedorImagen>

@@ -5,7 +5,6 @@ import Footer from "../Footer/Footer";
 import styled from "styled-components";
 import tenista from "../../assets/TennistaGris.svg";
 import links from "../../constants/links";
-import { connect } from "react-redux";
 
 const Derecho = styled.div`
     z-index: 0;

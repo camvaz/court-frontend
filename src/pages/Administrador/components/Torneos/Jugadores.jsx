@@ -3,8 +3,7 @@ import styled from "styled-components";
 import salir from "../../../../assets/salirBlanco.svg";
 import { connect } from "react-redux";
 import { Participante } from "../../../Secretaria/components/participante";
-const Cabecera = React.lazy(() => import("../../../Home/Cabecera"));
-const TarjetaJugador = React.lazy(() => import("./TarjetaJugador"));
+import "animate.css";
 
 const ContenedorGeneral = styled.div`
     position: relative;
@@ -103,7 +102,7 @@ class Jugadores extends Component {
         const { search } = this.state;
 
         return (
-            <ContenedorGeneral>
+            <ContenedorGeneral className="animated fadeIn">
                 <SubHeader>
                     <h1 id="titulo">Jugadores del torneo</h1>
                     <input

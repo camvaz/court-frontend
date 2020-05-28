@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import cup from "../../../assets/cup.svg";
 import "./participante.scss";
+import "animate.css";
 import { STORAGE_ENDPOINT } from "../../../environment/environment";
 
 export class Participante extends Component {
@@ -15,7 +16,7 @@ export class Participante extends Component {
         const { player } = this.props;
 
         return (
-            <div className="Contparticipante">
+            <div className="Contparticipante animated fadeIn">
                 <div className="border-img">
                     <img
                         id="imguser"

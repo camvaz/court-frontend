@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import styled from "styled-components";
 import { API_ENDPOINT } from "../../environment/environment";
 import { toast } from "react-toastify";
+import "animate.css";
 
 const ContenedorTarjeta = styled.div`
     position: relative;
@@ -277,7 +278,10 @@ function TarjetaResultados(props) {
     }, [matchData, fetchPartidoById]);
 
     return (
-        <ContenedorTarjeta onClick={() => setDesplegado(!estaDesplegado)}>
+        <ContenedorTarjeta
+            className="animated fadeIn"
+            onClick={() => setDesplegado(!estaDesplegado)}
+        >
             <ComponenteImagenesJugadores>
                 <img className="img-jugador1" src={props.imagen1} />
                 <h2>VS</h2>

@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 import fondoTorneo from "../../../../assets/fondoTorneo.jpg";
+import "animate.css";
 
 const ContenedorTarjeta = styled.div`
     width: 100%;
@@ -75,7 +76,10 @@ export default class TarjetaTorneo extends Component {
 
     render() {
         return (
-            <ContenedorTarjeta onClick={this.tarjetaWasClicked}>
+            <ContenedorTarjeta
+                className="animated fadeIn"
+                onClick={this.tarjetaWasClicked}
+            >
                 <Link
                     to={{
                         pathname: "/torneos/visualizar",
