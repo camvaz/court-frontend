@@ -72,6 +72,11 @@ const ContenedorBuscador = styled.div`
         height: 25px;
         padding: 0px 10px 0px 10px;
         margin: 0px 10px 0px 10px;
+
+        @media only screen and (max-width: 819px) {
+            margin: 32px auto;
+            width: 80%;
+        }
     }
 
     #anios {
@@ -118,8 +123,17 @@ const ContenedorBuscador = styled.div`
 `;
 
 const ContenedorTorneos = styled.div`
-    position: relative;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-row-gap: 24px;
     width: 100%;
+    @media only screen and (max-width: 1200px) {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    @media only screen and (max-width: 819px) {
+        grid-template-columns: 1fr;
+        margin-top: 24px;
+    }
 `;
 
 class Torneos extends Component {

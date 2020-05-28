@@ -4,16 +4,24 @@ import { Link } from "react-router-dom";
 import fondoTorneo from "../../../../assets/fondoTorneo.jpg";
 
 const ContenedorTarjeta = styled.div`
-    position: relative;
-    width: 300px;
+    width: 100%;
     height: 210px;
-    margin: auto;
     left: 0;
-    margin-top: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    a {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        width: 300px;
+        margin: auto;
+    }
 
     @media screen and (min-width: 767px) {
         display: inline-block;
-        margin: 15px;
     }
 `;
 const ContenedorImagen = styled.div`
@@ -24,7 +32,6 @@ const ContenedorImagen = styled.div`
     }
 
     position: relative;
-    left: 20px;
     width: 270px;
     height: 155px;
     border-radius: 10px 10px 0px 0px;
@@ -33,29 +40,31 @@ const ContenedorTitulo = styled.div`
     p {
         position: relative;
         width: 200px;
-        margin: 0;
+        margin: 0 0 0 16px;
         padding: 0;
         color: white;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
     }
     #nombre {
+        margin-top: 8px;
         font-family: Roboto;
         font-style: Medium;
         font-size: 16px;
         text-align: left;
-        margin-left: 20px;
-        height: 20px;
     }
     #fecha {
+        margin-bottom: 8px;
         font-family: Roboto;
         font-style: Regular;
         font-size: 12px;
         text-align: left;
-        margin-left: 20px;
     }
 
     position: relative;
     width: 100%;
-    height: 50px;
+    height: 63px;
     background: #1a3748;
 `;
 

@@ -81,7 +81,7 @@ const ContenedorTarjetas = styled.div`
     @media screen and (min-width: 767px) {
         grid-template-columns: 1fr 1fr;
     }
-    @media screen and (min-width: 1100px) {
+    @media screen and (min-width: 1287px) {
         grid-template-columns: 1fr 1fr 1fr;
     }
 `;
@@ -173,12 +173,11 @@ class ResultadosPartidos extends Component {
                                     )
                             )
                             .map((keyName, index) => {
-                                console.log(partidos[keyName].tournamentId);
-                                console.log(tournamentId);
                                 const player1 =
                                     players[partidos[keyName]?.player1];
                                 const player2 =
                                     players[partidos[keyName]?.player2];
+
                                 return (
                                     index < 31 && (
                                         <TarjetaResultados

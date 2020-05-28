@@ -9,10 +9,10 @@ const ContenedorGeneral = styled.div`
     position: relative;
     width: 100%;
 `;
+
 const ContenedorTarjeta = styled.div`
     position: relative;
     width: 90%;
-    height: 489px;
     margin: 30px auto;
     left: 0;
     background: white;
@@ -28,33 +28,32 @@ const ContenedorImagen = styled.div`
     img {
         position: relative;
         width: 100%;
+        object-fit: cover;
         height: 100%;
         border-radius: 10px 10px 0px 0px;
     }
-    .mobile{
+    .mobile {
         display: block;
-        @media screen and (min-width: 767px){
+        @media screen and (min-width: 767px) {
             display: none;
         }
     }
 
-    .web{
+    .web {
         display: none;
 
-        @media screen and (min-width: 767px){
+        @media screen and (min-width: 767px) {
             display: block;
         }
     }
-    .fondo-verde{
+    .fondo-verde {
         width: 100%;
         height: 100%;
-        background: #74BA5F;
-        opacity: .5;
+        background: #74ba5f;
+        opacity: 0.5;
         z-index: 99;
         position: absolute;
     }
-
-    
 
     position: relative;
     width: 100%;
@@ -96,7 +95,6 @@ const NombreTorneo = styled.div`
 `;
 
 const ContenedorDetalles = styled.div`
-    
     padding: 20px;
 
     p {
@@ -117,43 +115,44 @@ const ContenedorDetalles = styled.div`
     text-align: left;
 `;
 
-const ContenedorBotones = styled.div`   
-    margin-top: 50px;
-    position: relative;
-    display: grid;
-    grid-template-columns: 25% 25% 25% 25%;
+const ContenedorBotones = styled.div`
+    padding-bottom: 32px;
     justify-content: center;
-
-    button{
+    width: 529px;
+    margin: 50px auto 0;
+    display: flex;
+    button {
         width: 130px;
         padding: 5px 0;
         border: none;
-        background: #1A3748;
+        background: #1a3748;
         color: white;
         border-radius: 20px;
+        border: 1px solid var(--azul-3);
+    transition: 0.24s ease-in-out;
     }
-    button:nth-child(1){
-        grid-column-start:0;
+    button:nth-child(1) {
+        grid-column-start: 0;
         grid-column-end: 1;
-        margin-left: 50px;
+        margin-left: 16px;
     }
-    button:nth-child(2){
-        grid-column-start:3;
+    button:nth-child(2) {
+        grid-column-start: 3;
         grid-column-end: 4;
     }
-    button:nth-child(3){
+    button:nth-child(3) {
         grid-column-start: 4;
         grid-column-end: 5;
+        margin-left: auto;
     }
 
-    button:hover{
+    button:hover {
         background: white;
-        border: 1px solid #1A3748;
-        color: #1A3748;
-        cursor:pointer;
+        border: 1px solid #1a3748;
+        color: #1a3748;
+        cursor: pointer;
         font-weight: bold;
     }
-
 `;
 export default class TarjetaVisualizarTorneo extends Component {
     render() {
@@ -163,8 +162,16 @@ export default class TarjetaVisualizarTorneo extends Component {
                 <ContenedorTarjeta>
                     <ContenedorImagen>
                         <div className="fondo-verde" />
-                        <img className="mobile" src={fondoTorneo} alt="Imagen Torneo" />
-                        <img className="web" src={fondoTorneoWeb} alt="imagen Torneo"/>
+                        <img
+                            className="mobile"
+                            src={fondoTorneo}
+                            alt="Imagen Torneo"
+                        />
+                        <img
+                            className="web"
+                            src={fondoTorneoWeb}
+                            alt="imagen Torneo"
+                        />
                     </ContenedorImagen>
                     <NombreTorneo>
                         <h1>{this.props.location.state.data.name}</h1>
@@ -206,11 +213,10 @@ export default class TarjetaVisualizarTorneo extends Component {
                                 Ver Jugadores
                             </button>
                         </Link>
-  
+
                         <button type="button" id="cancelar">
                             Realizar Sorteo
                         </button>
-                        
                     </ContenedorBotones>
                 </ContenedorTarjeta>
             </ContenedorGeneral>

@@ -14,6 +14,9 @@ const ContenedorGeneral = styled.div`
 `;
 
 const SubHeader = styled.div`
+    position: relative;
+    margin: 72px auto;
+    width: 85%;
     #titulo {
         margin-top: 35px;
         font-family: SF Pro Display;
@@ -31,7 +34,7 @@ const SubHeader = styled.div`
         border: 1px solid #acb5bd;
         width: 80%;
         height: 20px;
-        border-radius: 3px;
+        border-radius: 5px;
         float: left;
         padding: 8px;
 
@@ -44,12 +47,6 @@ const SubHeader = styled.div`
         }
     }
 
-    position: relative;
-    left: 8%;
-    width: 80%;
-    height: 130px;
-    
-
     @media screen and (min-width: 767px) {
     }
 `;
@@ -58,8 +55,13 @@ const ContenedorJugadores = styled.div`
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     grid-row-gap: 24px;
-
+    padding: 24px 0;
+    margin: auto;
     overflow-y: auto;
+    position: relative;
+    width: 85%;
+    height: 540px;
+
     #imagen {
         position: relative;
         width: 100%;
@@ -75,12 +77,6 @@ const ContenedorJugadores = styled.div`
             margin: 9px;
         }
     }
-    padding: 0;
-    margin: auto;
-    position: relative;
-    width: 85%;
-    height: 540px;
-    //background: red;
 
     -webkit-box-shadow: 0px 0px 5px 0px rgba(176, 176, 176, 1);
     -moz-box-shadow: 0px 0px 5px 0px rgba(176, 176, 176, 1);
@@ -88,22 +84,45 @@ const ContenedorJugadores = styled.div`
 `;
 
 class Jugadores extends Component {
+    state = {
+        search: ""
+    };
+
+    filterSearch = e => {
+        if (e) {
+            e.persist();
+            this.setState({
+                search: e.target.value
+            });
+        }
+    };
+
     render() {
         const { inscriptions, participants, players } = this.props;
         const { tournamentId } = this.props.location.state;
+        const { search } = this.state;
+
         return (
             <ContenedorGeneral>
-                <Cabecera />
                 <SubHeader>
                     <h1 id="titulo">Jugadores del torneo</h1>
-                    <input type="text" placeholder="Buscar Jugador" />
+                    <input
+                        type="text"
+                        placeholder="Buscar Jugador"
+                        value={search}
+                        onChange={e => this.filterSearch(e)}
+                    />
                 </SubHeader>
                 <ContenedorJugadores>
                     {Object.keys(inscriptions)
                         .filter(data => {
+                            const { participant_id } = inscriptions[data];
+                            const { player_id } = participants[participant_id];
+
                             return (
                                 inscriptions[data].tournament_id ===
-                                parseInt(tournamentId)
+                                    parseInt(tournamentId) &&
+                                players[player_id]?.user?.name.includes(search)
                             );
                         })
                         .map((dato, index) => {
