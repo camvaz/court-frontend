@@ -206,9 +206,20 @@ class Torneos extends Component {
                                 tournamentId={data}
                             />
                         ))}
-                    <div id="contenedorAgregar">
-                        <img src={agregar} id="agregar" alt="" />
-                    </div>
+                    <Link
+                        to={{
+                            pathname: "/torneos/agregar",
+                            // state: {
+                            //     tournamentId: this.props.location.state
+                            //         .tournamentId
+                            // }
+                        }}
+                        >
+                            <div id="contenedorAgregar">
+                                <img src={agregar} id="agregar" alt="" />
+                            </div>
+                     </Link>
+
                 </ContenedorTorneos>
 
                 {/* <TarjetaVisualizarTorneo 

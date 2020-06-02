@@ -1,4 +1,7 @@
 import React, { Component } from "react";
+import {Link} from 'react-router-dom';
+import { API_ENDPOINT } from "../../../../environment/environment";
+import { toast } from "react-toastify";
 import styled from 'styled-components';
 import salir from "../../../../assets/cerrar.svg";
 
@@ -119,10 +122,6 @@ const ContenedorFormulario = styled.div`
         }
     }
 
-    div{
-        background: blue;
-    }
-
     #boton{
         font-family: Roboto;
         font-style: Bold;
@@ -144,12 +143,102 @@ const ContenedorFormulario = styled.div`
     width: 100%;
 `;
 export default class AgregarTorneo extends Component{
+    state = {
+        formData: {
+            name: "",
+            date: "",
+            place: "",
+            description: ""
+        },
+        uid: 0,
+        searchInput: "",
+        slide: false,
+        accionEnForm: true
+    };
+
+    onSubmit = async e => {
+        e.preventDefault();
+        const { token } = this.props.userSession.session;
+        //const { name, date, place, description} = this.state.formData;
+        const formData = new FormData();
+
+        // formData.append("name", name);
+        // formData.append("email", email);
+        // formData.append("phone", phone);
+        // formData.append("role", role);
+        // formData.append("password", password);
+        // formData.append("c_password", password);
+
+        if (this.state.accionEnForm) {
+            const response = await fetch(`${API_ENDPOINT}/users`, {
+                method: "POST",
+                headers: {
+                    Accept: "application/json",
+                    Authorization: `Bearer ${token}`
+                },
+                body: formData
+            });
+            console.log(response);
+
+            if (response) {
+                const toJson = await response.json();
+                console.log(toJson);
+                this.loadUsers();
+                toast.success("✔️ Torneo creado con éxito", {
+                    position: toast.POSITION.TOP_RIGHT,
+                    autoClose: 5000
+                });
+                this.setState({
+                    slide: false
+                });
+            }
+        } else {
+            console.log("object");
+            const response = await fetch(
+                `${API_ENDPOINT}/users/${this.state.uid}`,
+                {
+                    method: "PUT",
+                    headers: {
+                        Accept: "application/json",
+                        Authorization: `Bearer ${token}`
+                    },
+                    body: formData
+                }
+            );
+
+            console.log(response);
+            if (response) {
+                const toJson = await response.json();
+                console.log(toJson);
+                this.loadUsers();
+                toast.success("✔️ Usuario modificado con éxito", {
+                    position: toast.POSITION.TOP_RIGHT,
+                    autoClose: 5000
+                });
+                this.setState({
+                    slide: false
+                });
+            }
+        }
+    };
+
     render(){
         return(
             <ContenedorGeneral>
                 <ContenedorTarjeta>
                     <ContenedorImagen>
-                        <img src={salir}alt=""/>
+                        <Link
+                            to={{
+                                pathname: "/torneos",
+                                // state: {
+                                //     tournamentId: this.props.location.state
+                                //         .tournamentId
+                                // }
+                            }}
+                            >
+                                <img src={salir}alt=""/>
+                        </Link>
+                        
                     </ContenedorImagen>
                     <h1>Crear Torneo</h1>  
                     <ContenedorFormulario>
@@ -161,6 +250,8 @@ export default class AgregarTorneo extends Component{
                         <input type="text" id="lugar"/>
                         <label htmlFor="descripcion">Descripción:</label>
                         <textarea id="descripcion"></textarea>
+
+
                         <div>
                             <input type="submit" value="GUARDAR" id="boton"/>
                         </div>
