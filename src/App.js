@@ -10,7 +10,8 @@ import {
     setInscriptions,
     setParticipants,
     setPlayers,
-    setMatches
+    setMatches,
+    setUserSession
 } from "./Redux/actions";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -51,6 +52,16 @@ class App extends Component {
 
     componentDidMount() {
         this.getTournaments();
+        this.keepSession();
+    }
+
+    keepSession() {
+        const localStorageData = localStorage.getItem("courtUserData");
+
+        if (localStorageData) {
+            const parsedStorage = JSON.parse(localStorageData);
+            parsedStorage.token && this.props.setUserSession(parsedStorage);
+        }
     }
 
     async getTournaments() {
@@ -183,6 +194,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => {
     return {
+        setUserSession: userSession => dispatch(setUserSession(userSession)),
         setTournaments: users => dispatch(setTournaments(users)),
         setInscriptions: inscriptions =>
             dispatch(setInscriptions(inscriptions)),

@@ -4,11 +4,13 @@ import imgUsuario from "../../assets/imgUsuario.svg";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import links from "../../constants/links";
+import { setUserSession } from "../../Redux/actions";
+import { toast } from "react-toastify";
 
 const ContenedorGeneral = styled.div`
-   width: 100%;
-   position: relative;
-   height: 100%;
+    width: 100%;
+    position: relative;
+    height: 100%;
 `;
 
 const Contenedor = styled.div`
@@ -167,13 +169,33 @@ function Menu(props) {
                         <Link to="/torneos">Torneos </Link>
                     </li>
                 ) : (
-                    items.opciones.map((opcion, key) => (
-                        <li key={key}>
-                            <Link to={opcion.url} onClick={props.ocultarMenu}>
-                                {opcion.nombre}
+                    <>
+                        {items.opciones.map((opcion, key) => (
+                            <li key={key}>
+                                <Link
+                                    to={opcion.url}
+                                    onClick={props.ocultarMenu}
+                                >
+                                    {opcion.nombre}
+                                </Link>
+                            </li>
+                        ))}
+                        <li>
+                            <Link
+                                to="/"
+                                onClick={() => {
+                                    props.setUserSession({ user: {} });
+                                    localStorage.setItem(
+                                        "courtUserData",
+                                        JSON.stringify({ user: {} })
+                                    );
+                                    toast.success("Sesión Finalizada");
+                                }}
+                            >
+                                Cerrar Sesión
                             </Link>
                         </li>
-                    ))
+                    </>
                 )}
             </ul>
         </ContenedorMenu>
@@ -228,7 +250,11 @@ function Navbar(props) {
             {isToggleOn ? (
                 <Contenedor>
                     <Usuario user={props.userSession.user} />
-                    <Menu itemsMenu={itemsMenu} ocultarMenu={mobile} />
+                    <Menu
+                        itemsMenu={itemsMenu}
+                        ocultarMenu={mobile}
+                        setUserSession={props.setUserSession}
+                    />
                 </Contenedor>
             ) : (
                 ""
@@ -241,4 +267,8 @@ const mapStateToProps = state => ({
     userSession: state.userSession.session
 });
 
-export default connect(mapStateToProps)(Navbar);
+const mapDispatchToProps = dispatch => ({
+    setUserSession: userSession => dispatch(setUserSession(userSession))
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Navbar);

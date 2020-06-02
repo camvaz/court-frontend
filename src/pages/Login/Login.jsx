@@ -115,6 +115,10 @@ class Login extends Component {
             if (data.success) {
                 const { user, token } = data.data;
                 const { history } = this.props;
+                localStorage.setItem(
+                    "courtUserData",
+                    JSON.stringify({ user, token })
+                );
                 await this.props.setUserSession({ user, token });
                 toast.success("Sesión iniciada.");
                 switch (user.role) {
@@ -124,6 +128,10 @@ class Login extends Component {
                     }
                     case userTypes.SECRETARA_TYPE.role: {
                         history.push("/torneos");
+                        break;
+                    }
+                    case userTypes.CAPTURADOR_TYPE.role: {
+                        history.push("/");
                         break;
                     }
                     default:
