@@ -131,6 +131,8 @@ const ContenedorTorneos = styled.div`
     grid-template-columns: repeat(3, 1fr);
     grid-row-gap: 24px;
     width: 100%;
+    max-width: 1085px;
+    margin: auto;
     @media only screen and (max-width: 1200px) {
         grid-template-columns: repeat(2, 1fr);
     }

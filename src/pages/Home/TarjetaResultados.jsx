@@ -24,7 +24,7 @@ const ContenedorTarjeta = styled.div`
 
 const ComponenteTarjeta = styled.div`
     position: relative;
-    width: 300px;
+    width: 80%;
     border-radius: 10px;
     box-shadow: 3px 3px 10px gray;
     padding: 0 20px;
