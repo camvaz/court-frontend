@@ -18,7 +18,6 @@ import "react-toastify/dist/ReactToastify.css";
 import AgregarParticipante from "./pages/Secretaria/components/inscribirParticipantes/agregarParticipante";
 import Secretaria from "./pages/Secretaria/Secretaria";
 import { API_ENDPOINT } from "./environment/environment";
-import tournamentReducer from "./Redux/reducers/tournamentReducer";
 import { Participante } from "./pages/Secretaria/components/participante";
 const NotFound = React.lazy(() => import("./pages/NotFound/NotFound"));
 const Home = React.lazy(() => import("./pages/Home/Home"));
@@ -61,7 +60,7 @@ class App extends Component {
 
         const matches = await fetch(`${API_ENDPOINT}/all/matches`)
             .then(res => res.json())
-            .catch(e => console.log(e)); 
+            .catch(e => console.log(e));
 
         const inscriptions = await fetch(`${API_ENDPOINT}/all/inscriptions`)
             .then(res => res.json())
@@ -85,8 +84,6 @@ class App extends Component {
     }
 
     render() {
-       
-        
         const { role } = this.props.userSession.user;
         return (
             <Router>
@@ -137,7 +134,7 @@ class App extends Component {
                                 withFooter
                                 component={TarjetaJugador}
                             />
-                             <EnhancedRoute
+                            <EnhancedRoute
                                 path="/torneos/partidos"
                                 exact
                                 withNavbar
@@ -186,16 +183,13 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => {
     return {
-        setTournaments: users => 
-        dispatch(setTournaments(users)),
+        setTournaments: users => dispatch(setTournaments(users)),
         setInscriptions: inscriptions =>
             dispatch(setInscriptions(inscriptions)),
         setParticipants: participants =>
             dispatch(setParticipants(participants)),
-        setPlayers: players => 
-        dispatch(setPlayers(players)),
-        setMatches: matches => 
-        dispatch(setMatches(matches)),
+        setPlayers: players => dispatch(setPlayers(players)),
+        setMatches: matches => dispatch(setMatches(matches))
     };
 };
 

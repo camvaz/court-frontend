@@ -5,9 +5,15 @@ import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import links from "../../constants/links";
 
+const ContenedorGeneral = styled.div`
+   width: 100%;
+   position: relative;
+   height: 100%;
+`;
+
 const Contenedor = styled.div`
     background: var(--fuerte-1);
-    height: 100%;
+    height: 100vh;
     z-index: 9;
     position: fixed;
     top: 0px;
@@ -16,7 +22,8 @@ const Contenedor = styled.div`
     z-index: 91;
 
     @media screen and (min-width: 767px) {
-        position: relative;
+        position: fixed;
+        width: 25%;
     }
 `;
 
@@ -213,7 +220,7 @@ function Navbar(props) {
     );
 
     return (
-        <React.Fragment>
+        <ContenedorGeneral>
             <ContenedorHam onClick={ocultar}>
                 <Icono className={equis}></Icono>
             </ContenedorHam>
@@ -226,7 +233,7 @@ function Navbar(props) {
             ) : (
                 ""
             )}
-        </React.Fragment>
+        </ContenedorGeneral>
     );
 }
 

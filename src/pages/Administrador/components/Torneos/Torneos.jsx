@@ -3,6 +3,7 @@ import styled from "styled-components";
 import agregar from "../../../../assets/botonMas.png";
 import {Link} from 'react-router-dom';
 import { connect } from "react-redux";
+import "animate.css";
 const Cabecera = React.lazy(() => import("../../../Home/Cabecera"));
 const TarjetaTorneo = React.lazy(() => import("./TarjetaTorneo"));
 const AgregarTorneo = React.lazy(() => import("./AgregarTorneo"));
@@ -73,17 +74,23 @@ const ContenedorBuscador = styled.div`
         height: 25px;
         padding: 0px 10px 0px 10px;
         margin: 0px 10px 0px 10px;
+
+        @media only screen and (max-width: 819px) {
+            margin: 32px auto;
+            width: 80%;
+        }
     }
 
     #anios {
         width: 100px;
-        height: 25px;
+        padding: 4px 8px;
         background: #74ba5f;
         border-radius: 20px;
         border: 1px solid #74ba5f;
         margin: 0px 10px 0px 10px;
         color: white;
         display: none;
+        outline: none;
 
         @media screen and (min-width: 1200px) {
             display: inline;
@@ -91,14 +98,16 @@ const ContenedorBuscador = styled.div`
     }
 
     button {
-        width: 100px;
-        height: 25px;
         background: #74ba5f;
         margin: 0px 10px 0px 10px;
-        border-radius: 8px;
+        border-radius: 16px;
         border: 1px solid #74ba5f;
         color: white;
+        cursor: pointer;
         display: none;
+        text-transform: uppercase;
+        padding: 4px 12px;
+        outline: none;
 
         @media screen and (min-width: 1200px) {
             display: inline;
@@ -119,15 +128,29 @@ const ContenedorBuscador = styled.div`
 `;
 
 const ContenedorTorneos = styled.div`
-    position: relative;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-row-gap: 24px;
     width: 100%;
+    @media only screen and (max-width: 1200px) {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    @media only screen and (max-width: 819px) {
+        grid-template-columns: 1fr;
+        margin-top: 24px;
+    }
 `;
 
 class Torneos extends Component {
+    state = {
+        competition: ""
+    };
+
     render() {
+        const { competition } = this.state;
         const { tournaments } = this.props.tournaments;
         return (
-            <ContenedorHome>
+            <ContenedorHome className="animated fadeIn">
                 <Cabecera />
                 <div id="divagrega">
                     <AgregarTorneo id="agrega" />
@@ -145,8 +168,23 @@ class Torneos extends Component {
                         <option value="2013">2013</option>
                         <option value="2012">2012</option>
                     </select>
-                    <button>Individuales</button>
-                    <button>Dobles</button>
+                    <button onClick={() => this.setState({ competition: "" })}>
+                        Todos
+                    </button>
+                    <button
+                        onClick={() =>
+                            this.setState({ competition: "Singles" })
+                        }
+                    >
+                        Individuales
+                    </button>
+                    <button
+                        onClick={() =>
+                            this.setState({ competition: "Doubles" })
+                        }
+                    >
+                        Dobles
+                    </button>
                     <input
                         type="text"
                         name="nombre"
@@ -155,15 +193,19 @@ class Torneos extends Component {
                     />
                 </ContenedorBuscador>
                 <ContenedorTorneos>
-                    {Object.keys(tournaments).map((data, index) => (
-                        <TarjetaTorneo
-                            key={index}
-                            nombreTorneo={tournaments[data].name}
-                            fechaTorneo={tournaments[data].date}
-                            data={tournaments[data]}
-                            tournamentId={data}
-                        />
-                    ))}
+                    {Object.keys(tournaments)
+                        .filter(dato =>
+                            tournaments[dato].competition.includes(competition)
+                        )
+                        .map((data, index) => (
+                            <TarjetaTorneo
+                                key={index}
+                                nombreTorneo={tournaments[data].name}
+                                fechaTorneo={tournaments[data].date}
+                                data={tournaments[data]}
+                                tournamentId={data}
+                            />
+                        ))}
                     <div id="contenedorAgregar">
                         <img src={agregar} id="agregar" alt="" />
                     </div>

@@ -120,7 +120,7 @@ const ContenedorFormulario = styled.div`
     }
 
     div{
-        backgroung: blue;
+        background: blue;
     }
 
     #boton{
