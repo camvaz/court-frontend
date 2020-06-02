@@ -4,6 +4,7 @@ import { API_ENDPOINT } from "../../../../environment/environment";
 import { toast } from "react-toastify";
 import styled from 'styled-components';
 import salir from "../../../../assets/cerrar.svg";
+import { setTournaments } from "../../../../Redux/actions";
 
 const  ContenedorGeneral = styled.div`
     position: relative;
@@ -75,6 +76,25 @@ const ContenedorFormulario = styled.div`
         text-align: left;
     }
 
+
+    select{
+        margin-bottom: 20px;
+        background: none;
+        border: none;
+        border-bottom: 1px solid #AEBAC3;
+        float: left;
+        margin-left: 20px;
+        font-family: Roboto;
+        font-style: Regular;
+        font-size: 12px;
+        color: #AEBAC3;
+        width: 100px;
+
+        @media screen and (min-width: 767px){
+            margin-bottom: 30px;
+        }
+    }
+
     input{
         margin-bottom: 20px;
         width:90%;  
@@ -96,30 +116,14 @@ const ContenedorFormulario = styled.div`
         }
     }
 
-    textarea{
-        margin-top: 10px;
-        margin-bottom: 20px;
-        width:90%;   
-        height: 120px;
-        padding: 10px;
-        border: none;
-        background: white;
+    #divCategoria{
+        width: 50%;
+        display: inline-block;
+    }
 
-        font-family: roboto;
-        font-style: regular;
-        color: #AEBAC3;
-
-        -webkit-box-sizing: border-box;
-        -moz-box-sizing: border-box;
-        box-sizing: border-box;
-
-        -webkit-box-shadow: 0px 0px 5px 0px rgba(176,176,176,1);
-        -moz-box-shadow: 0px 0px 5px 0px rgba(176,176,176,1);
-        box-shadow: 0px 0px 5px 0px rgba(176,176,176,1);
-        
-        @media screen and (min-width: 767px){
-            margin-bottom: 30px;
-        }
+    #divCompetencia{
+        width: 50%;
+        display: inline-block;
     }
 
     #boton{
@@ -129,6 +133,8 @@ const ContenedorFormulario = styled.div`
         height: 40px;
         background: #1A3748;
         color: white;
+        position: relative;
+        bottom: 2px;
 
         @media screen and (min-width: 767px){
             height: 60px
@@ -147,8 +153,10 @@ export default class AgregarTorneo extends Component{
         formData: {
             name: "",
             date: "",
-            place: "",
-            description: ""
+            category: "",
+            competition: "",
+            nRounds: "",
+            location: ""
         },
         uid: 0,
         searchInput: "",
@@ -156,25 +164,65 @@ export default class AgregarTorneo extends Component{
         accionEnForm: true
     };
 
+    async loadTournaments() {
+        console.log(this.props);
+        const response = await fetch(`${API_ENDPOINT}/tournaments`, {
+            method: "GET",
+            headers: {
+                Accept: "application/json",
+                Authorization: `Bearer`
+            }
+        });
+        if (response) {
+            const res = await response.json();
+            this.props.updateTournaments(res.data);
+        } else {
+            this.setState({
+                fetchError: true
+            });
+        }
+    }
+
+    resetFormData() {
+        this.setState({
+            formData: {
+                name: "",
+                date: "",
+                category: "",
+                competition: "",
+                nRounds: "",
+                location: ""
+            }
+        });
+    }
+
+    onChange = (target, campo) => {
+        this.setState({
+            formData: {
+                ...this.state.formData,
+                [campo]: target.value
+            }
+        });
+    };
+
     onSubmit = async e => {
         e.preventDefault();
-        const { token } = this.props.userSession.session;
-        //const { name, date, place, description} = this.state.formData;
+        const { name, date, category, competition, nRounds, location} = this.state.formData;
         const formData = new FormData();
 
-        // formData.append("name", name);
-        // formData.append("email", email);
-        // formData.append("phone", phone);
-        // formData.append("role", role);
-        // formData.append("password", password);
-        // formData.append("c_password", password);
+        formData.append("name", name);
+        formData.append("date", date);
+        formData.append("category", category);
+        formData.append("competition", competition);
+        formData.append("nRounds", nRounds);
+        formData.append("location", location);
 
         if (this.state.accionEnForm) {
-            const response = await fetch(`${API_ENDPOINT}/users`, {
+            const response = await fetch(`${API_ENDPOINT}/tournaments`, {
                 method: "POST",
                 headers: {
                     Accept: "application/json",
-                    Authorization: `Bearer ${token}`
+                    Authorization: `Bearer`
                 },
                 body: formData
             });
@@ -183,7 +231,7 @@ export default class AgregarTorneo extends Component{
             if (response) {
                 const toJson = await response.json();
                 console.log(toJson);
-                this.loadUsers();
+                this.loadTournaments();
                 toast.success("✔️ Torneo creado con éxito", {
                     position: toast.POSITION.TOP_RIGHT,
                     autoClose: 5000
@@ -195,12 +243,12 @@ export default class AgregarTorneo extends Component{
         } else {
             console.log("object");
             const response = await fetch(
-                `${API_ENDPOINT}/users/${this.state.uid}`,
+                `${API_ENDPOINT}/tournaments/${this.state.uid}`,
                 {
                     method: "PUT",
                     headers: {
                         Accept: "application/json",
-                        Authorization: `Bearer ${token}`
+                        Authorization: `Bearer`
                     },
                     body: formData
                 }
@@ -210,8 +258,8 @@ export default class AgregarTorneo extends Component{
             if (response) {
                 const toJson = await response.json();
                 console.log(toJson);
-                this.loadUsers();
-                toast.success("✔️ Usuario modificado con éxito", {
+                this.loadTournaments();
+                toast.success("✔️ Torneo modificado con éxito", {
                     position: toast.POSITION.TOP_RIGHT,
                     autoClose: 5000
                 });
@@ -223,6 +271,13 @@ export default class AgregarTorneo extends Component{
     };
 
     render(){
+        const {
+            formData,
+            accionEnForm,
+            slide,
+            searchInput
+        } = this.state;
+        const { name, date, category, competition, nRounds, location } = formData;
         return(
             <ContenedorGeneral>
                 <ContenedorTarjeta>
@@ -240,22 +295,110 @@ export default class AgregarTorneo extends Component{
                         </Link>
                         
                     </ContenedorImagen>
-                    <h1>Crear Torneo</h1>  
-                    <ContenedorFormulario>
-                        <label htmlFor="nombre">Nombre:</label>
-                        <input type="text" id="nombre"/>
-                        <label htmlFor="fecha">Fecha:</label>
-                        <input type="date" id="fecha"/>
-                        <label htmlFor="lugar">Lugar:</label>
-                        <input type="text" id="lugar"/>
-                        <label htmlFor="descripcion">Descripción:</label>
-                        <textarea id="descripcion"></textarea>
+                    <form onSubmit={this.onSubmit}>
+                        <h1>Crear Torneo</h1>  
+                        <ContenedorFormulario>
+                            <label htmlFor="nombre">Nombre:</label>
+                            <input 
+                                type="text" 
+                                id="nombre"
+                                value={name}
+                                onChange={e =>
+                                    this.onChange(
+                                        e.target,
+                                        "name"
+                                    )
+                                }
+                                required
+                            />
+
+                            <label htmlFor="fecha">Fecha:</label>
+                            <input 
+                                type="date" 
+                                id="fecha"
+                                value={date}
+                                onChange={e =>
+                                    this.onChange(
+                                        e.target,
+                                        "date"
+                                    )
+                                }
+                                required
+                            />
+
+                            <div id="divCategoria">
+                                <label htmlFor="categoria" class="selector">Categoría:</label>
+                                <select 
+                                    name = "categoria"
+                                    id="Categoria"
+                                    value={category}
+                                    onChange={e =>
+                                        this.onChange(
+                                            e.target,
+                                            "category"
+                                        )
+                                    }
+                                    required
+                                >
+                                    <option value="Male">Male</option>
+                                    <option value="Female">Female</option>
+                                    <option value="Mixed">Mixed</option>
+                                </select>
+                            </div>    
+                            
+                            <div id="divCompetencia">
+                                <label htmlFor="Competencia" class="selector">Competencia:</label>
+                                <select 
+                                    id="Competencia"
+                                    value={competition}
+                                    onChange={e =>
+                                        this.onChange(
+                                            e.target,
+                                            "competition"
+                                        )
+                                    }
+                                    required
+                                >
+                                    <option value="Singles">Singles</option>
+                                    <option value="Doubles">Doubles</option>
+                                </select>
+                            </div>    
+                            
+                            <label htmlFor="NumeroRondas" id="rondasLabel">Numero de rondas:</label>
+                            <input
+                                type="text" 
+                                id="NumeroRondas"
+                                value={nRounds}
+                                onChange={e =>
+                                    this.onChange(
+                                        e.target,
+                                        "nRounds"
+                                    )
+                                }
+                                required
+                            />
+
+                            <label htmlFor="lugar">Lugar:</label>
+                            <input
+                                type="text" 
+                                id="lugar"
+                                value={location}
+                                onChange={e =>
+                                    this.onChange(
+                                        e.target,
+                                        "location"
+                                    )
+                                }
+                                required
+                            />
 
 
-                        <div>
-                            <input type="submit" value="GUARDAR" id="boton"/>
-                        </div>
-                    </ContenedorFormulario>
+                            <div>
+                                <input type="submit" value="GUARDAR" id="boton"/>
+                            </div>
+                        </ContenedorFormulario>
+                    </form>
+                    
                     
                 </ContenedorTarjeta>    
             </ContenedorGeneral>
@@ -263,3 +406,4 @@ export default class AgregarTorneo extends Component{
         )
     }
 }
+
