@@ -1,10 +1,13 @@
 import React, { Component } from "react";
-import {Link} from 'react-router-dom';
-import { API_ENDPOINT } from "../../../../environment/environment";
 import { toast } from "react-toastify";
+import { userTypes } from "../../../../constants/userTypes";
+import { connect } from "react-redux";
+import { setTournaments } from "../../../../Redux/actions";
+import { API_ENDPOINT } from "../../../../environment/environment";
+import {Link} from 'react-router-dom';
 import styled from 'styled-components';
 import salir from "../../../../assets/cerrar.svg";
-import { setTournaments } from "../../../../Redux/actions";
+
 
 const  ContenedorGeneral = styled.div`
     position: relative;
@@ -148,8 +151,9 @@ const ContenedorFormulario = styled.div`
     position: relative;
     width: 100%;
 `;
-export default class AgregarTorneo extends Component{
+class AgregarTorneo extends Component{
     state = {
+        currentUserType: userTypes.ADMIN_TYPE,
         formData: {
             name: "",
             date: "",
@@ -165,12 +169,13 @@ export default class AgregarTorneo extends Component{
     };
 
     async loadTournaments() {
+        const { token } = this.props.userSession.session;
         console.log(this.props);
-        const response = await fetch(`${API_ENDPOINT}/tournaments`, {
+        const response = await fetch(`${API_ENDPOINT}/all/tournaments`, {
             method: "GET",
             headers: {
                 Accept: "application/json",
-                Authorization: `Bearer`
+                Authorization: `Bearer ${token}`
             }
         });
         if (response) {
@@ -197,16 +202,43 @@ export default class AgregarTorneo extends Component{
     }
 
     onChange = (target, campo) => {
-        this.setState({
-            formData: {
-                ...this.state.formData,
-                [campo]: target.value
-            }
-        });
+        
+        if(campo == "date"){
+           // console.log(target.value);
+
+            // var cadena = target.value,
+            //     separador = "T", // un espacio en blanco
+            //     limite    = 2,
+            //     arregloDeSubCadenas = cadena.split(separador, limite);
+
+            // console.log(arregloDeSubCadenas);
+
+
+            // console.log(typeof(Date.parse(target.value)));
+            //var d = arregloDeSubCadenas[0]+" "+arregloDeSubCadenas[1]+":00";
+            var dt= target.value+":00.000"
+            console.log(dt);
+
+            this.setState({
+                formData: {
+                    ...this.state.formData,
+                    [campo]: dt
+                }
+            });
+        }
+        else{
+            this.setState({
+                formData: {
+                    ...this.state.formData,
+                    [campo]: target.value
+                }
+            });
+        }
     };
 
     onSubmit = async e => {
         e.preventDefault();
+        const { token } = this.props.userSession.session;
         const { name, date, category, competition, nRounds, location} = this.state.formData;
         const formData = new FormData();
 
@@ -218,15 +250,15 @@ export default class AgregarTorneo extends Component{
         formData.append("location", location);
 
         if (this.state.accionEnForm) {
-            const response = await fetch(`${API_ENDPOINT}/tournaments`, {
+            const response = await fetch(`${API_ENDPOINT}/home/tournaments/store`,{
                 method: "POST",
                 headers: {
                     Accept: "application/json",
-                    Authorization: `Bearer`
+                    Authorization: `Bearer ${token}`
                 },
                 body: formData
             });
-            console.log(response);
+            
 
             if (response) {
                 const toJson = await response.json();
@@ -314,7 +346,7 @@ export default class AgregarTorneo extends Component{
 
                             <label htmlFor="fecha">Fecha:</label>
                             <input 
-                                type="date" 
+                                type="datetime-local" 
                                 id="fecha"
                                 value={date}
                                 onChange={e =>
@@ -407,3 +439,15 @@ export default class AgregarTorneo extends Component{
     }
 }
 
+const mapStateToProps = state => ({
+    tournaments: state.tournaments,
+    userSession: state.userSession
+});
+
+const mapDispatchToProps = dispatch => {
+    return {
+        updateTournaments: tournaments => dispatch(setTournaments(tournaments))
+    };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(AgregarTorneo);
