@@ -20,6 +20,10 @@ import AgregarParticipante from "./pages/Secretaria/components/inscribirParticip
 import Secretaria from "./pages/Secretaria/Secretaria";
 import { API_ENDPOINT } from "./environment/environment";
 import { Participante } from "./pages/Secretaria/components/participante";
+import Tarjeta from "./pages/Administrador/components/Torneos/arbol/Tarjeta";
+import Match from "./pages/Administrador/components/Torneos/arbol/Match";
+import Round from "./pages/Administrador/components/Torneos/arbol/Round";
+import Tournament from "./pages/Administrador/components/Torneos/arbol/Tournament";
 const NotFound = React.lazy(() => import("./pages/NotFound/NotFound"));
 const Home = React.lazy(() => import("./pages/Home/Home"));
 const Login = React.lazy(() => import("./pages/Login/Login"));
@@ -175,9 +179,13 @@ class App extends Component {
                                 withFooter
                                 component={AgregarParticipante}
                             />
-                            <Route path="/testing">
-                                <Participante />
-                            </Route>
+                            <EnhancedRoute
+                                path="/torneos/bracket"
+                                exact
+                                withNavbar
+                                withFooter
+                                component={Tournament}
+                            />
                             <EnhancedRoute component={NotFound} withNavbar />
                         </Switch>
                     </Suspense>
