@@ -78,9 +78,7 @@ class AgregarParticipante extends Component {
         return (
             <div className="ContAddParticipantes">
                 <form onSubmit={this.handleSubmit}>
-                    <div id="contbtX">
-                        <button className="btnX">X</button>
-                    </div>
+                  
                     <h1 className="cargar">Cargar Archivo Excel</h1>
 
                     <div className="file has-name is-boxed">
