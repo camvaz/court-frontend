@@ -216,7 +216,7 @@ class AgregarTorneo extends Component{
 
             // console.log(typeof(Date.parse(target.value)));
             //var d = arregloDeSubCadenas[0]+" "+arregloDeSubCadenas[1]+":00";
-            var dt= target.value+":00.000"
+            var dt= target.value+":48.000"
             console.log(dt);
 
             this.setState({
@@ -264,6 +264,7 @@ class AgregarTorneo extends Component{
                 const toJson = await response.json();
                 console.log(toJson);
                 this.loadTournaments();
+                console.log(this.props.tournamentId);
                 toast.success("✔️ Torneo creado con éxito", {
                     position: toast.POSITION.TOP_RIGHT,
                     autoClose: 5000
@@ -348,6 +349,7 @@ class AgregarTorneo extends Component{
                             <input 
                                 type="datetime-local" 
                                 id="fecha"
+                                maxlength = "50"
                                 value={date}
                                 onChange={e =>
                                     this.onChange(
