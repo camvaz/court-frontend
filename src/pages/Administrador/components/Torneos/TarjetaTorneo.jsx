@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import styled from "styled-components";
+import { toast } from "react-toastify";
 import { Link } from "react-router-dom";
+import { API_ENDPOINT } from "../../../../environment/environment";
 import fondoTorneo from "../../../../assets/fondoTorneo.jpg";
 import "animate.css";
 
@@ -11,6 +13,44 @@ const ContenedorTarjeta = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
+
+    #contenedorImagen{
+        position: relative;
+        width: 270px;
+        height: 155px;
+        border-radius: 10px 10px 0px 0px;
+
+        img {
+            position: relative;
+            width: 100%;
+            border-radius: 10px 10px 0px 0px;
+        }
+
+        #opciones{
+            width: 100px;
+            height: 80px;
+            text-align: center;
+            background: white;
+            color: black;
+            position: absolute;
+            z-index: 3;
+            border: 1px solid gray;
+            border-radius: 5px;
+            float: right;
+            right: 2px;
+            display: none;
+
+            p:hover{
+                color: blue;
+            }
+        }
+    }
+
+    #contenedorImagen:hover{
+        #opciones{
+            display: block;
+        }
+    }
 
     a {
         display: flex;
@@ -30,6 +70,20 @@ const ContenedorImagen = styled.div`
         position: relative;
         width: 100%;
         border-radius: 10px 10px 0px 0px;
+    }
+
+    #opciones{
+            width: 100px;
+            height: 80px;
+            text-align: center;
+            background: white;
+            color: black;
+            position: absolute;
+            z-index: 3;
+            border: 1px solid gray;
+            border-radius: 5px;
+            float: right;
+            right: 2px;
     }
 
     position: relative;
@@ -70,15 +124,40 @@ const ContenedorTitulo = styled.div`
 `;
 
 export default class TarjetaTorneo extends Component {
-    tarjetaWasClicked() {
-        //alert("Tarjeta clickeada");
+    
+    rightClick(){
+        alert("Izquierdo");
     }
+
+    onDelete = async tournament => {
+        //const { token } = this.props.userSession.session;
+        const response = await fetch(`${API_ENDPOINT}/home/tournaments/${tournament}`, {
+            method: "DELETE",
+            headers: {
+                Authorization: `Bearer`
+            }
+        });
+
+        console.log(response);
+
+        if (response) {
+            if (response.status === 202) {
+                this.loadUsers();
+                toast.success("✔️ Usuario eliminado con éxito", {
+                    position: toast.POSITION.TOP_RIGHT,
+                    autoClose: 5000
+                });
+            }
+            const toJson = await response.json();
+            console.log(toJson);
+        }
+    };
 
     render() {
         return (
             <ContenedorTarjeta
                 className="animated fadeIn"
-                onClick={this.tarjetaWasClicked}
+                onContextMenu={this.rightClick}
             >
                 <Link
                     to={{
@@ -89,9 +168,41 @@ export default class TarjetaTorneo extends Component {
                         }
                     }}
                 >
-                    <ContenedorImagen>
-                        <img src={fondoTorneo} alt="" />
-                    </ContenedorImagen>
+                    {/* <ContenedorImagen>
+                        <div id = "opciones">
+                            <p>Modificar</p>
+                            <p>Eliminar</p>
+                        </div>
+                        <img src={fondoTorneo} alt=""/>                            
+                    </ContenedorImagen> */}
+
+                     <div id = "contenedorImagen">
+                        <div id = "opciones">
+                            <p>Modificar</p>
+
+                            <p
+                                onClick={() => {
+                                    this.onDelete(
+                                        this.props.data
+                                    );
+                                    // document
+                                    //     .getElementById(
+                                    //         `admin-user-${index}`
+                                    //     )
+                                    //     .classList.remove(
+                                    //         "show"
+                                    //     );
+                                }}
+                            >
+                            Eliminar
+                            
+                            </p>
+
+                        </div>
+                        <img src={fondoTorneo} alt=""/>                            
+                    </div>
+
+
                     <ContenedorTitulo>
                         <p id="nombre">{this.props.nombreTorneo}</p>
                         <p id="fecha">{this.props.fechaTorneo}</p>
