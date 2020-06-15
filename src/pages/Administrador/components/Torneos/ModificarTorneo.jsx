@@ -151,7 +151,7 @@ const ContenedorFormulario = styled.div`
     position: relative;
     width: 100%;
 `;
-class AgregarTorneo extends Component{
+class ModificarTorneo extends Component{
     state = {
         currentUserType: userTypes.ADMIN_TYPE,
         formData: {
@@ -249,59 +249,34 @@ class AgregarTorneo extends Component{
         formData.append("nRounds", nRounds);
         formData.append("location", location);
 
-        if (this.state.accionEnForm) {
-            const response = await fetch(`${API_ENDPOINT}/home/tournaments/store`,{
-                method: "POST",
+        console.log("object");
+        console.log(this.uid)
+        const response = await fetch(
+            `${API_ENDPOINT}/home/tournaments/update/${this.state.uid}`,
+            {
+                method: "PUT",
                 headers: {
                     Accept: "application/json",
-                    Authorization: `Bearer ${token}`
+                    Authorization: `Bearer`
                 },
                 body: formData
+            }
+        );
+
+        console.log(response);
+        if (response) {
+            const toJson = await response.json();
+            console.log(toJson);
+            this.loadTournaments();
+            toast.success("✔️ Torneo modificado con éxito", {
+                position: toast.POSITION.TOP_RIGHT,
+                autoClose: 5000
             });
-            
-
-            if (response) {
-                const toJson = await response.json();
-                console.log(toJson);
-                this.loadTournaments();
-                console.log(this.props.tournamentId);
-                toast.success("✔️ Torneo creado con éxito", {
-                    position: toast.POSITION.TOP_RIGHT,
-                    autoClose: 5000
-                });
-                this.setState({
-                    slide: false
-                });
-                window.location.reload(false);
-            }
-        } else {
-            console.log("object");
-            const response = await fetch(
-                `${API_ENDPOINT}/tournaments/${this.state.uid}`,
-                {
-                    method: "PUT",
-                    headers: {
-                        Accept: "application/json",
-                        Authorization: `Bearer`
-                    },
-                    body: formData
-                }
-            );
-
-            console.log(response);
-            if (response) {
-                const toJson = await response.json();
-                console.log(toJson);
-                this.loadTournaments();
-                toast.success("✔️ Torneo modificado con éxito", {
-                    position: toast.POSITION.TOP_RIGHT,
-                    autoClose: 5000
-                });
-                this.setState({
-                    slide: false
-                });
-            }
+            this.setState({
+                slide: false
+            });
         }
+        
     };
 
     render(){
@@ -330,7 +305,7 @@ class AgregarTorneo extends Component{
                         
                     </ContenedorImagen>
                     <form onSubmit={this.onSubmit}>
-                        <h1>Crear Torneo</h1>  
+                        <h1>Modificar Torneo</h1>  
                         <ContenedorFormulario>
                             <label htmlFor="nombre">Nombre:</label>
                             <input 
@@ -453,4 +428,4 @@ const mapDispatchToProps = dispatch => {
     };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(AgregarTorneo);
+export default connect(mapStateToProps, mapDispatchToProps)(ModificarTorneo);

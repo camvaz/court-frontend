@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import styled from "styled-components";
 import agregar from "../../../../assets/botonMas.png";
+import {Link} from 'react-router-dom';
 import { connect } from "react-redux";
 import "animate.css";
 const Cabecera = React.lazy(() => import("../../../Home/Cabecera"));
@@ -212,9 +213,20 @@ class Torneos extends Component {
                                 tournamentId={data}
                             />
                         ))}
-                    <div id="contenedorAgregar">
-                        <img src={agregar} id="agregar" alt="" />
-                    </div>
+                    <Link
+                        to={{
+                            pathname: "/torneos/agregar",
+                            // state: {
+                            //     tournamentId: this.props.location.state
+                            //         .tournamentId
+                            // }
+                        }}
+                        >
+                            <div id="contenedorAgregar">
+                                <img src={agregar} id="agregar" alt="" />
+                            </div>
+                     </Link>
+
                 </ContenedorTorneos>
 
                 {/* <TarjetaVisualizarTorneo 

@@ -36,6 +36,9 @@ const VisualizarTorneo = React.lazy(() =>
 const AgregarTorneo = React.lazy(() =>
     import("./pages/Administrador/components/Torneos/AgregarTorneo")
 );
+const ModificarTorneo = React.lazy(() =>
+    import("./pages/Administrador/components/Torneos/ModificarTorneo")
+);
 const Jugadores = React.lazy(() =>
     import("./pages/Administrador/components/Torneos/Jugadores")
 );
@@ -134,6 +137,13 @@ class App extends Component {
                                 withNavbar
                                 withFooter
                                 component={AgregarTorneo}
+                            />
+                            <EnhancedRoute
+                                path="/torneos/modificar"
+                                exact
+                                withNavbar
+                                withFooter
+                                component={ModificarTorneo}
                             />
                             <EnhancedRoute
                                 path="/torneos/jugadores"

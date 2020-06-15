@@ -45,6 +45,7 @@ class Usuarios extends Component {
         });
         if (response) {
             const res = await response.json();
+            console.log(res.data)
             this.props.updateUsers(res.data);
         } else {
             this.setState({
