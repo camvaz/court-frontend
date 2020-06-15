@@ -126,7 +126,7 @@ const ContenedorTitulo = styled.div`
 export default class TarjetaTorneo extends Component {
     
     rightClick(){
-        alert("Izquierdo");
+        alert("derecho");
     }
 
     onDelete = async tournament => {
@@ -176,29 +176,7 @@ export default class TarjetaTorneo extends Component {
                         <img src={fondoTorneo} alt=""/>                            
                     </ContenedorImagen> */}
 
-                     <div id = "contenedorImagen">
-                        <div id = "opciones">
-                            <p>Modificar</p>
-
-                            <p
-                                onClick={() => {
-                                    this.onDelete(
-                                        this.props.data
-                                    );
-                                    // document
-                                    //     .getElementById(
-                                    //         `admin-user-${index}`
-                                    //     )
-                                    //     .classList.remove(
-                                    //         "show"
-                                    //     );
-                                }}
-                            >
-                            Eliminar
-                            
-                            </p>
-
-                        </div>
+                    <div id = "contenedorImagen">
                         <img src={fondoTorneo} alt=""/>                            
                     </div>
 
