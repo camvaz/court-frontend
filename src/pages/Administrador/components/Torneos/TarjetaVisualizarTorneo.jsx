@@ -113,8 +113,8 @@ const ContenedorDetalles = styled.div`
 
 const ContenedorBotones = styled.div`
     padding-bottom: 32px;
-    justify-content: center;
-    width: 529px;
+    justify-content: space-evenly;
+    width: 100%;
     margin: 50px auto 0;
     display: flex;
     button {
@@ -128,7 +128,7 @@ const ContenedorBotones = styled.div`
         border: 1px solid var(--azul-3);
         transition: 0.24s ease-in-out;
     }
-    button:nth-child(1) {
+    /* button:nth-child(1) {
         grid-column-start: 0;
         grid-column-end: 1;
         margin-left: 16px;
@@ -149,7 +149,7 @@ const ContenedorBotones = styled.div`
         color: #1a3748;
         cursor: pointer;
         font-weight: bold;
-    }
+    } */
 `;
 export default class TarjetaVisualizarTorneo extends Component {
     render() {

@@ -33,7 +33,7 @@ function Tournament(props) {
     const { tournamentId } = props.location.state;
     return (
         <GridContainer>
-            <h1>Bracket</h1>
+            <h1> Árbol de partidos</h1>
             <TournamentContainer>
                 <h1>4ta ronda.</h1>
                 <h1>Cuartos de final</h1>
