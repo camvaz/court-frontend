@@ -13,28 +13,28 @@ const ContenedorGeneral = styled.div`
 `;
 
 const SubHeader = styled.div`
-    position: relative;
-    margin: 72px auto;
+    margin: 72px auto 0;
     width: 85%;
+    display: flex;
+    flex-direction: column;
     #titulo {
         margin-top: 35px;
         font-family: SF Pro Display;
         font-style: Bold;
         font-size: 16px;
         color: #1a3748;
-        float: left;
+        text-align: left;
         @media screen and (min-width: 767px) {
             margin-top: 0px;
             font-size: 25px;
         }
     }
     input {
-        margin: 15px 0px 15px;
+        margin: 16px 0px;
         border: 1px solid #acb5bd;
         width: 80%;
         height: 20px;
         border-radius: 5px;
-        float: left;
         padding: 8px;
 
         -webkit-box-sizing: border-box;

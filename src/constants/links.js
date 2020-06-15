@@ -53,7 +53,7 @@ export default [
             },
             {
                 nombre: "Organizar Torneos",
-                url: ""
+                url: "/torneos"
             }
         ]
     },

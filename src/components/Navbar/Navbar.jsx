@@ -1,14 +1,18 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
-import imgUsuario from "../../assets/imgUsuario.svg";
+import userMujer from "../../assets/userMujer.png";
+import userHombre from "../../assets/userHombre.png";
+
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import links from "../../constants/links";
+import { setUserSession } from "../../Redux/actions";
+import { toast } from "react-toastify";
 
 const ContenedorGeneral = styled.div`
-   width: 100%;
-   position: relative;
-   height: 100%;
+    width: 100%;
+    position: relative;
+    height: 100%;
 `;
 
 const Contenedor = styled.div`
@@ -47,7 +51,6 @@ const ContenedorUsuario = styled.div`
         margin: 0;
         padding-left: 10px;
         color: white;
-        font-family: "SF Pro Display";
         font-size: 1.2rem;
         margin-top: 10px;
     }
@@ -61,6 +64,7 @@ const ContenedorUsuario = styled.div`
         font-size: 0.9rem;
     }
 `;
+
 const ContenedorHam = styled.div`
     position: fixed;
     width: 50px;
@@ -132,7 +136,7 @@ const ContenedorMenu = styled.div`
                 height: 100%;
                 padding-left: 30px;
                 font-weight: normal;
-                font-size: 1.2rem;
+                font-size: 1rem;
                 text-decoration: none;
                 &:hover,
                 &:active {
@@ -140,15 +144,40 @@ const ContenedorMenu = styled.div`
                 }
             }
         }
+        .opcionCerrar{ 
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            
+        }
     }
 `;
 
 function Usuario({ user }) {
+    console.log(user);
+    var rol = "";
+
+    switch(user.role){
+        case "Tournament Manager":
+            rol="Manager";
+            break;
+        case "Secretary":
+            rol="Secretaria";
+            break;
+        case "Results Capturer":
+            rol="capturador de resultados"
+            break;
+        case "Global Admin":
+            rol="Administrador"
+            break;
+    }
+
     return (
         <ContenedorUsuario>
-            <img src={imgUsuario} alt="Usuario" />
-            <h3>{user.name || "Visitante"}</h3>
-            <p>{user.role || ""}</p>
+            <img src={userHombre} alt="Usuario" />
+            <h3>{user.name || "Bienvenido"}</h3>
+            <p>{rol || ""}</p>
         </ContenedorUsuario>
     );
 }
@@ -167,13 +196,33 @@ function Menu(props) {
                         <Link to="/torneos">Torneos </Link>
                     </li>
                 ) : (
-                    items.opciones.map((opcion, key) => (
-                        <li key={key}>
-                            <Link to={opcion.url} onClick={props.ocultarMenu}>
-                                {opcion.nombre}
+                    <>
+                        {items.opciones.map((opcion, key) => (
+                            <li key={key}>
+                                <Link
+                                    to={opcion.url}
+                                    onClick={props.ocultarMenu}
+                                >
+                                    {opcion.nombre}
+                                </Link>
+                            </li>
+                        ))}
+                        <li className="opcionCerrar">
+                            <Link
+                                to="/"
+                                onClick={() => {
+                                    props.setUserSession({ user: {} });
+                                    localStorage.setItem(
+                                        "courtUserData",
+                                        JSON.stringify({ user: {} })
+                                    );
+                                    toast.success("Sesión Finalizada");
+                                }}
+                            >
+                                Cerrar Sesión
                             </Link>
                         </li>
-                    ))
+                    </>
                 )}
             </ul>
         </ContenedorMenu>
@@ -224,11 +273,16 @@ function Navbar(props) {
             <ContenedorHam onClick={ocultar}>
                 <Icono className={equis}></Icono>
             </ContenedorHam>
+            
 
             {isToggleOn ? (
                 <Contenedor>
                     <Usuario user={props.userSession.user} />
-                    <Menu itemsMenu={itemsMenu} ocultarMenu={mobile} />
+                    <Menu
+                        itemsMenu={itemsMenu}
+                        ocultarMenu={mobile}
+                        setUserSession={props.setUserSession}
+                    />
                 </Contenedor>
             ) : (
                 ""
@@ -241,4 +295,8 @@ const mapStateToProps = state => ({
     userSession: state.userSession.session
 });
 
-export default connect(mapStateToProps)(Navbar);
+const mapDispatchToProps = dispatch => ({
+    setUserSession: userSession => dispatch(setUserSession(userSession))
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Navbar);

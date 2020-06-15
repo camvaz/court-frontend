@@ -21,15 +21,17 @@ const ContenedorHome = styled.div`
 
     #contenedorAgregar {
         position: fixed;
-        bottom: 20px;
-        left: 10px;
+        bottom: 0px;
         width: 100%;
-        float: left;
+        background: white;
+        height: 70px;
 
         img {
-            position: relative;
+            position: absolute;
             width: 50px;
-            float: left;
+            left: 10px;
+            top: 10px;
+            border-radius: 50%;
         }
 
         img:hover {
@@ -46,10 +48,13 @@ const ContenedorHome = styled.div`
     @media screen and (min-width: 767px) {
         text-align: center;
         #contenedorAgregar {
+            background: none;
+            width: 50px;
+            height: 50px;
             bottom: 20px;
-            right: 20px;
-            width: 100%;
-            float: right;
+            right: 30px;
+            
+
 
             img {
                 position: relative;
@@ -132,6 +137,8 @@ const ContenedorTorneos = styled.div`
     grid-template-columns: repeat(3, 1fr);
     grid-row-gap: 24px;
     width: 100%;
+    max-width: 1085px;
+    margin: auto;
     @media only screen and (max-width: 1200px) {
         grid-template-columns: repeat(2, 1fr);
     }

@@ -98,24 +98,19 @@ const ContenedorImagen = styled.div`
 
 const NombreTorneo = styled.div`
     h1 {
-        position: relative;
-        vertical-align: middle;
-        color: white;
-        font: "San Francisco", Helvetica, Arial, san-serif;
-        font-size: 15px;
+        color: #ffffff;
+        font-size: 16px;
         font-weight: normal;
     }
 
-    position: relative;
-    padding-top: 17px;
     width: 100%;
     height: 5vh;
-    margin: 0;
-    left: 0;
     background: #1a3748;
-    font-size: 15px;
-    color: white;
+    color: #ffffff;
     text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 
     @media screen and (min-width: 1300px) {
         height: 7vh;
@@ -150,6 +145,7 @@ const ContenedorBotones = styled.div`
     margin: 50px auto 0;
     display: flex;
     button {
+        outline: none;
         width: 130px;
         padding: 5px 0;
         border: none;
@@ -307,6 +303,17 @@ export default class TarjetaVisualizarTorneo extends Component {
                         </p>
                     </ContenedorDetalles>
                     <ContenedorBotones>
+                        <Link
+                            to={{
+                                pathname: "/torneos/bracket",
+                                state: {
+                                    tournamentId: this.props.location.state
+                                        .tournamentId
+                                }
+                            }}
+                        >
+                            <button type="button"> Ver Bracket </button>
+                        </Link>
                         <Link
                             to={{
                                 pathname: "/torneos/partidos",

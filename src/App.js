@@ -10,7 +10,8 @@ import {
     setInscriptions,
     setParticipants,
     setPlayers,
-    setMatches
+    setMatches,
+    setUserSession
 } from "./Redux/actions";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -19,6 +20,10 @@ import AgregarParticipante from "./pages/Secretaria/components/inscribirParticip
 import Secretaria from "./pages/Secretaria/Secretaria";
 import { API_ENDPOINT } from "./environment/environment";
 import { Participante } from "./pages/Secretaria/components/participante";
+import Tarjeta from "./pages/Administrador/components/Torneos/arbol/Tarjeta";
+import Match from "./pages/Administrador/components/Torneos/arbol/Match";
+import Round from "./pages/Administrador/components/Torneos/arbol/Round";
+import Tournament from "./pages/Administrador/components/Torneos/arbol/Tournament";
 const NotFound = React.lazy(() => import("./pages/NotFound/NotFound"));
 const Home = React.lazy(() => import("./pages/Home/Home"));
 const Login = React.lazy(() => import("./pages/Login/Login"));
@@ -54,6 +59,16 @@ class App extends Component {
 
     componentDidMount() {
         this.getTournaments();
+        this.keepSession();
+    }
+
+    keepSession() {
+        const localStorageData = localStorage.getItem("courtUserData");
+
+        if (localStorageData) {
+            const parsedStorage = JSON.parse(localStorageData);
+            parsedStorage.token && this.props.setUserSession(parsedStorage);
+        }
     }
 
     async getTournaments() {
@@ -174,9 +189,13 @@ class App extends Component {
                                 withFooter
                                 component={AgregarParticipante}
                             />
-                            <Route path="/testing">
-                                <Participante />
-                            </Route>
+                            <EnhancedRoute
+                                path="/torneos/bracket"
+                                exact
+                                withNavbar
+                                withFooter
+                                component={Tournament}
+                            />
                             <EnhancedRoute component={NotFound} withNavbar />
                         </Switch>
                     </Suspense>
@@ -193,6 +212,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => {
     return {
+        setUserSession: userSession => dispatch(setUserSession(userSession)),
         setTournaments: users => dispatch(setTournaments(users)),
         setInscriptions: inscriptions =>
             dispatch(setInscriptions(inscriptions)),
