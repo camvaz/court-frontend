@@ -8,7 +8,7 @@ import { ReactComponent as Plus } from "../../../../assets/plus.svg";
 import { ReactComponent as Lupa } from "../../../../assets/lupa.svg";
 import { ReactComponent as Gear } from "../../../../assets/gear.svg";
 import { ReactComponent as Flecha } from "../../../../assets/flecha-azul.svg";
-import ImgAdmin from "../../../../assets/imagen-admin.png";
+import ImgAdmin from "../../../../assets/userHombre.png";
 import Cabecera from "../../../Home/Cabecera";
 import "./Usuarios.scss";
 import "animate.css";
@@ -45,6 +45,7 @@ class Usuarios extends Component {
         });
         if (response) {
             const res = await response.json();
+            console.log(res.data)
             this.props.updateUsers(res.data);
         } else {
             this.setState({

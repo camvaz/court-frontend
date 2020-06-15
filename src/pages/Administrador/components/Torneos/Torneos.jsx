@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import styled from "styled-components";
 import agregar from "../../../../assets/botonMas.png";
+import {Link} from 'react-router-dom';
 import { connect } from "react-redux";
 import "animate.css";
 const Cabecera = React.lazy(() => import("../../../Home/Cabecera"));
@@ -20,15 +21,17 @@ const ContenedorHome = styled.div`
 
     #contenedorAgregar {
         position: fixed;
-        bottom: 20px;
-        left: 10px;
+        bottom: 0px;
         width: 100%;
-        float: left;
+        background: white;
+        height: 70px;
 
         img {
-            position: relative;
+            position: absolute;
             width: 50px;
-            float: left;
+            left: 10px;
+            top: 10px;
+            border-radius: 50%;
         }
 
         img:hover {
@@ -45,10 +48,13 @@ const ContenedorHome = styled.div`
     @media screen and (min-width: 767px) {
         text-align: center;
         #contenedorAgregar {
+            background: none;
+            width: 50px;
+            height: 50px;
             bottom: 20px;
-            right: 20px;
-            width: 100%;
-            float: right;
+            right: 30px;
+            
+
 
             img {
                 position: relative;
@@ -207,9 +213,20 @@ class Torneos extends Component {
                                 tournamentId={data}
                             />
                         ))}
-                    <div id="contenedorAgregar">
-                        <img src={agregar} id="agregar" alt="" />
-                    </div>
+                    <Link
+                        to={{
+                            pathname: "/torneos/agregar",
+                            // state: {
+                            //     tournamentId: this.props.location.state
+                            //         .tournamentId
+                            // }
+                        }}
+                        >
+                            <div id="contenedorAgregar">
+                                <img src={agregar} id="agregar" alt="" />
+                            </div>
+                     </Link>
+
                 </ContenedorTorneos>
 
                 {/* <TarjetaVisualizarTorneo 

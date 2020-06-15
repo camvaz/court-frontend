@@ -16,15 +16,23 @@
         width: 100%;
     }
     form {
+
+      
         //background-color: blue;
+        position: relative;
         height: 600px;
         width: 481px;
         display: flex;
         flex-direction: column;
         justify-self: center;
         align-items: center;
+        border-radius: 10px;
 
         background: #f5f5f5;
+        box-shadow: 3px 3px 5px #cecece;
+        padding-top: 30px;
+        
+   
         .file-name {
             background: white;
             border: none;
@@ -38,6 +46,17 @@
             width: 100%;
             display: flex;
             justify-content: flex-end;
+           
+            border-radius: 10px;
+
+            button{
+                border-radius: 10px;
+                
+                &:hover{
+                    cursor: pointer;
+                    color: black;
+                }
+            }
         }
 
         i.im {
@@ -93,6 +112,7 @@
         .file {
             //new
             padding-bottom: 2em;
+            
         }
 
         .file-label {
@@ -120,22 +140,30 @@
         .contbtnCargar //new
         {
             padding-top: 3.5em;
+            .btcCargar //change
+            {
+                width: 400px;
+                height: 64px;
+                top: 650px;
+
+                background: #1a3748;
+                border-radius: 5px;
+                font-family: Roboto;
+                font-style: normal;
+                font-size: 18px;
+                line-height: 21px;
+                color: #fbfbfb;
+                border: none;
+
+                &:hover{
+                    cursor: pointer;
+                    background: #001630;
+                }
+            }
         }
 
-        .btcCargar //change
-        {
-            width: 400px;
-            height: 64px;
-            top: 650px;
+       
 
-            background: #1a3748;
-            border-radius: 5px;
-            font-family: Roboto;
-            font-style: normal;
-            font-weight: bold;
-            font-size: 18px;
-            line-height: 21px;
-            color: #fbfbfb;
-        }
+        
     }
 }

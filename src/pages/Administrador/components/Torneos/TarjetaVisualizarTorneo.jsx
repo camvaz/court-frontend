@@ -1,4 +1,7 @@
 import React, { Component } from "react";
+import { toast } from "react-toastify";
+import { API_ENDPOINT } from "../../../../environment/environment";
+import { setTournaments } from "../../../../Redux/actions";
 import styled from "styled-components";
 import fondoTorneo from "../../../../assets/fondoVisualizarWeb.jpg";
 import fondoTorneoWeb from "../../../../assets/imgTorneoWeb.png";
@@ -26,6 +29,11 @@ const ContenedorTarjeta = styled.div`
 `;
 
 const ContenedorImagen = styled.div`
+    #subcontimg:hover{
+        #opciones{
+            display: block;
+        }
+    }
     img {
         position: relative;
         width: 100%;
@@ -54,6 +62,25 @@ const ContenedorImagen = styled.div`
         opacity: 0.5;
         z-index: 99;
         position: absolute;
+    }
+
+    #opciones{
+        position: relative;
+        z-index: 100;
+        background: white;
+        width: 130px;
+        float: right; 
+        text-align: center;
+        display: none;
+
+        p{
+            border: 1px solid gray;
+            height: 30px
+        }
+        p:hover{
+            cursor: pointer;
+            color: blue;
+        }
     }
 
     position: relative;
@@ -152,13 +179,61 @@ const ContenedorBotones = styled.div`
     } */
 `;
 export default class TarjetaVisualizarTorneo extends Component {
+
+    async loadTournaments() {
+        console.log(this.props);
+        const response = await fetch(`${API_ENDPOINT}/all/tournaments`, {
+            method: "GET",
+            headers: {
+                Accept: "application/json",
+                Authorization: `Bearer`
+            }
+        });
+        if (response) {
+            const res = await response.json();
+            this.props.updateTournaments(res.data);
+        } else {
+            this.setState({
+                fetchError: true
+            });
+        }
+    }
+     onDelete = async tournament => {
+        //const { token } = this.props.userSession.session;
+        console.log("Deleting")
+        console.log(this.props.location.state.tournamentId);
+        const response = await fetch(`${API_ENDPOINT}/home/tournaments/${tournament}`, {
+            method: "DELETE",
+            headers: {
+                Authorization: `Bearer`
+            }
+        });
+
+        console.log(response);
+
+        if (response) {
+            if (response.status === 202) {
+                this.loadTournaments();
+                toast.success("✔️ Usuario eliminado con éxito", {
+                    position: toast.POSITION.TOP_RIGHT,
+                    autoClose: 5000
+                });
+            }
+            const toJson = await response.json();
+            console.log(toJson);
+            window.location.reload(false);
+        }
+    };
+
     render() {
         return (
             <ContenedorGeneral className="animated fadeIn">
                 <Cabecera />
                 <ContenedorTarjeta>
                     <ContenedorImagen>
-                        <div className="fondo-verde" />
+                    <div id = "subcontimg">
+                        <div className="fondo-verde">
+
                         <img
                             className="mobile"
                             src={fondoTorneo}
@@ -169,6 +244,48 @@ export default class TarjetaVisualizarTorneo extends Component {
                             src={fondoTorneoWeb}
                             alt="imagen Torneo"
                         />
+                        </div>
+
+                        <div id = "opciones">
+                            <Link
+                                to={{
+                                    pathname: "/torneos/modificar",
+                                    uid: this.props.location.state.tournamentId
+                                    
+                                }}
+                            >
+                                <p>Modificar</p>
+                            </Link>
+
+
+                            <Link
+                                to={{
+                                    pathname: "/torneos",
+                                    state: {
+                                        uid: this.props.location.state.tournamentId
+                                    }
+                                }}
+                            >
+
+                                <p
+                                onClick={() => {
+                                    this.onDelete(
+                                        this.props.location.state.tournamentId
+                                    );
+                                    // document
+                                    //     .getElementById(
+                                    //         `admin-user-${index}`
+                                    //     )
+                                    //     .classList.remove(
+                                    //         "show"
+                                    //     );
+                                }}
+                                >
+                                Eliminar</p>
+                            </Link>
+                            
+                        </div>
+                    </div>
                     </ContenedorImagen>
                     <NombreTorneo>
                         <h1>{this.props.location.state.data.name}</h1>
@@ -231,3 +348,9 @@ export default class TarjetaVisualizarTorneo extends Component {
         );
     }
 }
+
+const mapDispatchToProps = dispatch => {
+    return {
+        updateTournaments: tournaments => dispatch(setTournaments(tournaments))
+    };
+};
