@@ -249,6 +249,7 @@ class AgregarTorneo extends Component{
         formData.append("nRounds", nRounds);
         formData.append("location", location);
 
+
         if (this.state.accionEnForm) {
             const response = await fetch(`${API_ENDPOINT}/home/tournaments/store`,{
                 method: "POST",
@@ -272,7 +273,6 @@ class AgregarTorneo extends Component{
                 this.setState({
                     slide: false
                 });
-                window.location.reload(false);
             }
         } else {
             console.log("object");
@@ -302,6 +302,8 @@ class AgregarTorneo extends Component{
                 });
             }
         }
+
+        window.location.reload(false);
     };
 
     render(){

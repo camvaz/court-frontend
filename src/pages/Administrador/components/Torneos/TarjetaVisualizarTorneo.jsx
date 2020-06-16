@@ -4,10 +4,15 @@ import { API_ENDPOINT } from "../../../../environment/environment";
 import { setTournaments } from "../../../../Redux/actions";
 import styled from "styled-components";
 import fondoTorneo from "../../../../assets/fondoVisualizarWeb.jpg";
+import engranaje from "../../../../assets/gear.svg"
 import fondoTorneoWeb from "../../../../assets/imgTorneoWeb.png";
+import { ReactComponent as Gear } from "../../../../assets/gear.svg";
 import { Link } from "react-router-dom";
+import { confirmAlert } from 'react-confirm-alert'; // Import
+import 'react-confirm-alert/src/react-confirm-alert.css'; // Import css
 import "animate.css";
 const Cabecera = React.lazy(() => import("../../../Home/Cabecera"));
+
 
 const ContenedorGeneral = styled.div`
     position: relative;
@@ -29,6 +34,14 @@ const ContenedorTarjeta = styled.div`
 `;
 
 const ContenedorImagen = styled.div`
+    #subcontimg{
+        #gear{
+            width: 30px;
+            height: 30px;
+            float: right;
+            z-index: 200;
+        }
+    }
     #subcontimg:hover{
         #opciones{
             display: block;
@@ -198,7 +211,27 @@ export default class TarjetaVisualizarTorneo extends Component {
             });
         }
     }
-     onDelete = async tournament => {
+
+    confirm(){
+        confirmAlert({
+            title: 'Confirma tu solicitud',
+            message: 'Estás seguro de eliminar este torneo?',
+            buttons: [
+                {
+                label: 'Si',
+                onClick: () => {
+                    this.onDelete(this.props.location.state.tournamentId)
+                }
+                },
+                {
+                label: 'No',
+                // onClick: () => alert('Click No')
+                }
+            ]
+        });
+    }
+
+    onDelete = async tournament => {
         //const { token } = this.props.userSession.session;
         console.log("Deleting")
         console.log(this.props.location.state.tournamentId);
@@ -225,6 +258,10 @@ export default class TarjetaVisualizarTorneo extends Component {
         }
     };
 
+    showOptions(){
+        console.log("alertaa")
+    }
+
     render() {
         return (
             <ContenedorGeneral className="animated fadeIn">
@@ -246,11 +283,27 @@ export default class TarjetaVisualizarTorneo extends Component {
                         />
                         </div>
 
+                        <div id = "gear" onClick = {this.showOptions}>
+                            <img
+                                className="engranaje"
+                                src={engranaje}
+                            />
+                        </div>
                         <div id = "opciones">
                             <Link
                                 to={{
                                     pathname: "/torneos/modificar",
-                                    uid: this.props.location.state.tournamentId
+                                    state:{
+                                        formData:{
+                                            nombre: this.props.location.state.data.name,
+                                            date: this.props.location.state.data.date,
+                                            category: this.props.location.state.data.category,
+                                            competition: this.props.location.state.data.competition,
+                                            nRounds: this.props.location.state.data.nRounds,
+                                            location: this.props.location.state.data.location,
+                                        },
+                                        uid: this.props.location.state.tournamentId
+                                    },
                                     
                                 }}
                             >
@@ -261,25 +314,25 @@ export default class TarjetaVisualizarTorneo extends Component {
                             <Link
                                 to={{
                                     pathname: "/torneos",
-                                    state: {
-                                        uid: this.props.location.state.tournamentId
-                                    }
+                                    uid: this.props.location.state.tournamentId
+                                    //formdata: this.props.location.state.data
                                 }}
                             >
 
                                 <p
-                                onClick={() => {
-                                    this.onDelete(
-                                        this.props.location.state.tournamentId
-                                    );
-                                    // document
-                                    //     .getElementById(
-                                    //         `admin-user-${index}`
-                                    //     )
-                                    //     .classList.remove(
-                                    //         "show"
-                                    //     );
-                                }}
+                                onClick={() => this.confirm()}
+                                // onClick={() => {
+                                //     this.onDelete(
+                                //         this.props.location.state.tournamentId
+                                //     );
+                                //     // document
+                                //     //     .getElementById(
+                                //     //         `admin-user-${index}`
+                                //     //     )
+                                //     //     .classList.remove(
+                                //     //         "show"
+                                //     //     );
+                                // }}
                                 >
                                 Eliminar</p>
                             </Link>
