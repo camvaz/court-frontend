@@ -17,6 +17,8 @@ const SubHeader = styled.div`
     width: 85%;
     display: flex;
     flex-direction: column;
+    padding: 0 50px ;
+    
     #titulo {
         margin-top: 35px;
         font-family: SF Pro Display;
@@ -25,6 +27,7 @@ const SubHeader = styled.div`
         color: #1a3748;
         text-align: left;
         @media screen and (min-width: 767px) {
+            position: relative;
             margin-top: 0px;
             font-size: 25px;
         }
@@ -56,10 +59,8 @@ const ContenedorJugadores = styled.div`
     grid-row-gap: 24px;
     padding: 24px 0;
     margin: auto;
-    overflow-y: auto;
     position: relative;
     width: 85%;
-    height: 540px;
 
     #imagen {
         position: relative;
@@ -76,10 +77,6 @@ const ContenedorJugadores = styled.div`
             margin: 9px;
         }
     }
-
-    -webkit-box-shadow: 0px 0px 5px 0px rgba(176, 176, 176, 1);
-    -moz-box-shadow: 0px 0px 5px 0px rgba(176, 176, 176, 1);
-    box-shadow: 0px 0px 5px 0px rgba(176, 176, 176, 1);
 `;
 
 class Jugadores extends Component {
@@ -112,6 +109,7 @@ class Jugadores extends Component {
                         onChange={e => this.filterSearch(e)}
                     />
                 </SubHeader>
+
                 <ContenedorJugadores>
                     {Object.keys(inscriptions)
                         .filter(data => {
@@ -135,6 +133,7 @@ class Jugadores extends Component {
                             );
                         })}
                 </ContenedorJugadores>
+
             </ContenedorGeneral>
         );
     }
