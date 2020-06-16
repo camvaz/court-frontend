@@ -170,6 +170,8 @@ class ModificarTorneo extends Component{
 
     async loadTournaments() {
         const { token } = this.props.userSession.session;
+        const {uid} = this.props.location;
+
         console.log(this.props);
         const response = await fetch(`${API_ENDPOINT}/all/tournaments`, {
             method: "GET",
@@ -189,33 +191,24 @@ class ModificarTorneo extends Component{
     }
 
     resetFormData() {
+        const { nombre, date, category, competition, nRounds, location } = this.props.location.state.formData;
         this.setState({
             formData: {
-                name: "",
-                date: "",
-                category: "",
-                competition: "",
-                nRounds: "",
-                location: ""
+                name: nombre,
+                date: date,
+                category: category,
+                competition: competition,
+                nRounds: nRounds,
+                location: location
             }
         });
+        console.log("Datadatadata");
+        console.log(this.state.formData)
     }
 
     onChange = (target, campo) => {
         
         if(campo == "date"){
-           // console.log(target.value);
-
-            // var cadena = target.value,
-            //     separador = "T", // un espacio en blanco
-            //     limite    = 2,
-            //     arregloDeSubCadenas = cadena.split(separador, limite);
-
-            // console.log(arregloDeSubCadenas);
-
-
-            // console.log(typeof(Date.parse(target.value)));
-            //var d = arregloDeSubCadenas[0]+" "+arregloDeSubCadenas[1]+":00";
             var dt= target.value+":48.000"
             console.log(dt);
 
@@ -237,29 +230,37 @@ class ModificarTorneo extends Component{
     };
 
     onSubmit = async e => {
+        var myHeaders = new Headers();
+        myHeaders.append("_method", "PUT");
+
         e.preventDefault();
         const { token } = this.props.userSession.session;
         const { name, date, category, competition, nRounds, location} = this.state.formData;
         const formData = new FormData();
+        const {uid} = this.props.location.state.uid;
 
-        formData.append("name", name);
-        formData.append("date", date);
-        formData.append("category", category);
-        formData.append("competition", competition);
-        formData.append("nRounds", nRounds);
-        formData.append("location", location);
+        var urlencoded = new URLSearchParams();
+        urlencoded.append("name", name);
+        urlencoded.append("date", date);
+        urlencoded.append("category", category);
+        urlencoded.append("competition", competition);
+        urlencoded.append("nRounds", nRounds);
+        urlencoded.append("location", location);
 
-        console.log("object");
-        console.log(this.uid)
+        console.log("Data a agregar");
+        console.log(urlencoded);
+
         const response = await fetch(
-            `${API_ENDPOINT}/home/tournaments/update/${this.state.uid}`,
+            `${API_ENDPOINT}/home/tournaments/update/${this.props.location.state.uid}`,
             {
                 method: "PUT",
-                headers: {
-                    Accept: "application/json",
-                    Authorization: `Bearer`
-                },
-                body: formData
+                headers: myHeaders,
+                // headers: {
+                //     Accept: "application/json",
+                //     //Authorization: `Bearer`
+                // },
+                body: urlencoded,
+                redirect: 'follow'
             }
         );
 
@@ -286,18 +287,16 @@ class ModificarTorneo extends Component{
             slide,
             searchInput
         } = this.state;
-        const { name, date, category, competition, nRounds, location } = formData;
+        const { nombre, date, category, competition, nRounds, location } = this.props.location.state.formData;
+
         return(
             <ContenedorGeneral>
+            {/* {this.resetFormData()}; */}
                 <ContenedorTarjeta>
                     <ContenedorImagen>
                         <Link
                             to={{
                                 pathname: "/torneos",
-                                // state: {
-                                //     tournamentId: this.props.location.state
-                                //         .tournamentId
-                                // }
                             }}
                             >
                                 <img src={salir}alt=""/>
@@ -311,14 +310,14 @@ class ModificarTorneo extends Component{
                             <input 
                                 type="text" 
                                 id="nombre"
-                                value={name}
+                                placeholder={this.props.location.state.formData.nombre}
                                 onChange={e =>
                                     this.onChange(
                                         e.target,
                                         "name"
                                     )
                                 }
-                                required
+                                //required
                             />
 
                             <label htmlFor="fecha">Fecha:</label>
@@ -326,14 +325,14 @@ class ModificarTorneo extends Component{
                                 type="datetime-local" 
                                 id="fecha"
                                 maxlength = "50"
-                                value={date}
+                                placeholder={date}
                                 onChange={e =>
                                     this.onChange(
                                         e.target,
                                         "date"
                                     )
                                 }
-                                required
+                                //required
                             />
 
                             <div id="divCategoria">
@@ -341,14 +340,14 @@ class ModificarTorneo extends Component{
                                 <select 
                                     name = "categoria"
                                     id="Categoria"
-                                    value={category}
+                                    placeholder={category}
                                     onChange={e =>
                                         this.onChange(
                                             e.target,
                                             "category"
                                         )
                                     }
-                                    required
+                                    //required
                                 >
                                     <option value="Male">Male</option>
                                     <option value="Female">Female</option>
@@ -360,14 +359,14 @@ class ModificarTorneo extends Component{
                                 <label htmlFor="Competencia" class="selector">Competencia:</label>
                                 <select 
                                     id="Competencia"
-                                    value={competition}
+                                    placeholder={competition}
                                     onChange={e =>
                                         this.onChange(
                                             e.target,
                                             "competition"
                                         )
                                     }
-                                    required
+                                    //required
                                 >
                                     <option value="Singles">Singles</option>
                                     <option value="Doubles">Doubles</option>
@@ -378,28 +377,28 @@ class ModificarTorneo extends Component{
                             <input
                                 type="text" 
                                 id="NumeroRondas"
-                                value={nRounds}
+                                placeholder={nRounds}
                                 onChange={e =>
                                     this.onChange(
                                         e.target,
                                         "nRounds"
                                     )
                                 }
-                                required
+                                //required
                             />
 
                             <label htmlFor="lugar">Lugar:</label>
                             <input
                                 type="text" 
                                 id="lugar"
-                                value={location}
+                                placeholder={location}
                                 onChange={e =>
                                     this.onChange(
                                         e.target,
                                         "location"
                                     )
                                 }
-                                required
+                                //required
                             />
 
 
