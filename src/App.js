@@ -8,7 +8,7 @@ import { connect } from "react-redux";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-import { AgregarParticipante } from "./pages/Secretaria/components/inscribirParticipantes/agregarParticipante";
+import { JugadoresFederacion } from "./pages/Secretaria/components/jugadoresPorFerderacion";
 import Secretaria from "./pages/Secretaria/Secretaria";
 const NotFound = React.lazy(() => import("./pages/NotFound/NotFound"));
 const Home = React.lazy(() => import("./pages/Home/Home"));
@@ -55,6 +55,11 @@ class App extends Component {
                             <Route path="/dashboard/secretaria">
                                 <Secretaria />
                             </Route>
+
+                            <Route path="/dashboard/secretaria/jugadores">
+                                <JugadoresFederacion />
+                            </Route>
+
                             <EnhancedRoute component={NotFound} withNavbar />
                         </Switch>
                     </Suspense>

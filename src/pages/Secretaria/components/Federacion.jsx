@@ -9,13 +9,19 @@ export class Federacion extends Component
     {
         return(
             <div className="ContenedorFederacion">
-                <div className="Jugadores">
+                    <div className="jugadorPorFed">
+                        <p><img id="imguser" src={imgUsuario} alt="Usuario"/></p>
+                        <p>Jason Smith</p>
+
+                    </div>
                     <div className="jugadorPorFed">
                         <p><img id="imguser" src={imgUsuario} alt="Usuario"/></p>
                         <p>Jason Smith</p>
                     </div>
-
-                </div>
+                    <div className="jugadorPorFed">
+                        <p><img id="imguser" src={imgUsuario} alt="Usuario"/></p>
+                        <p>Jason Smith</p>
+                    </div>
 
                 <button className="botonFed">Mexico</button>
                     

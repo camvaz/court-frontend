@@ -19,6 +19,13 @@ class Secretaria extends Component {
                     withFooter
                     component={AgregarParticipante}
                 />
+                <EnhancedRoute
+                    path="/dashboard/secretaria/jugadores"
+                    exact
+                    withNavbar
+                    withFooter
+                    component={JugadoresFederacion}
+                />
             </Switch>
         );
     }

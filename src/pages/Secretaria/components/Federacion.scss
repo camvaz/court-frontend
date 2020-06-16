@@ -4,19 +4,19 @@
     left: 491px;
     top: 193px;
 
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin-bottom: 0.5em;
+
     background: #FFFFFF;
     box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.25);
-    .jugadores{
-        display: flex;
-        flex-wrap: unset;
-        justify-content: unset;
-        padding: 1em;
-        
-    }
+
 
     .jugadorPorFed
     {
-        padding:1em;
+        padding: 1em;
+        margin-bottom: 10px;
     }
 
     #imguser{
@@ -48,13 +48,25 @@
 }
 
 .Federaciones{
+    .Federaciones-list
+    {
 
-    .Federacion{
-        padding-right: 1em;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        height:450px;
+        overflow: auto;
+
+        .Federacion{
+            padding: 1em;
+            margin-bottom: 10px;
+        }
+
     }
 
     .field{
-        padding-bottom: 1.2em;
+        padding-bottom: 0.1em;
+        padding-left: 1em;
     }
 
     .input{
@@ -68,6 +80,8 @@
     }
 
     h1.torneo{
+        padding-top: 0em;
+        padding-left: 1em;
         padding-bottom: 2em;
         font-family: SF Pro Display;
         font-style: normal;

@@ -24,7 +24,24 @@ export class JugadoresFederacion extends Component
                     </p>
                 </div>
 
-                <div className="Federacion"><Federacion/> </div>
+                <div className="Federaciones-list">
+                    <div className="Federacion">
+                        <Federacion/>
+                    </div>
+                    <div className="Federacion">
+                        <Federacion/>
+                    </div>
+                    <div className="Federacion">
+                        <Federacion/>
+                    </div>
+                    <div className="Federacion">
+                        <Federacion/>
+                    </div>
+                    <div className="Federacion">
+                        <Federacion/>
+                    </div>
+                </div>
+                 
 
                 <div className="ContbtnAgregar">
                     <button className="btnAgregar"></button>
