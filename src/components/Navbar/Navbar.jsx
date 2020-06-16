@@ -24,6 +24,7 @@ const Contenedor = styled.div`
     overflow: hidden;
     width: 100%;
     z-index: 91;
+    box-shadow: 0px 5px 3px lightgray;
 
     @media screen and (min-width: 767px) {
         position: fixed;

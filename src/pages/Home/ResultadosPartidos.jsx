@@ -1,8 +1,10 @@
 import React, { Component } from "react";
 import TarjetaResultados from "./TarjetaResultados";
-import styled from "styled-components";
+import styled , {keyframes} from "styled-components";
 import { STORAGE_ENDPOINT } from "../../environment/environment";
 import { connect } from "react-redux";
+import imgArbol from "../../assets/imgArbol.png"
+import {Link} from 'react-router-dom'
 import "animate.css";
 
 const Contenedor = styled.div`
@@ -10,6 +12,34 @@ const Contenedor = styled.div`
     position: relative;
     height: 100%;
     padding-top: 20px;
+`;
+
+const movArbol = keyframes`
+    0%{
+      transform: scale(1, 1)
+  }
+  25%{
+    transform: scale(1, 1)
+  }
+  50%{
+    transform: scale(1.1, 1.1)
+  }
+  75%{
+    transform: scale(1, 1)
+  }
+  100%{
+    transform: scale(1, 1)
+  }
+`;
+const ImgArbol = styled.div`
+    position: absolute;
+    right: 200px;
+    top: 50px;
+    width: 90px;
+
+    img{
+        animation: ${movArbol} 2s linear infinite;
+    }
 `;
 
 const ContenedorCategorias = styled.div`
@@ -25,8 +55,22 @@ const ContenedorCategorias = styled.div`
         "buscador buscador buscador buscador";
     align-items: center;
 
+
     @media screen and (min-width: 767px) {
-        grid-template-areas: "boton1 boton2 boton3 boton4 buscador buscador";
+        width: 50%;
+        margin-left: 50px;
+        left: 0;
+        transform: translateX(0);
+        grid-template-areas: "boton1 boton2 boton3 boton4"
+                             "buscador buscador buscador";
+        margin-bottom: 20px;
+        margin-top: 10px;
+    }
+
+    button{
+        text-align: left;
+
+
     }
 
     button:nth-child(1) {
@@ -44,11 +88,13 @@ const ContenedorCategorias = styled.div`
 
     input {
         grid-area: buscador;
-        height: 25px;
+        height: 32px;
         border-radius: 10px;
         box-shadow: none;
         padding: 10px;
         outline: none;
+        border: 1px solid lightgray;
+        margin-top: 10px;
     }
 `;
 
@@ -61,11 +107,10 @@ const Button = styled.button`
     padding: 5px 0;
     outline: none;
 
-    &:active,
-    &:hover {
-        border-bottom: 2px solid var(--verde-1);
-        font-size: 0.9rem;
+    &:hover{
+        margin-top: -5px;
     }
+
     div {
         color: gray;
     }
@@ -78,6 +123,7 @@ const ContenedorTarjetas = styled.div`
 
     @media screen and (min-width: 767px) {
         grid-template-columns: 1fr 1fr;
+        margin-top: 50px;
     }
     @media screen and (min-width: 1287px) {
         grid-template-columns: 1fr 1fr 1fr;
@@ -159,6 +205,20 @@ class ResultadosPartidos extends Component {
         return (
             <Contenedor>
                 <Categorias date={this.state.date} setInput={this.setInput} />
+                <ImgArbol>
+                    <Link
+                        to={{
+                            pathname: "/torneos/bracket",
+                            state: {
+                                tournamentId: this.props.location.state
+                                   .tournamentId
+                                }
+                            }}
+                        >
+                        <img src={imgArbol} alt="Arbol"/>
+                    </Link>
+                    
+                </ImgArbol>
 
                 <ContenedorTarjetas className="animated fadeIn">
                     {partidos &&

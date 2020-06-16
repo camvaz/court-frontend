@@ -103,9 +103,10 @@ const ContenedorImagen = styled.div`
     }
 
     position: relative;
-    width: 270px;
-    height: 155px;
+    width: 250px;
+    height: 130px;
     border-radius: 10px 10px 0px 0px;
+  
 `;
 const ContenedorTitulo = styled.div`
     p {

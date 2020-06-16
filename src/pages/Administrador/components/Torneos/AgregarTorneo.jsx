@@ -14,25 +14,27 @@ const  ContenedorGeneral = styled.div`
     width: 100%;
     height: 100%;
     text-align: center;
-    Blend: Pass Through;
 `;
 
 const ContenedorTarjeta = styled.div`    
     h1{
-        font-family: roboto;
-        font-style: bold;
-        font-size: 20px;
-        margin: 60px 0px 40px 0px;
+        position: relative;
+        font-size: 1.5rem;
+        width: 200px;
+        position: relative;
+        left: 50%;
+        transform: translateX(-50%);
+        padding: 20px 0;
+        font-weight: bold;
+
     }
 
     position: absolute;
-    text-align: center;
     top: 0;
     bottom: 0;
     left: 0;
     right: 0;
     width: 80%;
-    height: 75%;
     margin: auto;
     background: #F5F5F5;
     border-radius: 10px;
@@ -65,14 +67,15 @@ const ContenedorImagen = styled.form`
 `;
 
 const ContenedorFormulario = styled.div`
+   
     label{
         position: relative;
         font-family: Roboto;
         font-style: Regular;
-        font-size: 12px;
+        font-size: 1rem;
         color: #1A3748;
         display: block;
-        width: 100%;
+        width: 80%;
         float: left;
         margin-left: 20px;
         margin-bottom: 10px;
@@ -130,6 +133,8 @@ const ContenedorFormulario = styled.div`
     }
 
     #boton{
+        position: relative;
+
         font-family: Roboto;
         font-style: Bold;
         font-size: 14px;
@@ -138,6 +143,9 @@ const ContenedorFormulario = styled.div`
         color: white;
         position: relative;
         bottom: 2px;
+        border-radius: 10px;
+        border: none;
+        box-shadow: 3px 3px 5px lightgray;
 
         @media screen and (min-width: 767px){
             height: 60px
@@ -146,6 +154,8 @@ const ContenedorFormulario = styled.div`
 
     #boton:hover{
         cursor: pointer;
+        margin-top: -4px;
+
     } 
 
     position: relative;
