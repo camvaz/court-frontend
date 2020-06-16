@@ -30,16 +30,12 @@ export default [
                 url: "/"
             },
             {
-                nombre: "Organizar Torneo",
-                url: "/torneos/agregar"
+                nombre: "Torneos",
+                url: "/torneos"
             },
             {
-                nombre: "Organizar Participantes",
+                nombre: "Ingresar Participantes",
                 url: "/agregar-participantes"
-            },
-            {
-                nombre: "Administrar Resultados",
-                url: ""
             }
         ]
     },

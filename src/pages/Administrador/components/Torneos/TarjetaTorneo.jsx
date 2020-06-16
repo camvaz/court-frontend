@@ -6,6 +6,18 @@ import { API_ENDPOINT } from "../../../../environment/environment";
 import fondoTorneo from "../../../../assets/fondoTorneo.jpg";
 import "animate.css";
 
+
+const FondoVerde = styled.div`
+    width: 100%;
+    position: absolute;
+    background: #74BA5F;
+    height: 100%;
+    z-index: 99;
+    top: 0;
+    opacity: .5;
+    border-radius: 5px;
+`;
+
 const ContenedorTarjeta = styled.div`
     width: 100%;
     height: 210px;
@@ -14,6 +26,9 @@ const ContenedorTarjeta = styled.div`
     justify-content: center;
     align-items: center;
 
+    &:hover{
+        margin-top: -10px;
+    }
     #contenedorImagen{
         position: relative;
         width: 270px;
@@ -24,6 +39,7 @@ const ContenedorTarjeta = styled.div`
             position: relative;
             width: 100%;
             border-radius: 10px 10px 0px 0px;
+   
         }
 
         #opciones{
@@ -121,6 +137,8 @@ const ContenedorTitulo = styled.div`
     width: 100%;
     height: 63px;
     background: #1a3748;
+    border-radius: 5px;
+    box-shadow: 3px 3px 3px lightgrey;
 `;
 
 export default class TarjetaTorneo extends Component {
@@ -137,8 +155,6 @@ export default class TarjetaTorneo extends Component {
                 Authorization: `Bearer`
             }
         });
-
-        console.log(response);
 
         if (response) {
             if (response.status === 202) {
@@ -168,15 +184,9 @@ export default class TarjetaTorneo extends Component {
                         }
                     }}
                 >
-                    {/* <ContenedorImagen>
-                        <div id = "opciones">
-                            <p>Modificar</p>
-                            <p>Eliminar</p>
-                        </div>
-                        <img src={fondoTorneo} alt=""/>                            
-                    </ContenedorImagen> */}
 
                     <div id = "contenedorImagen">
+                        <FondoVerde> </FondoVerde>
                         <img src={fondoTorneo} alt=""/>                            
                     </div>
 

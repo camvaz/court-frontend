@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import styled from "styled-components";
+import styled, {keyframes} from "styled-components";
 import agregar from "../../../../assets/botonMas.png";
 import {Link} from 'react-router-dom';
 import { connect } from "react-redux";
@@ -7,6 +7,25 @@ import "animate.css";
 const Cabecera = React.lazy(() => import("../../../Home/Cabecera"));
 const TarjetaTorneo = React.lazy(() => import("./TarjetaTorneo"));
 const AgregarTorneo = React.lazy(() => import("./AgregarTorneo"));
+
+const botonInicio = keyframes`
+  0%{
+      transform: scale(1, 1)
+  }
+  25%{
+    transform: scale(1, 1)
+  }
+  50%{
+    transform: scale(1.3, 1.3)
+  }
+  75%{
+    transform: scale(1, 1)
+  }
+  100%{
+    transform: scale(1, 1)
+  }
+`;
+
 
 const ContenedorHome = styled.div`
     overflow-y: auto;
@@ -25,6 +44,7 @@ const ContenedorHome = styled.div`
         width: 100%;
         background: white;
         height: 70px;
+        
 
         img {
             position: absolute;
@@ -32,10 +52,17 @@ const ContenedorHome = styled.div`
             left: 10px;
             top: 10px;
             border-radius: 50%;
+
+            @media screen and (min-width: 767px){
+                animation: ${botonInicio} 2s linear infinite;
+            }
+           
+           
         }
 
         img:hover {
             cursor: pointer;
+            
         }
     }
 
@@ -51,11 +78,8 @@ const ContenedorHome = styled.div`
             background: none;
             width: 50px;
             height: 50px;
-            bottom: 20px;
-            right: 30px;
-            
-
-
+            bottom: 50px;
+            right: 50px;
             img {
                 position: relative;
                 width: 50px;
@@ -156,6 +180,7 @@ class Torneos extends Component {
     render() {
         const { competition } = this.state;
         const { tournaments } = this.props.tournaments;
+        
         return (
             <ContenedorHome className="animated fadeIn">
                 <Cabecera />

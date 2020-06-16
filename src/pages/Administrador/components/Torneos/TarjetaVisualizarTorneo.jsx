@@ -6,6 +6,8 @@ import styled from "styled-components";
 import fondoTorneo from "../../../../assets/fondoVisualizarWeb.jpg";
 import engranaje from "../../../../assets/gear.svg"
 import fondoTorneoWeb from "../../../../assets/imgTorneoWeb.png";
+import eliminar1 from "../../../../assets/delete.png";
+import edit1 from "../../../../assets/edit.png";
 import { ReactComponent as Gear } from "../../../../assets/gear.svg";
 import { Link } from "react-router-dom";
 import { confirmAlert } from 'react-confirm-alert'; // Import
@@ -42,11 +44,7 @@ const ContenedorImagen = styled.div`
             z-index: 200;
         }
     }
-    #subcontimg:hover{
-        #opciones{
-            display: block;
-        }
-    }
+  
     img {
         position: relative;
         width: 100%;
@@ -77,24 +75,7 @@ const ContenedorImagen = styled.div`
         position: absolute;
     }
 
-    #opciones{
-        position: relative;
-        z-index: 100;
-        background: white;
-        width: 130px;
-        float: right; 
-        text-align: center;
-        display: none;
-
-        p{
-            border: 1px solid gray;
-            height: 30px
-        }
-        p:hover{
-            cursor: pointer;
-            color: blue;
-        }
-    }
+    
 
     position: relative;
     width: 100%;
@@ -131,6 +112,25 @@ const NombreTorneo = styled.div`
 `;
 
 const ContenedorDetalles = styled.div`
+
+    #opciones{
+        position: relative;
+        z-index: 100;
+        background: white;
+        width: 100px;
+        float: right; 
+        text-align: center;
+
+        img{
+            margin: 5px;
+
+            &:hover{
+                transform: scale(1.1,1.1)
+            }
+        }
+
+    }
+
     padding: 20px;
 
     p {
@@ -157,6 +157,7 @@ const ContenedorBotones = styled.div`
     width: 100%;
     margin: 50px auto 0;
     display: flex;
+    
     button {
         outline: none;
         width: 130px;
@@ -166,7 +167,12 @@ const ContenedorBotones = styled.div`
         color: white;
         border-radius: 20px;
         border: 1px solid var(--azul-3);
-        transition: 0.24s ease-in-out;
+        transition: 0.1s ease-in-out;
+
+        cursor: pointer;
+        &:hover{
+            transform: scale(1.1,1.1)
+        }
     }
     /* button:nth-child(1) {
         grid-column-start: 0;
@@ -283,12 +289,13 @@ export default class TarjetaVisualizarTorneo extends Component {
                         />
                         </div>
 
-                        <div id = "gear" onClick = {this.showOptions}>
-                            <img
-                                className="engranaje"
-                                src={engranaje}
-                            />
-                        </div>
+                        
+                    </div>
+                    </ContenedorImagen>
+                    <NombreTorneo>
+                        <h1>{this.props.location.state.data.name}</h1>
+                    </NombreTorneo>
+                    <ContenedorDetalles>
                         <div id = "opciones">
                             <Link
                                 to={{
@@ -307,7 +314,7 @@ export default class TarjetaVisualizarTorneo extends Component {
                                     
                                 }}
                             >
-                                <p>Modificar</p>
+                                <img src={edit1} alt="Editar"/>
                             </Link>
 
 
@@ -319,31 +326,16 @@ export default class TarjetaVisualizarTorneo extends Component {
                                 }}
                             >
 
-                                <p
+                                <img
                                 onClick={() => this.confirm()}
-                                // onClick={() => {
-                                //     this.onDelete(
-                                //         this.props.location.state.tournamentId
-                                //     );
-                                //     // document
-                                //     //     .getElementById(
-                                //     //         `admin-user-${index}`
-                                //     //     )
-                                //     //     .classList.remove(
-                                //     //         "show"
-                                //     //     );
-                                // }}
+                                src={eliminar1}
+                                alt="Eliminar"
                                 >
-                                Eliminar</p>
+                                </img>
                             </Link>
                             
                         </div>
-                    </div>
-                    </ContenedorImagen>
-                    <NombreTorneo>
-                        <h1>{this.props.location.state.data.name}</h1>
-                    </NombreTorneo>
-                    <ContenedorDetalles>
+
                         <p>Fecha: {this.props.location.state.data.date}</p>
                         <p>Lugar: {this.props.location.state.data.location}</p>
                         <p>Numero de equipos: 10</p>

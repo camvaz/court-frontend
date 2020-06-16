@@ -153,6 +153,9 @@ class ResultadosPartidos extends Component {
         const { partidos, players } = this.props;
         const { tournamentId } = this.props.location.state;
         console.log(tournamentId);
+        console.log(partidos);
+        
+        
         return (
             <Contenedor>
                 <Categorias date={this.state.date} setInput={this.setInput} />
