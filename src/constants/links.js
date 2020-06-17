@@ -44,7 +44,7 @@ export default [
                 url: "/"
             },
             {
-                nombre: "Organizar Torneos",
+                nombre: "Capturar Resultados",
                 url: "/torneos"
             }
         ]

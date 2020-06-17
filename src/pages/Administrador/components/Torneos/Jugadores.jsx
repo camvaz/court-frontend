@@ -97,6 +97,7 @@ class Jugadores extends Component {
         const { inscriptions, participants, players } = this.props;
         const { tournamentId } = this.props.location.state;
         const { search } = this.state;
+        const { user } = this.props.userSession;
 
         return (
             <ContenedorGeneral className="animated fadeIn">
@@ -129,6 +130,7 @@ class Jugadores extends Component {
                                 <Participante
                                     key={index}
                                     player={players[player_id]}
+                                    rol={user.role}
                                 />
                             );
                         })}
@@ -142,7 +144,8 @@ class Jugadores extends Component {
 const mapStateToProps = state => ({
     inscriptions: state.tournaments.inscriptions,
     participants: state.tournaments.participants,
-    players: state.tournaments.players
+    players: state.tournaments.players,
+    userSession: state.userSession.session
 });
 
 export default connect(mapStateToProps)(Jugadores);

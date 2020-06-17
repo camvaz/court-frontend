@@ -333,7 +333,7 @@ function ComponenteResultados(props) {
                 editStat={props.editStat}
                 statField="serverGamesWon"
             />
-            {props.user.role && (
+            {props.user.role === "Results Capturer" ? (
                 <div className="btn-wrapper">
                     <button
                         className="editar"
@@ -352,7 +352,8 @@ function ComponenteResultados(props) {
                         {props.editingState ? "Guardar" : "Editar"}
                     </button>
                 </div>
-            )}
+            ): null
+            }
         </ComponenteDatos>
     );
 }

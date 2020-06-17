@@ -173,14 +173,21 @@ const ContenedorTorneos = styled.div`
 `;
 
 class Torneos extends Component {
-    state = {
-        competition: ""
-    };
+    constructor(props){
+        super(props);
+
+        this.state = {
+            competition: ""
+        }
+    }
+ 
 
     render() {
         const { competition } = this.state;
         const { tournaments } = this.props.tournaments;
-        
+        const { user } = this.props.userSession;
+    console.log(user.role);
+    
         return (
             <ContenedorHome className="animated fadeIn">
                 <Cabecera />
@@ -238,19 +245,23 @@ class Torneos extends Component {
                                 tournamentId={data}
                             />
                         ))}
-                    <Link
-                        to={{
-                            pathname: "/torneos/agregar",
-                            // state: {
-                            //     tournamentId: this.props.location.state
-                            //         .tournamentId
-                            // }
-                        }}
-                        >
-                            <div id="contenedorAgregar">
-                                <img src={agregar} id="agregar" alt="" />
-                            </div>
-                     </Link>
+
+                    {
+                        user.role === "Tournament Manager" ? (
+                        
+                            <Link
+                            to={{
+                                pathname: "/torneos/agregar"
+                            }}
+                            >
+                                <div id="contenedorAgregar">
+                                    <img src={agregar} id="agregar" alt="" />
+                                </div>
+                         </Link>
+                         ) : null
+                    
+                    }
+                   
 
                 </ContenedorTorneos>
 
@@ -268,7 +279,9 @@ class Torneos extends Component {
 }
 
 const mapStateToProps = state => ({
-    tournaments: state.tournaments
+    tournaments: state.tournaments,
+    userSession: state.userSession.session
 });
+
 
 export default connect(mapStateToProps)(Torneos);

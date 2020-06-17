@@ -5,13 +5,17 @@ import "animate.css";
 import { STORAGE_ENDPOINT } from "../../../environment/environment";
 
 export class Participante extends Component {
-    state = {
-        nombre: "",
-        edad: "",
-        nacionalidad: "",
-        correo: "",
-        copas: ""
-    };
+    constructor(props){
+        super(props);
+        this.state = {
+            nombre: "",
+            edad: "",
+            nacionalidad: "",
+            correo: "",
+            copas: ""
+        };
+    }
+    
     render() {
         const { player } = this.props;
 
@@ -39,7 +43,11 @@ export class Participante extends Component {
                 </p>
                 <div id="cups">
                     <img src={cup} alt="copa" />5
-                    <button id="btnDlete"> Eliminar </button>
+                    {
+                        this.props.rol === "Secretary" ? (<button id="btnDlete"> Eliminar </button>) 
+                        : null
+                    }
+                    
                 </div>
             </div>
         );

@@ -8,11 +8,13 @@ import engranaje from "../../../../assets/gear.svg"
 import fondoTorneoWeb from "../../../../assets/imgTorneoWeb.png";
 import eliminar1 from "../../../../assets/delete.png";
 import edit1 from "../../../../assets/edit.png";
+import { connect } from "react-redux";
 import { ReactComponent as Gear } from "../../../../assets/gear.svg";
 import { Link } from "react-router-dom";
 import { confirmAlert } from 'react-confirm-alert'; // Import
 import 'react-confirm-alert/src/react-confirm-alert.css'; // Import css
 import "animate.css";
+
 const Cabecera = React.lazy(() => import("../../../Home/Cabecera"));
 
 
@@ -197,7 +199,10 @@ const ContenedorBotones = styled.div`
         font-weight: bold;
     } */
 `;
-export default class TarjetaVisualizarTorneo extends Component {
+class TarjetaVisualizarTorneo extends Component {
+    constructor(props){
+        super(props);
+    }
 
     async loadTournaments() {
         console.log(this.props);
@@ -269,6 +274,8 @@ export default class TarjetaVisualizarTorneo extends Component {
     }
 
     render() {
+        const { user } = this.props.userSession;
+
         return (
             <ContenedorGeneral className="animated fadeIn">
                 <Cabecera />
@@ -296,7 +303,10 @@ export default class TarjetaVisualizarTorneo extends Component {
                         <h1>{this.props.location.state.data.name}</h1>
                     </NombreTorneo>
                     <ContenedorDetalles>
+                    {
+                                user.role === "Tournament Manager" ? (
                         <div id = "opciones">
+                            
                             <Link
                                 to={{
                                     pathname: "/torneos/modificar",
@@ -317,24 +327,27 @@ export default class TarjetaVisualizarTorneo extends Component {
                                 <img src={edit1} alt="Editar"/>
                             </Link>
 
-
-                            <Link
-                                to={{
-                                    pathname: "/torneos",
-                                    uid: this.props.location.state.tournamentId
-                                    //formdata: this.props.location.state.data
-                                }}
-                            >
-
-                                <img
-                                onClick={() => this.confirm()}
-                                src={eliminar1}
-                                alt="Eliminar"
+                           
+                                <Link
+                                    to={{
+                                        pathname: "/torneos",
+                                        uid: this.props.location.state.tournamentId
+                                        //formdata: this.props.location.state.data
+                                    }}
                                 >
-                                </img>
-                            </Link>
+    
+                                    <img
+                                    onClick={() => this.confirm()}
+                                    src={eliminar1}
+                                    alt="Eliminar"
+                                    >
+                                    </img>
+                                </Link>
                             
-                        </div>
+                            
+                            
+                        </div> ) : null 
+                    }
 
                         <p>Fecha: {this.props.location.state.data.date}</p>
                         <p>Lugar: {this.props.location.state.data.location}</p>
@@ -359,23 +372,31 @@ export default class TarjetaVisualizarTorneo extends Component {
                         >
                             <button type="button"> Ver Partidos </button>
                         </Link>
-                        <Link
-                            to={{
-                                pathname: "/torneos/jugadores",
-                                state: {
-                                    tournamentId: this.props.location.state
-                                        .tournamentId
-                                }
-                            }}
-                        >
-                            <button type="button" id="verJugadores">
-                                Ver Jugadores
-                            </button>
-                        </Link>
 
-                        <button type="button" id="cancelar">
-                            Realizar Sorteo
-                        </button>
+                        {
+                            user.role != "Results Capturer" ? ( <Link
+                                to={{
+                                    pathname: "/torneos/jugadores",
+                                    state: {
+                                        tournamentId: this.props.location.state
+                                            .tournamentId
+                                    }
+                                }}
+                            >
+                                <button type="button" id="verJugadores">
+                                    Ver Jugadores
+                                </button>
+                            </Link>): null
+                        }
+                       
+                        
+                        {
+                            user.role === "Tournament Manager" ? (
+                            <button type="button" id="cancelar">
+                                Realizar Sorteo
+                            </button>): null
+                        }
+                        
                     </ContenedorBotones>
                 </ContenedorTarjeta>
             </ContenedorGeneral>
@@ -388,3 +409,8 @@ const mapDispatchToProps = dispatch => {
         updateTournaments: tournaments => dispatch(setTournaments(tournaments))
     };
 };
+const mapStateToProps = state => ({
+    userSession: state.userSession.session
+});
+
+export default connect(mapStateToProps)(TarjetaVisualizarTorneo);

@@ -5,9 +5,10 @@ import search from '../../../assets/Search.svg';
 import './jugadoresTorneo.scss';
 import {Participante} from './participante';
 
-
-export class JugadoresTorneo extends Component 
-{
+export class JugadoresTorneo extends Component {
+    constructor(props){
+        super(props);
+    }
     render()
     {
         return(
