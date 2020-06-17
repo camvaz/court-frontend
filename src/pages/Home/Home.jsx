@@ -1,10 +1,29 @@
 import React from "react";
 import Boton from "../../components/Elements/Boton";
 import tenista from "../../assets/tenista.svg";
-import styled from "styled-components";
+import styled , {keyframes} from "styled-components";
 import Cabecera from "./Cabecera";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
+
+const efectoCuadro1 = keyframes`
+    0%{
+        transform: rotate(120deg);
+    }
+
+    100%{
+        transform: rotate(0deg);
+    }
+`;
+const efectoCuadro2 = keyframes`
+    0%{
+        transform: rotate(150deg);
+    }
+
+    100%{
+        transform: rotate(360deg);
+    }
+`;
 
 const ContenedorHome = styled.div`
     position: relative;
@@ -12,6 +31,32 @@ const ContenedorHome = styled.div`
     height: 100vh;
     margin: 0;
     left: 0;
+    .cuadro{
+        display: none;
+    }
+    @media screen and (min-width: 767px){
+        .cuadro{
+            display: block;
+            position: absolute;
+            width: 290px;
+            height: 250px;
+            border: 2px solid #F0F0F0;
+        
+        }
+        .cuadro1{
+            transform: rotate(120deg);
+            top: 200px;
+            left: 300px;
+            animation: ${efectoCuadro1} 20s linear infinite;
+        }
+        .cuadro2{
+            transform: rotate(150deg);
+            top: 300px;
+            left: 150px;
+            animation: ${efectoCuadro2} 20s linear infinite;
+        }
+    }
+    
 `;
 
 const Contenido = styled.div`
@@ -82,6 +127,8 @@ const Contenido = styled.div`
 function Home({ userSession }) {
     return (
         <ContenedorHome>
+            <div className="cuadro cuadro1" />
+            <div className="cuadro cuadro2" />
             <Cabecera />
             <Contenido>
                 <img src={tenista} alt="Imagen ilustracion Tennis" />
