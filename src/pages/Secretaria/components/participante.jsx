@@ -39,7 +39,6 @@ export class Participante extends Component {
                 </p>
                 <div id="cups">
                     <img src={cup} alt="copa" />5
-                    <button id="btnDlete"> Eliminar </button>
                 </div>
             </div>
         );

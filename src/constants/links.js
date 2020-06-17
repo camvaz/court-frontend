@@ -14,10 +14,6 @@ export default [
             {
                 nombre: "Usuarios",
                 url: "/admin/usuarios"
-            },
-            {
-                nombre: "Resultados",
-                url: "/resultados"
             }
         ]
     },
