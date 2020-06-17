@@ -5,16 +5,16 @@ import { Link } from "react-router-dom";
 import { API_ENDPOINT } from "../../../../environment/environment";
 import fondoTorneo from "../../../../assets/fondoTorneo.jpg";
 import "animate.css";
-
+import { connect } from "react-redux";
 
 const FondoVerde = styled.div`
     width: 100%;
     position: absolute;
-    background: #74BA5F;
+    background: #74ba5f;
     height: 100%;
     z-index: 99;
     top: 0;
-    opacity: .5;
+    opacity: 0.5;
     border-radius: 5px;
 `;
 
@@ -26,10 +26,10 @@ const ContenedorTarjeta = styled.div`
     justify-content: center;
     align-items: center;
 
-    &:hover{
+    &:hover {
         margin-top: -10px;
     }
-    #contenedorImagen{
+    #contenedorImagen {
         position: relative;
         width: 270px;
         height: 155px;
@@ -39,10 +39,9 @@ const ContenedorTarjeta = styled.div`
             position: relative;
             width: 100%;
             border-radius: 10px 10px 0px 0px;
-   
         }
 
-        #opciones{
+        #opciones {
             width: 100px;
             height: 80px;
             text-align: center;
@@ -56,14 +55,14 @@ const ContenedorTarjeta = styled.div`
             right: 2px;
             display: none;
 
-            p:hover{
+            p:hover {
                 color: blue;
             }
         }
     }
 
-    #contenedorImagen:hover{
-        #opciones{
+    #contenedorImagen:hover {
+        #opciones {
             display: block;
         }
     }
@@ -88,25 +87,24 @@ const ContenedorImagen = styled.div`
         border-radius: 10px 10px 0px 0px;
     }
 
-    #opciones{
-            width: 100px;
-            height: 80px;
-            text-align: center;
-            background: white;
-            color: black;
-            position: absolute;
-            z-index: 3;
-            border: 1px solid gray;
-            border-radius: 5px;
-            float: right;
-            right: 2px;
+    #opciones {
+        width: 100px;
+        height: 80px;
+        text-align: center;
+        background: white;
+        color: black;
+        position: absolute;
+        z-index: 3;
+        border: 1px solid gray;
+        border-radius: 5px;
+        float: right;
+        right: 2px;
     }
 
     position: relative;
     width: 250px;
     height: 130px;
     border-radius: 10px 10px 0px 0px;
-  
 `;
 const ContenedorTitulo = styled.div`
     p {
@@ -142,20 +140,22 @@ const ContenedorTitulo = styled.div`
     box-shadow: 3px 3px 3px lightgrey;
 `;
 
-export default class TarjetaTorneo extends Component {
-    
-    rightClick(){
+class TarjetaTorneo extends Component {
+    rightClick() {
         alert("derecho");
     }
 
     onDelete = async tournament => {
         //const { token } = this.props.userSession.session;
-        const response = await fetch(`${API_ENDPOINT}/home/tournaments/${tournament}`, {
-            method: "DELETE",
-            headers: {
-                Authorization: `Bearer`
+        const response = await fetch(
+            `${API_ENDPOINT}/home/tournaments/${tournament}`,
+            {
+                method: "DELETE",
+                headers: {
+                    Authorization: `Bearer`
+                }
             }
-        });
+        );
 
         if (response) {
             if (response.status === 202) {
@@ -185,12 +185,10 @@ export default class TarjetaTorneo extends Component {
                         }
                     }}
                 >
-
-                    <div id = "contenedorImagen">
+                    <div id="contenedorImagen">
                         <FondoVerde> </FondoVerde>
-                        <img src={fondoTorneo} alt=""/>                            
+                        <img src={fondoTorneo} alt="" />
                     </div>
-
 
                     <ContenedorTitulo>
                         <p id="nombre">{this.props.nombreTorneo}</p>
@@ -201,3 +199,9 @@ export default class TarjetaTorneo extends Component {
         );
     }
 }
+
+const mapStateToProps = state => ({
+    userSession: state.userSession.session
+});
+
+export default connect(mapStateToProps)(TarjetaTorneo);

@@ -135,6 +135,7 @@ class Login extends Component {
                         break;
                     }
                     default:
+                        history.push("/");
                         break;
                 }
             }

@@ -4,19 +4,18 @@ import { API_ENDPOINT } from "../../../../environment/environment";
 import { setTournaments } from "../../../../Redux/actions";
 import styled from "styled-components";
 import fondoTorneo from "../../../../assets/fondoVisualizarWeb.jpg";
-import engranaje from "../../../../assets/gear.svg"
+import engranaje from "../../../../assets/gear.svg";
 import fondoTorneoWeb from "../../../../assets/imgTorneoWeb.png";
 import eliminar1 from "../../../../assets/delete.png";
 import edit1 from "../../../../assets/edit.png";
 import { connect } from "react-redux";
 import { ReactComponent as Gear } from "../../../../assets/gear.svg";
 import { Link } from "react-router-dom";
-import { confirmAlert } from 'react-confirm-alert'; // Import
-import 'react-confirm-alert/src/react-confirm-alert.css'; // Import css
+import { confirmAlert } from "react-confirm-alert"; // Import
+import "react-confirm-alert/src/react-confirm-alert.css"; // Import css
 import "animate.css";
 
 const Cabecera = React.lazy(() => import("../../../Home/Cabecera"));
-
 
 const ContenedorGeneral = styled.div`
     position: relative;
@@ -38,15 +37,15 @@ const ContenedorTarjeta = styled.div`
 `;
 
 const ContenedorImagen = styled.div`
-    #subcontimg{
-        #gear{
+    #subcontimg {
+        #gear {
             width: 30px;
             height: 30px;
             float: right;
             z-index: 200;
         }
     }
-  
+
     img {
         position: relative;
         width: 100%;
@@ -76,8 +75,6 @@ const ContenedorImagen = styled.div`
         z-index: 99;
         position: absolute;
     }
-
-    
 
     position: relative;
     width: 100%;
@@ -114,23 +111,21 @@ const NombreTorneo = styled.div`
 `;
 
 const ContenedorDetalles = styled.div`
-
-    #opciones{
+    #opciones {
         position: relative;
         z-index: 100;
         background: white;
         width: 100px;
-        float: right; 
+        float: right;
         text-align: center;
 
-        img{
+        img {
             margin: 5px;
 
-            &:hover{
-                transform: scale(1.1,1.1)
+            &:hover {
+                transform: scale(1.1, 1.1);
             }
         }
-
     }
 
     padding: 20px;
@@ -159,7 +154,7 @@ const ContenedorBotones = styled.div`
     width: 100%;
     margin: 50px auto 0;
     display: flex;
-    
+
     button {
         outline: none;
         width: 130px;
@@ -172,8 +167,8 @@ const ContenedorBotones = styled.div`
         transition: 0.1s ease-in-out;
 
         cursor: pointer;
-        &:hover{
-            transform: scale(1.1,1.1)
+        &:hover {
+            transform: scale(1.1, 1.1);
         }
     }
     /* button:nth-child(1) {
@@ -200,7 +195,7 @@ const ContenedorBotones = styled.div`
     } */
 `;
 class TarjetaVisualizarTorneo extends Component {
-    constructor(props){
+    constructor(props) {
         super(props);
     }
 
@@ -223,20 +218,20 @@ class TarjetaVisualizarTorneo extends Component {
         }
     }
 
-    confirm(){
+    confirm() {
         confirmAlert({
-            title: 'Confirma tu solicitud',
-            message: 'Estás seguro de eliminar este torneo?',
+            title: "Confirma tu solicitud",
+            message: "Estás seguro de eliminar este torneo?",
             buttons: [
                 {
-                label: 'Si',
-                onClick: () => {
-                    this.onDelete(this.props.location.state.tournamentId)
-                }
+                    label: "Si",
+                    onClick: () => {
+                        this.onDelete(this.props.location.state.tournamentId);
+                    }
                 },
                 {
-                label: 'No',
-                // onClick: () => alert('Click No')
+                    label: "No"
+                    // onClick: () => alert('Click No')
                 }
             ]
         });
@@ -244,14 +239,17 @@ class TarjetaVisualizarTorneo extends Component {
 
     onDelete = async tournament => {
         //const { token } = this.props.userSession.session;
-        console.log("Deleting")
+        console.log("Deleting");
         console.log(this.props.location.state.tournamentId);
-        const response = await fetch(`${API_ENDPOINT}/home/tournaments/${tournament}`, {
-            method: "DELETE",
-            headers: {
-                Authorization: `Bearer`
+        const response = await fetch(
+            `${API_ENDPOINT}/home/tournaments/${tournament}`,
+            {
+                method: "DELETE",
+                headers: {
+                    Authorization: `Bearer`
+                }
             }
-        });
+        );
 
         console.log(response);
 
@@ -269,9 +267,30 @@ class TarjetaVisualizarTorneo extends Component {
         }
     };
 
-    showOptions(){
-        console.log("alertaa")
+    showOptions() {
+        console.log("alertaa");
     }
+
+    realizarSorteo = async () => {
+        const res = await fetch(
+            `${API_ENDPOINT}/sortmatches/${this.props.location.state.tournamentId}`,
+            {
+                headers: {
+                    Authorization: `Bearer ${this.props.userSession.token}`,
+                    Accept: "application/json"
+                }
+            }
+        )
+            .then(res => {
+                console.log(res);
+                return res.json();
+            })
+            .catch(e => console.log(e));
+
+        res.success
+            ? toast.success("Torneo sorteado con exito")
+            : toast.error("Torneo sorteado sin exito, intente nuevamente");
+    };
 
     render() {
         const { user } = this.props.userSession;
@@ -281,73 +300,69 @@ class TarjetaVisualizarTorneo extends Component {
                 <Cabecera />
                 <ContenedorTarjeta>
                     <ContenedorImagen>
-                    <div id = "subcontimg">
-                        <div className="fondo-verde">
-
-                        <img
-                            className="mobile"
-                            src={fondoTorneo}
-                            alt="Imagen Torneo"
-                        />
-                        <img
-                            className="web"
-                            src={fondoTorneoWeb}
-                            alt="imagen Torneo"
-                        />
+                        <div id="subcontimg">
+                            <div className="fondo-verde">
+                                <img
+                                    className="mobile"
+                                    src={fondoTorneo}
+                                    alt="Imagen Torneo"
+                                />
+                                <img
+                                    className="web"
+                                    src={fondoTorneoWeb}
+                                    alt="imagen Torneo"
+                                />
+                            </div>
                         </div>
-
-                        
-                    </div>
                     </ContenedorImagen>
                     <NombreTorneo>
                         <h1>{this.props.location.state.data.name}</h1>
                     </NombreTorneo>
                     <ContenedorDetalles>
-                    {
-                                user.role === "Tournament Manager" ? (
-                        <div id = "opciones">
-                            
-                            <Link
-                                to={{
-                                    pathname: "/torneos/modificar",
-                                    state:{
-                                        formData:{
-                                            nombre: this.props.location.state.data.name,
-                                            date: this.props.location.state.data.date,
-                                            category: this.props.location.state.data.category,
-                                            competition: this.props.location.state.data.competition,
-                                            nRounds: this.props.location.state.data.nRounds,
-                                            location: this.props.location.state.data.location,
-                                        },
-                                        uid: this.props.location.state.tournamentId
-                                    },
-                                    
-                                }}
-                            >
-                                <img src={edit1} alt="Editar"/>
-                            </Link>
+                        {user.role === "Tournament Manager" ? (
+                            <div id="opciones">
+                                <Link
+                                    to={{
+                                        pathname: "/torneos/modificar",
+                                        state: {
+                                            formData: {
+                                                nombre: this.props.location
+                                                    .state.data.name,
+                                                date: this.props.location.state
+                                                    .data.date,
+                                                category: this.props.location
+                                                    .state.data.category,
+                                                competition: this.props.location
+                                                    .state.data.competition,
+                                                nRounds: this.props.location
+                                                    .state.data.nRounds,
+                                                location: this.props.location
+                                                    .state.data.location
+                                            },
+                                            uid: this.props.location.state
+                                                .tournamentId
+                                        }
+                                    }}
+                                >
+                                    <img src={edit1} alt="Editar" />
+                                </Link>
 
-                           
                                 <Link
                                     to={{
                                         pathname: "/torneos",
-                                        uid: this.props.location.state.tournamentId
+                                        uid: this.props.location.state
+                                            .tournamentId
                                         //formdata: this.props.location.state.data
                                     }}
                                 >
-    
                                     <img
-                                    onClick={() => this.confirm()}
-                                    src={eliminar1}
-                                    alt="Eliminar"
-                                    >
-                                    </img>
+                                        onClick={() => this.confirm()}
+                                        src={eliminar1}
+                                        alt="Eliminar"
+                                    ></img>
                                 </Link>
-                            
-                            
-                            
-                        </div> ) : null 
-                    }
+                            </div>
+                        ) : null}
 
                         <p>Fecha: {this.props.location.state.data.date}</p>
                         <p>Lugar: {this.props.location.state.data.location}</p>
@@ -373,8 +388,8 @@ class TarjetaVisualizarTorneo extends Component {
                             <button type="button"> Ver Partidos </button>
                         </Link>
 
-                        {
-                            user.role != "Results Capturer" ? ( <Link
+                        {user.role != "Results Capturer" ? (
+                            <Link
                                 to={{
                                     pathname: "/torneos/jugadores",
                                     state: {
@@ -386,17 +401,18 @@ class TarjetaVisualizarTorneo extends Component {
                                 <button type="button" id="verJugadores">
                                     Ver Jugadores
                                 </button>
-                            </Link>): null
-                        }
-                       
-                        
-                        {
-                            user.role === "Tournament Manager" ? (
-                            <button type="button" id="cancelar">
+                            </Link>
+                        ) : null}
+
+                        {user.role === "Tournament Manager" ? (
+                            <button
+                                type="button"
+                                id="cancelar"
+                                onClick={() => this.realizarSorteo()}
+                            >
                                 Realizar Sorteo
-                            </button>): null
-                        }
-                        
+                            </button>
+                        ) : null}
                     </ContenedorBotones>
                 </ContenedorTarjeta>
             </ContenedorGeneral>
