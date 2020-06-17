@@ -28,10 +28,6 @@ export default [
             {
                 nombre: "Torneos",
                 url: "/torneos"
-            },
-            {
-                nombre: "Ingresar Participantes",
-                url: "/agregar-participantes"
             }
         ]
     },
