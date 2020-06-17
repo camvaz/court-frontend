@@ -29,7 +29,7 @@ class AgregarParticipante extends Component {
         e.preventDefault();
         toast.info("Subiendo archivo...");
         const formData = new FormData();
-        formData.append("archivo", this.state.file);
+        formData.append("file", this.state.file);
 
         const response = await fetch(`${API_ENDPOINT}/subir`, {
             method: "POST",
