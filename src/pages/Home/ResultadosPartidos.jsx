@@ -223,9 +223,11 @@ class ResultadosPartidos extends Component {
                                         parseInt(tournamentId) &&
                                     partidos[data].round ===
                                         this.state.currentRound &&
-                                    partidos[data].started_at?.includes(
-                                        this.state.date
-                                    )
+                                    (partidos[data].started_at
+                                        ? partidos[data].started_at.includes(
+                                              this.state.date
+                                          )
+                                        : true)
                             )
                             .map((keyName, index) => {
                                 const player1 =
