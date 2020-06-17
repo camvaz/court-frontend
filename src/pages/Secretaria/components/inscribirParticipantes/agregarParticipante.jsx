@@ -35,7 +35,7 @@ class AgregarParticipante extends Component {
             method: "POST",
             headers: {
                 Accept: "application/json",
-                Authorization: `Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIxIiwianRpIjoiZTRkNzAzMzA4ZTVkY2ZlNGQ3OTVhZGFlMjc4ZjQ5MTY1NzkzMzQyNzFjYzk1YTQxNTViYTdjMzM2YzI3MGMwOWU5MWQyYjU0ZTQ4YjZiYjkiLCJpYXQiOjE1OTA3MjU3NjUsIm5iZiI6MTU5MDcyNTc2NSwiZXhwIjoxNjIyMjYxNzY1LCJzdWIiOiIzIiwic2NvcGVzIjpbXX0.UrSTGKt-7RGcnFiK4wro8tams8AYaGnf7id_gsHzPaQeR6sJNLvbjxML3u99EsbGSo1L3bvrfQ0JdldOfJ_Yf68H-prZBERCkkNO2bXGAcHwiBbJ0oJZLiBlp6T6OZ6glaHl5C9fllVATaK-85v-g3-Um43WrVHzv1nSftxfZ_18Cceq1qPxsicyapZnJ0MiivOuQqnU-XY2HP_JZkv_liXSsnXUFRtD-D8L9w1sAgHHbQDj2Bv8DRN_ElNK4e29nCNWT6azJxkU3Jg3TXTfsTbOR_KWRnuJ27PTdwTxCzJZVD4hNIJDzfBNLFOXABJTCCXYKF515ClGyH0RRXIutR3NhGeaAcheqJlPD10HBSmxWlx1mV71EuIg1peJPc1Dywz8lg2B3Q7x-A8QsLw3517AB8rk7IFR3Zpl_yzdjWlzEjhMpPdG9zDlrTQZjPbrMXgSm2osr8E__Hxy4qiacU16KsM6bxRsOwv7zEzPgypGgQfMoOuSO8tM1khl4oqONFG8LDpgbb2tHLHKYDO5sC5SeJBhEp238o7oLOY0og8pL6XruF265K5zuvhzuNOQ6coLB-mTLAfx39Z926MdQrqlJ5iceGiQWh8bi9ysQjiLwaxYGvmGGE2L3fFZwP7LcY9OCrQHML5FcwSZZMeqMyNbPcQplggFaSvVKDDJ_RQ`
+                Authorization: `Bearer ${this.props.userSession.token}`
             },
             body: formData
         })
@@ -75,10 +75,10 @@ class AgregarParticipante extends Component {
     }
 
     render() {
+        console.log(this.props);
         return (
             <div className="ContAddParticipantes">
                 <form onSubmit={this.handleSubmit}>
-                  
                     <h1 className="cargar">Cargar Archivo Excel</h1>
 
                     <div className="file has-name is-boxed">
@@ -144,4 +144,11 @@ const mapDispatchToProps = dispatch => {
     };
 };
 
-export default connect(null, mapDispatchToProps)(AgregarParticipante);
+const mapStateToProps = state => ({
+    userSession: state.userSession.session
+});
+
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(AgregarParticipante);
