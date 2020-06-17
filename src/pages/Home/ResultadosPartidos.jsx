@@ -1,10 +1,10 @@
 import React, { Component } from "react";
 import TarjetaResultados from "./TarjetaResultados";
-import styled , {keyframes} from "styled-components";
+import styled, { keyframes } from "styled-components";
 import { STORAGE_ENDPOINT } from "../../environment/environment";
 import { connect } from "react-redux";
-import imgArbol from "../../assets/imgArbol.png"
-import {Link} from 'react-router-dom'
+import imgArbol from "../../assets/imgArbol.png";
+import { Link } from "react-router-dom";
 import "animate.css";
 
 const Contenedor = styled.div`
@@ -37,7 +37,7 @@ const ImgArbol = styled.div`
     top: 50px;
     width: 90px;
 
-    img{
+    img {
         animation: ${movArbol} 2s linear infinite;
     }
 `;
@@ -55,22 +55,20 @@ const ContenedorCategorias = styled.div`
         "buscador buscador buscador buscador";
     align-items: center;
 
-
     @media screen and (min-width: 767px) {
         width: 50%;
         margin-left: 50px;
         left: 0;
         transform: translateX(0);
-        grid-template-areas: "boton1 boton2 boton3 boton4"
-                             "buscador buscador buscador";
+        grid-template-areas:
+            "boton1 boton2 boton3 boton4"
+            "buscador buscador buscador";
         margin-bottom: 20px;
         margin-top: 10px;
     }
 
-    button{
+    button {
         text-align: left;
-
-
     }
 
     button:nth-child(1) {
@@ -107,7 +105,7 @@ const Button = styled.button`
     padding: 5px 0;
     outline: none;
 
-    &:hover{
+    &:hover {
         margin-top: -5px;
     }
 
@@ -198,10 +196,7 @@ class ResultadosPartidos extends Component {
     render() {
         const { partidos, players } = this.props;
         const { tournamentId } = this.props.location.state;
-        console.log(tournamentId);
-        console.log(partidos);
-        
-        
+
         return (
             <Contenedor>
                 <Categorias date={this.state.date} setInput={this.setInput} />
@@ -211,13 +206,12 @@ class ResultadosPartidos extends Component {
                             pathname: "/torneos/bracket",
                             state: {
                                 tournamentId: this.props.location.state
-                                   .tournamentId
-                                }
-                            }}
-                        >
-                        <img src={imgArbol} alt="Arbol"/>
+                                    .tournamentId
+                            }
+                        }}
+                    >
+                        <img src={imgArbol} alt="Arbol" />
                     </Link>
-                    
                 </ImgArbol>
 
                 <ContenedorTarjetas className="animated fadeIn">
@@ -229,7 +223,7 @@ class ResultadosPartidos extends Component {
                                         parseInt(tournamentId) &&
                                     partidos[data].round ===
                                         this.state.currentRound &&
-                                    partidos[data].started_at.includes(
+                                    partidos[data].started_at?.includes(
                                         this.state.date
                                     )
                             )
