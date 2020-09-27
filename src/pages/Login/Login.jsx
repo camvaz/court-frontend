@@ -109,6 +109,7 @@ class Login extends Component {
                 },
                 body: formData
             };
+            console.log(formData);
 
             let res = await fetch(`${API_ENDPOINT}/login`, config);
             let data = await res.json();

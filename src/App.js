@@ -73,7 +73,10 @@ class App extends Component {
 
     async getTournaments() {
         const tournaments = await fetch(`${API_ENDPOINT}/all/tournaments`)
-            .then(res => res.json())
+            .then(res => {
+                console.log(res)
+                return res.json();})
+                .then(x => {console.log(x); return x})
             .catch(e => console.log(e));
 
         const matches = await fetch(`${API_ENDPOINT}/all/matches`)
@@ -91,6 +94,9 @@ class App extends Component {
         const players = await fetch(`${API_ENDPOINT}/all/players`)
             .then(res => res.json())
             .catch(e => console.log(e));
+
+        console.log(tournaments) 
+
 
         if (tournaments && inscriptions && participants && players && matches) {
             this.props.setTournaments(tournaments);
