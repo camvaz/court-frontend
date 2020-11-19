@@ -12,6 +12,40 @@ import ImgAdmin from "../../../../assets/userHombre.png";
 import Cabecera from "../../../Home/Cabecera";
 import "./Usuarios.scss";
 import "animate.css";
+import { Either } from "./types";
+const {Left,Right} = Either;
+
+export const runValidations = (formData, token) => 
+    Either.of({formData, token})
+    .map((data) => {
+        const reducedValue = Object.keys(data.formData)
+                                   .reduce((acc,key) => 
+                                        acc.error ? acc : data.formData[key].length === 0 ? 
+                                        ({key, error:true}) : ({key, error:false}), {error:false});
+
+        return reducedValue.error ? Left({res:false, message:reducedValue.key, data})
+                           : Right({res:true, message:'Validación exitosa', data})
+    })
+    .map(unFoldedData => {
+        const foldedData = unFoldedData.fold(x => x, x => x)
+        if(!foldedData.res) return unFoldedData;
+        const {data} = foldedData;
+        const reducedValue = Object.keys(data.formData)
+                                   .reduce((acc,key) => 
+                                        acc.error ? acc : !data.formData[key].match(/^[a-zA-Z0-9\s]+/)
+                                        ? ({key, error:true}) : ({key, error:false}), {error:false});
+
+        return reducedValue.error ? Left({res:false, message:reducedValue.key, data, type:'symbol'})
+                           : Right({res:true, message:'Validación exitosa', data})
+    })
+    .map(unFoldedData => {
+        const foldedData = unFoldedData.fold(x => x, x => x)
+        if(!foldedData.res) return unFoldedData;
+        const {data} = foldedData;
+        return data.token.length !== 952 ? Left({res:false, message:'Token corto', data})
+                                         : Right({res:true, message:'Validación exitosa', data})
+    })
+    .fold(x => x, x => x)
 
 class Usuarios extends Component {
     state = {
@@ -98,10 +132,17 @@ class Usuarios extends Component {
         }
     };
 
-    onSubmit = async e => {
+
+    onSubmit = async (e, formData, token) => {
         e.preventDefault();
-        const { token } = this.props.userSession.session;
-        const { name, email, phone, role, password } = this.state.formData;
+        const validationStatus = runValidations(token,formData);
+        if(!validationStatus.res) {
+            toast.error(validationStatus.message);
+            return;
+        }
+        // Resto del código
+        const { name, email, phone, role, password } = formData;
+
 
         if (this.state.accionEnForm) {
             const formData = new FormData();
@@ -120,11 +161,16 @@ class Usuarios extends Component {
                     Authorization: `Bearer ${token}`
                 },
                 body: formData
-            });
-
+            }).then(res => {
+                console.log(res);
+                if(res.ok){
+                    return res.json();
+                } else {
+                    return false;
+                }
+            })
+            
             if (response) {
-                const toJson = await response.json();
-                console.log(toJson);
                 this.loadUsers();
                 toast.success("✔️ Usuario creado con éxito", {
                     position: toast.POSITION.TOP_RIGHT,
@@ -133,6 +179,9 @@ class Usuarios extends Component {
                 this.setState({
                     slide: false
                 });
+            }else {
+                toast.error("Error al crear el usuario")
+                console.log(response);
             }
         } else {
             const formData = new URLSearchParams();
@@ -142,7 +191,7 @@ class Usuarios extends Component {
             formData.append("role", role);
             formData.append("password", password);
             formData.append("c_password", password);
-            console.log(formData);
+
             const response = await fetch(
                 `${API_ENDPOINT}/users/${this.state.uid}`,
                 {
@@ -156,7 +205,6 @@ class Usuarios extends Component {
                 }
             );
 
-            console.log(response);
             if (response) {
                 const toJson = await response.json();
                 console.log(toJson);
@@ -376,7 +424,7 @@ class Usuarios extends Component {
                                             }}
                                         />
                                     </div>
-                                    <form onSubmit={this.onSubmit}>
+                                    <form onSubmit={(e) => this.onSubmit(e, {...this.state.formData},this.props.userSession.session.token)}>
                                         {accionEnForm ? (
                                             <h2>Crear Usuario</h2>
                                         ) : (

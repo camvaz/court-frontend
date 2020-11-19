@@ -96,6 +96,7 @@ class Login extends Component {
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
     }
+
     async handleSubmit(e) {
         e.preventDefault();
         try {
@@ -109,7 +110,6 @@ class Login extends Component {
                 },
                 body: formData
             };
-            console.log(formData);
 
             let res = await fetch(`${API_ENDPOINT}/login`, config);
             let data = await res.json();
