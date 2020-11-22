@@ -24,7 +24,7 @@
     },
     "scripts": {
         "start": "react-scripts start",
-        "build": "react-scripts build",
+        "build": "CI= react-scripts build",
         "test": "react-scripts test",
         "jest": "jest src/ --coverage --passWithNoTests",
         "eject": "react-scripts eject"
@@ -32,11 +32,11 @@
     "eslintConfig": {
         "extends": "react-app"
     },
-    "babel":{
-      "plugins": [
-        "@babel/plugin-proposal-class-properties",
-        "@babel/plugin-transform-react-jsx"
-      ]
+    "babel": {
+        "plugins": [
+            "@babel/plugin-proposal-class-properties",
+            "@babel/plugin-transform-react-jsx"
+        ]
     },
     "browserslist": {
         "production": [
